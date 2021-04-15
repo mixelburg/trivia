@@ -26,6 +26,7 @@ public:
 private:
 
 	void accept();
+	void handleClient(SOCKET clientSocket);
 	SOCKET m_serverSocket;
 	/*
 	IDatabase& m_database;
