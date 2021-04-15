@@ -2,7 +2,6 @@
 #include <exception>
 #include <iostream>
 #include <string>
-
 #define MESSAGE_LEN 100
 #define LOGIN_CODE 200
 #define IP_SIZE 16 // 12 numbers, 3 dots, 1 for null char
@@ -85,6 +84,8 @@ void Server::accept()
 
 	std::cout << "Cerating thread..." << std::endl;
 	//creating a thread for the client and detaching it from the function
+	IRequestHandler* reqHandler = new LoginRequestHandler();
+	m_clients.insert(std::make_pair(client_socket, reqHandler));
 	std::thread t(&Server::handleClient, this, client_socket);
 	t.detach();
 }
