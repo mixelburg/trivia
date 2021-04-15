@@ -10,6 +10,9 @@
 #include "Helper.h"
 #include <fstream>
 #include <algorithm>
+#include <map>
+#include "IRequestHandler.h"
+#include "LoginRequestHandler.h"
 
 class Server
 {
@@ -28,6 +31,7 @@ private:
 	void accept();
 	void handleClient(SOCKET clientSocket);
 	SOCKET m_serverSocket;
+	std::map<SOCKET, IRequestHandler*> m_clients;
 	/*
 	IDatabase& m_database;
 	Communicator m_communicator;

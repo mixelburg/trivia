@@ -5,8 +5,19 @@
 #include <iostream>
 #include <exception>
 
+#define EXIT "EXIT"
+
+void getInput() {
+	std::string clientInput = "";
+	while (clientInput != EXIT) {
+		std::cin >> clientInput;
+	}
+	exit(0);
+}
+
 int main()
 {
+	std::thread t(getInput);
 	try
 	{
 		WSAInitializer wsaInit;
@@ -17,6 +28,7 @@ int main()
 	{
 		std::cout << "Error occured: " << e.what() << std::endl;
 	}
+	t.join();
 	system("PAUSE");
 	return 0;
 }

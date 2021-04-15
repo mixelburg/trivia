@@ -2,7 +2,6 @@
 #include <exception>
 #include <iostream>
 #include <string>
-
 #define MESSAGE_LEN 100
 #define LOGIN_CODE 200
 #define IP_SIZE 16 // 12 numbers, 3 dots, 1 for null char
@@ -10,6 +9,8 @@
 #define NAME_LEN_FIELD 2
 #define MESSAGE_LEN_FIELD 5
 #define LISTEN_PORT 5050
+#define HELLO_LEN 5
+
 using std::cout;
 using std::endl;
 using std::flush;
@@ -83,6 +84,8 @@ void Server::accept()
 
 	std::cout << "Cerating thread..." << std::endl;
 	//creating a thread for the client and detaching it from the function
+	IRequestHandler* reqHandler = new LoginRequestHandler();
+	m_clients.insert(std::make_pair(client_socket, reqHandler));
 	std::thread t(&Server::handleClient, this, client_socket);
 	t.detach();
 }
@@ -91,8 +94,14 @@ void Server::handleClient(SOCKET clientSocket)
 {
 	std::cout << "Comms with the client..." << std::endl;
 
-	Helper::sendData(clientSocket, "Hello");
-	auto retVal = Helper::getStringPartFromSocket(clientSocket, 5);
-	std::cout << retVal << std::endl;
+	try {
+		Helper::sendData(clientSocket, "Hello");
+		auto retVal = Helper::getStringPartFromSocket(clientSocket, HELLO_LEN);
+		std::cout << retVal << std::endl;
+	}
+	catch (const std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
+	
 }
 
