@@ -8,7 +8,10 @@ def main():
         print("[+] socket opened")
         s.connect((HOST, PORT))
         print("[+] socket connected")
-        s.sendall(b'Hello')
+
+        string = input("enter string")
+
+        s.sendall(string.encode())
 
         data = s.recv(1024)
 
@@ -16,4 +19,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except:
+        print("[!] An error occurred")
