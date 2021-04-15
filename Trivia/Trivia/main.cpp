@@ -5,8 +5,18 @@
 #include <iostream>
 #include <exception>
 
-
-int main() {
-
+int main()
+{
+	try
+	{
+		WSAInitializer wsaInit;
+		Server myServer;
+		myServer.run();
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "Error occured: " << e.what() << std::endl;
+	}
+	system("PAUSE");
 	return 0;
 }
