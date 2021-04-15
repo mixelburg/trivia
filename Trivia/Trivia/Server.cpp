@@ -81,6 +81,18 @@ void Server::accept()
 
 	std::cout << "Client accepted. Server and client can speak" << std::endl;
 
+	std::cout << "Cerating thread..." << std::endl;
 	//creating a thread for the client and detaching it from the function
+	std::thread t(&Server::handleClient, this, client_socket);
+	t.detach();
+}
+
+void Server::handleClient(SOCKET clientSocket)
+{
+	std::cout << "Comms with the client..." << std::endl;
+
+	Helper::sendData(clientSocket, "Hello");
+	auto retVal = Helper::getStringPartFromSocket(clientSocket, 5);
+	std::cout << retVal << std::endl;
 }
 
