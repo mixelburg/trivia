@@ -10,6 +10,8 @@
 #define NAME_LEN_FIELD 2
 #define MESSAGE_LEN_FIELD 5
 #define LISTEN_PORT 5050
+#define HELLO_LEN 5
+
 using std::cout;
 using std::endl;
 using std::flush;
@@ -91,8 +93,14 @@ void Server::handleClient(SOCKET clientSocket)
 {
 	std::cout << "Comms with the client..." << std::endl;
 
-	Helper::sendData(clientSocket, "Hello");
-	auto retVal = Helper::getStringPartFromSocket(clientSocket, 5);
-	std::cout << retVal << std::endl;
+	try {
+		Helper::sendData(clientSocket, "Hello");
+		auto retVal = Helper::getStringPartFromSocket(clientSocket, HELLO_LEN);
+		std::cout << retVal << std::endl;
+	}
+	catch (const std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
+	
 }
 
