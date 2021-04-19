@@ -30,7 +30,7 @@ class JsonResponsePacketSerializer
 	input: strcut of the login response
 	output: buffer with the login response
 	*/
-	static std::vector<unsigned char> serializeResponse(LoginResponse);
+	static std::vector<unsigned char> serializeResponse(const LoginResponse& loginResponse);
 	/*
 	Function serialize the signup response to buffer
 	input: struct of the signup response
