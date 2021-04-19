@@ -14,3 +14,15 @@ Communicator::Communicator()
 		throw std::exception(__FUNCTION__ " - socket");
 	}
 }
+
+Communicator::~Communicator()
+{
+	try
+	{
+		// the only use of the destructor should be for freeing 
+		// resources that was allocated in the constructor
+		closesocket(m_serverSocket);
+	}
+	catch (...) {}
+}
+
