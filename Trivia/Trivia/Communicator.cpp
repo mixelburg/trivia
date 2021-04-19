@@ -53,3 +53,25 @@ void Communicator::bindAndListen()
 	}
 }
 
+void Communicator::acceptConnection()
+{
+	// notice that we step out to the global namespace
+	// for the resolution of the function accept
+
+	// this accepts the client and create a specific socket from server to this client
+	SOCKET client_socket = ::accept(m_serverSocket, NULL, NULL);
+
+	if (client_socket == INVALID_SOCKET) {
+		throw std::exception(__FUNCTION__);
+	}
+
+	std::cout << "Client accepted. Server and client can speak" << std::endl;
+
+	std::cout << "Cerating thread..." << std::endl;
+	//creating a thread for the client and detaching it from the function
+	IRequestHandler* reqHandler = new LoginRequestHandler();
+	m_clients.insert(std::make_pair(client_socket, reqHandler));
+	std::thread t(&Communicator::handleNewClient, this, client_socket);
+	t.detach();
+}
+
