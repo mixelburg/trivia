@@ -7,5 +7,6 @@ bool LoginRequestHandler::isRequestRelevant(const RequestInfo& reqInfo)
 
 RequestResult LoginRequestHandler::handleRequest(const RequestInfo& reqInfo)
 {
-    return RequestResult();
+    RequestResult loginReqRes;
+    return loginReqRes;
 }
