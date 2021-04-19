@@ -17,6 +17,11 @@ Communicator::Communicator()
 
 Communicator::~Communicator()
 {
+	//deletes the allocated handlers 
+	for (const auto& client : m_clients) {
+		delete client.second;
+	}
+
 	try
 	{
 		// the only use of the destructor should be for freeing 
@@ -78,6 +83,7 @@ void Communicator::acceptConnection()
 	m_clients.insert(std::make_pair(client_socket, reqHandler));
 	std::thread t(&Communicator::handleNewClient, this, client_socket);
 	t.detach();
+	
 }
 
 void Communicator::handleNewClient(SOCKET clientSocket)
