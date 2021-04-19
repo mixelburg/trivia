@@ -1,5 +1,7 @@
 #pragma once
 
+#include "json/json.h"
+
 #include <string>
 #include <vector>
 
@@ -17,7 +19,7 @@ struct ErrorResponse {
 
 class JsonResponsePacketSerializer
 {
-	static std::vector<unsigned char> serializeResponse(ErrorResponse);
+	static std::vector<unsigned char> serializeResponse(const ErrorResponse& errResponse);
 	static std::vector<unsigned char> serializeResponse(LoginResponse);
 	static std::vector<unsigned char> serializeResponse(SignupResponse);
 
