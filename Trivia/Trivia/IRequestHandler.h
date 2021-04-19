@@ -7,13 +7,17 @@
 
 class IRequestHandler;
 
-struct RequestInfo {
+struct IRequest {
+	
+};
+
+struct RequestInfo: public IRequest {
 	int id;
 	time_t receivalTime;
 	std::vector<int> buffer;
 };
 
-struct RequestResult {
+struct RequestResult: public IRequest {
 	std::string response;
 	IRequestHandler* newHandler;
 };
