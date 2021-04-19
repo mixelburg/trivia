@@ -37,10 +37,15 @@ private:
 	*/
 	void bindAndListen();
 	/*
-	Function ment to handle a client 
+	Function accepts the client connection and starts handling him with handleNewClient function
 	input + output: none
 	*/
-	void handleNewClient();
+	void acceptConnection();
+	/*
+	Function ment to handle a client
+	input + output: none
+	*/
+	void handleNewClient(SOCKET clientSocket);
 	
 	//server socket
 	SOCKET m_serverSocket;
