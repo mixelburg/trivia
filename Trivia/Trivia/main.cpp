@@ -4,7 +4,7 @@
 #include "Server.h"
 #include <iostream>
 #include <exception>
-
+#include "Communicator.h"
 #define EXIT "EXIT"
 
 void getInput() {
