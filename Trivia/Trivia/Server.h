@@ -13,28 +13,22 @@
 #include <map>
 #include "IRequestHandler.h"
 #include "LoginRequestHandler.h"
+#include "Communicator.h"
 
 class Server
 {
 public:
 	Server();
-	~Server();
+	~Server() = default;
 	/*
-	Function listening with the listen port of the server for clients
+	Function inits the server' commponents
 	input: none
 	output: none
 	*/
 	void run();
 
 private:
-
-	void accept();
-	void handleClient(SOCKET clientSocket);
-	SOCKET m_serverSocket;
-	std::map<SOCKET, IRequestHandler*> m_clients;
-	/*
-	IDatabase& m_database;
+	//IDatabase m_database;
 	Communicator m_communicator;
-	RequestHandlerFactory m_handlerFactory;
-	*/
+	//RequestHandlerFactory m_handlerFactory;
 };
