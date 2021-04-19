@@ -26,6 +26,11 @@ Communicator::~Communicator()
 	catch (...) {}
 }
 
+void Communicator::startHandleRequests()
+{
+	bindAndListen();
+}
+
 void Communicator::bindAndListen()
 {
 	struct sockaddr_in sa = { 0 };
