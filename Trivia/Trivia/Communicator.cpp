@@ -75,3 +75,18 @@ void Communicator::acceptConnection()
 	t.detach();
 }
 
+void Communicator::handleNewClient(SOCKET clientSocket)
+{
+	std::cout << "Comms with the client..." << std::endl;
+
+	try {
+		Helper::sendData(clientSocket, "Hello");
+		auto retVal = Helper::getStringPartFromSocket(clientSocket, HELLO_LEN);
+		std::cout << retVal << std::endl;
+	}
+	catch (const std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
+
+}
+
