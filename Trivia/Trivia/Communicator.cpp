@@ -72,7 +72,7 @@ void Communicator::acceptConnection()
 
 	std::cout << "Client accepted. Server and client can speak" << std::endl;
 
-	std::cout << "Cerating thread..." << std::endl;
+	std::cout << "Creating thread..." << std::endl;
 	//creating a thread for the client and detaching it from the function
 	IRequestHandler* reqHandler = new LoginRequestHandler();
 	m_clients.insert(std::make_pair(client_socket, reqHandler));
