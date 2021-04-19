@@ -20,8 +20,6 @@ Server::Server(): m_communicator()
 {
 }
 
-
-
 void Server::run()
 {
 	m_communicator.startHandleRequests();
