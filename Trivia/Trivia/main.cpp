@@ -5,6 +5,7 @@
 #include <iostream>
 #include <exception>
 #include "Communicator.h"
+#include "JsonResponsePacketSerializer.h"
 #define EXIT "EXIT"
 
 void getInput() {
@@ -21,6 +22,9 @@ int main()
 	try
 	{
 		WSAInitializer wsaInit;
+		ErrorResponse errRes;
+		errRes.message = "Error accured";
+		JsonResponsePacketSerializer::serializeResponse(errRes);
 		Server myServer;
 		myServer.run();
 	}
