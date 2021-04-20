@@ -7,13 +7,17 @@
 
 class IRequestHandler;
 
-struct RequestInfo {
+struct IRequest {
+	
+};
+
+struct RequestInfo: public IRequest {
 	int id;
 	time_t receivalTime;
 	std::vector<int> buffer;
 };
 
-struct RequestResult {
+struct RequestResult: public IRequest {
 	std::string response;
 	IRequestHandler* newHandler;
 };
@@ -21,6 +25,8 @@ struct RequestResult {
 class IRequestHandler
 {
 public:
+	IRequestHandler() = default;
+	virtual ~IRequestHandler() = default;
 	virtual bool isRequestRelevant(const RequestInfo& reqInfo) = 0;
 	virtual RequestResult handleRequest(const RequestInfo& reqInfo) = 0;
 };
