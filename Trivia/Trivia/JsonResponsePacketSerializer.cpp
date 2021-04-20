@@ -31,12 +31,13 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
     root = "status:" + std::to_string(statusResponse.status);
     auto jsonData = root.asString();
 
-    //insert the data' size
+    //insert the data' size + the data
     std::string dataSize = Helper::getPaddedNumber(jsonData.length(), LEN_SIZE);
-
     for (const auto ch : dataSize + jsonData) {
         buffer.push_back(ch);
     }
+
+    //returning the complete message
     return buffer;
 }
 
