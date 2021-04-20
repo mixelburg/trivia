@@ -3,12 +3,15 @@
 #include <string>
 #include <vector>
 
-struct LoginResponse {
+struct IStatusResponse {
+public:
 	unsigned int status;
 };
 
-struct SignupResponse {
-	unsigned int status;
+struct LoginResponse : public IStatusResponse {
+};
+
+struct SignupResponse : public IStatusResponse {
 };
 
 struct ErrorResponse {
@@ -29,13 +32,8 @@ public:
 	input: strcut of the login response
 	output: buffer with the login response
 	*/
-	static std::vector<unsigned char> serializeResponse(const LoginResponse& loginResponse);
-	/*
-	Function serialize the signup response to buffer
-	input: struct of the signup response
-	output: buffer with the signup response
-	*/
-	static std::vector<unsigned char> serializeResponse(SignupResponse);
+	static std::vector<unsigned char> serializeResponse(const IStatusResponse& codeResponse);
+	
 
 };
 
