@@ -14,14 +14,15 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
     return buffer;
 }
 
-std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const LoginResponse& loginResponse)
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const IStatusResponse& statusResponse)
 {
     std::vector<unsigned char> buffer;
     Json::Value root;
-    root = "message:" + std::to_string(loginResponse.status);
+    root = "status:" + std::to_string(statusResponse.status);
     const auto jsonData = root.asString();
     for (const auto ch : jsonData) {
         buffer.push_back(ch);
     }
     return buffer;
 }
+
