@@ -3,15 +3,24 @@
 #include <string>
 #include <vector>
 
+enum responseCodes {
+	LOGIN_CODE = 1,
+	SIGNUP_CODE = 2
+};
+
 struct IStatusResponse {
 public:
+	IStatusResponse(unsigned int status, unsigned int code):code(code), status(status) {}
 	unsigned int status;
+	unsigned int code;
 };
 
 struct LoginResponse : public IStatusResponse {
+	LoginResponse(unsigned int status) : IStatusResponse(status, LOGIN_CODE) {}
 };
 
 struct SignupResponse : public IStatusResponse {
+	SignupResponse(unsigned int status) : IStatusResponse(status, SIGNUP_CODE) {}
 };
 
 struct ErrorResponse {
