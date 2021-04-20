@@ -4,18 +4,27 @@
 #include <iostream>
 #include "Helper.h"
 
-#define TO_NUMBER 48
 #define LEN_SIZE 4
 
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const ErrorResponse& errResponse)
 {
     std::vector<unsigned char> buffer;
+
+    //insert the message code
+    buffer.push_back(ERROR_CODE);
+
+    //create the json object
     Json::Value root;
     root = "message:" + errResponse.message;
-    const auto jsonData = root.asString();
-    for (const auto ch : jsonData) {
+    auto jsonData = root.asString();
+    
+    //insert the data' size + the data
+    std::string dataSize = Helper::getPaddedNumber(jsonData.length(), LEN_SIZE);
+    for (const auto ch : dataSize + jsonData) {
         buffer.push_back(ch);
     }
+
+    //returning the complete message
     return buffer;
 }
 
@@ -24,7 +33,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
     std::vector<unsigned char> buffer;
     
     //insert the message code
-    buffer.push_back(statusResponse.code + TO_NUMBER);
+    buffer.push_back(statusResponse.code);
     
     //create the json object
     Json::Value root;
