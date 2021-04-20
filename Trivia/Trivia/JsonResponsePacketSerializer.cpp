@@ -6,6 +6,11 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
 {
     std::vector<unsigned char> buffer;
     Json::Value root;
+    root = "message:" + errResponse.message;
+    const auto jsonData = root.asString();
+    for (const auto ch : jsonData) {
+        buffer.push_back(ch);
+    }
     return buffer;
 }
 
