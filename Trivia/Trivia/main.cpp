@@ -22,7 +22,6 @@ int main()
 	try
 	{
 		WSAInitializer wsaInit;
-		
 		Server myServer;
 		myServer.run();
 	}
