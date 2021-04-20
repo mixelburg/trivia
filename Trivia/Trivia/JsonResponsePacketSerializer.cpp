@@ -1,7 +1,6 @@
 #pragma warning(disable : 4996)
 #include "JsonResponsePacketSerializer.h"
-#include "json/json.h"
-#include "json/assertions.h"
+#include "json.h"
 #include <iostream>
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const ErrorResponse& errResponse)
 {
