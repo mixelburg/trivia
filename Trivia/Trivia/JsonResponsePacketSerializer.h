@@ -1,7 +1,5 @@
 #pragma once
 
-#include "json/json.h"
-
 #include <string>
 #include <vector>
 
@@ -19,6 +17,7 @@ struct ErrorResponse {
 
 class JsonResponsePacketSerializer
 {
+public:
 	/*
 	Function serialize the error response to buffer
 	input: struct of the error response
