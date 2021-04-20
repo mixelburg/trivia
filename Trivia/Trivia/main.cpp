@@ -22,9 +22,6 @@ int main()
 	try
 	{
 		WSAInitializer wsaInit;
-		ErrorResponse errRes;
-		errRes.message = "Error accured";
-		JsonResponsePacketSerializer::serializeResponse(errRes);
 		Server myServer;
 		myServer.run();
 	}
