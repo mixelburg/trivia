@@ -4,15 +4,16 @@
 #include <vector>
 
 enum responseCodes {
-	LOGIN_CODE = 1,
-	SIGNUP_CODE = 2
+	LOGIN_CODE = '1',
+	SIGNUP_CODE = '2',
+	ERROR_CODE = '3'
 };
 
 struct IStatusResponse {
 public:
-	IStatusResponse(unsigned int status, unsigned int code):code(code), status(status) {}
+	IStatusResponse(unsigned int status, unsigned char code):code(code), status(status) {}
 	unsigned int status;
-	unsigned int code;
+	unsigned char code;
 };
 
 struct LoginResponse : public IStatusResponse {
@@ -24,6 +25,7 @@ struct SignupResponse : public IStatusResponse {
 };
 
 struct ErrorResponse {
+	ErrorResponse(std::string message) : message(message) {}
 	std::string message;
 };
 
