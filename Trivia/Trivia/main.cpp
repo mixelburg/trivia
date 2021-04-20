@@ -22,8 +22,7 @@ int main()
 	try
 	{
 		WSAInitializer wsaInit;
-		SignupResponse l(1);
-		JsonResponsePacketSerializer::serializeResponse(l);
+		
 		Server myServer;
 		myServer.run();
 	}
