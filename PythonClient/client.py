@@ -10,12 +10,12 @@ def prepare_msg(code: int, msg_data: str):
 
 login_temp = {
     "name": "John",
-    "pswd": "Hammond"
+    "password": "Hammond"
 }
 
 register_temp = {
     "name": "John",
-    "pswd": "Hammond"
+    "password": "Hammond"
 }
 
 def main():
@@ -23,12 +23,12 @@ def main():
         print("[+] socket opened")
         s.connect((HOST, PORT))
         print("[+] socket connected")
-
+        s.sendall("hello".encode());
         string = input("1: login \n 2: sign up")
         if string == "1":
-            s.sendall(string.encode(prepare_msg(1, json.dumps(login_temp))))
+            s.sendall(prepare_msg(1, json.dumps(login_temp)).encode())
         elif string == "2":
-            s.sendall(string.encode(prepare_msg(2, json.dumps(login_temp))))
+            s.sendall(prepare_msg(2, json.dumps(login_temp)).encode())
         else:
             print(f"[!] unknown command '{string}'")
 
