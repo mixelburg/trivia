@@ -3,6 +3,8 @@
 
 #define LISTEN_PORT 5050
 #define HELLO_LEN 5
+#define LEN_SIZE 4
+#define CODE_LEN 1
 
 Communicator::Communicator()
 {
@@ -91,9 +93,20 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 	std::cout << "Comms with the client..." << std::endl;
 
 	try {
+		// sending and reciving hello message
 		Helper::sendData(clientSocket, "Hello");
 		auto retVal = Helper::getStringPartFromSocket(clientSocket, HELLO_LEN);
 		std::cout << retVal << std::endl;
+
+		RequestInfo clientRequest;
+		// splitting the request of the client
+		clientRequest.id = Helper::getIntPartFromSocket(clientSocket, CODE_LEN);
+		auto reqDataLen = Helper::getIntPartFromSocket(clientSocket, LEN_SIZE);
+		auto jsonData = Helper::getStringPartFromSocket(clientSocket, reqDataLen);
+		for (const auto ch : jsonData) {
+			clientRequest.buffer.push_back(ch);
+		}
+
 	}
 	catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
