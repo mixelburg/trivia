@@ -23,7 +23,7 @@ def main():
         print("[+] socket opened")
         s.connect((HOST, PORT))
         print("[+] socket connected")
-
+        s.sendall("hello".encode());
         string = input("1: login \n 2: sign up")
         if string == "1":
             s.sendall(string.encode(prepare_msg(1, json.dumps(login_temp))))
