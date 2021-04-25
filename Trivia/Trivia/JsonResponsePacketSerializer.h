@@ -2,7 +2,7 @@
 
 #include <string>
 #include <vector>
-#include "responseCodes.h"
+#include "Codes.h"
 
 struct IStatusResponse {
 public:

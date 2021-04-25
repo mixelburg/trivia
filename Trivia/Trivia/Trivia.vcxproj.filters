@@ -65,7 +65,7 @@
     <ClInclude Include="JsonRequestPacketDeserializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="responseCodes.h">
+    <ClInclude Include="Codes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
