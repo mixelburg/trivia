@@ -26,9 +26,9 @@ def main():
         s.sendall("hello".encode());
         string = input("1: login \n 2: sign up")
         if string == "1":
-            s.sendall(string.encode(prepare_msg(1, json.dumps(login_temp))))
+            s.sendall(prepare_msg(1, json.dumps(login_temp)).encode())
         elif string == "2":
-            s.sendall(string.encode(prepare_msg(2, json.dumps(login_temp))))
+            s.sendall(prepare_msg(2, json.dumps(login_temp)).encode())
         else:
             print(f"[!] unknown command '{string}'")
 
