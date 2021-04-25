@@ -1,5 +1,5 @@
 #include "JsonRequestPacketDeserializer.h"
-#include "json.h"
+#include "json/json.h"
 #include <iostream>
 
 LoginRequest JsonRequestPacketDeserializer::deserializeLoginRequest(const std::vector<unsigned char>& buffer)
