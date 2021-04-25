@@ -1,4 +1,5 @@
 #pragma warning(disable : 4996)
+
 #include "JsonResponsePacketSerializer.h"
 #include "json.h"
 #include <iostream>
