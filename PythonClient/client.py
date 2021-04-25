@@ -10,12 +10,12 @@ def prepare_msg(code: int, msg_data: str):
 
 login_temp = {
     "name": "John",
-    "pswd": "Hammond"
+    "password": "Hammond"
 }
 
 register_temp = {
     "name": "John",
-    "pswd": "Hammond"
+    "password": "Hammond"
 }
 
 def main():
