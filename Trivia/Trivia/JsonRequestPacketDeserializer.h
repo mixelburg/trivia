@@ -15,6 +15,7 @@ struct SignupRequest : LoginRequest{
 
 class JsonRequestPacketDeserializer
 {
+public:
 	/*
 	Function deserialize a client request into LoginRequest 
 	input: a buffer with the data of the request (json)
