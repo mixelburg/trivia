@@ -1,7 +1,9 @@
 #include "Communicator.h"
 #include <iostream>
 #include <ctime>
-
+#include "Codes.h"
+#include "JsonResponsePacketSerializer.h"
+#include "JsonRequestPacketDeserializer.h"
 #define LISTEN_PORT 5050
 #define HELLO_LEN 5
 #define LEN_SIZE 4
@@ -107,6 +109,14 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		auto jsonData = Helper::getStringPartFromSocket(clientSocket, reqDataLen);
 		for (const auto ch : jsonData) {
 			clientRequest.buffer.push_back(ch);
+		}
+
+		LoginRequest req;
+		if (clientRequest.id == LOGIN_CODE) {
+			req = JsonRequestPacketDeserializer::deserializeLoginRequest(clientRequest.buffer);
+		}
+		else if (clientRequest.id == SIGNUP_CODE) {
+			req = JsonRequestPacketDeserializer::deserializeSignupRequest(clientRequest.buffer);
 		}
 
 	}
