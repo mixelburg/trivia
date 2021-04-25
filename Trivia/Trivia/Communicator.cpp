@@ -1,5 +1,6 @@
 #include "Communicator.h"
 #include <iostream>
+#include <ctime>
 
 #define LISTEN_PORT 5050
 #define HELLO_LEN 5
@@ -98,9 +99,10 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		auto retVal = Helper::getStringPartFromSocket(clientSocket, HELLO_LEN);
 		std::cout << retVal << std::endl;
 
-		RequestInfo clientRequest;
 		// splitting the request of the client
+		RequestInfo clientRequest;
 		clientRequest.id = Helper::getIntPartFromSocket(clientSocket, CODE_LEN);
+		clientRequest.receivalTime = time(NULL);
 		auto reqDataLen = Helper::getIntPartFromSocket(clientSocket, LEN_SIZE);
 		auto jsonData = Helper::getStringPartFromSocket(clientSocket, reqDataLen);
 		for (const auto ch : jsonData) {
