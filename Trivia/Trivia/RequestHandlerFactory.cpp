@@ -2,7 +2,8 @@
 
 LoginRequestHandler RequestHandlerFactory::createLoginRequestHandler()
 {
-    return LoginRequestHandler();
+    LoginManager loginManagerObject(nullptr);
+    return LoginRequestHandler(loginManagerObject);
 }
 
 MenuRequestHandler RequestHandlerFactory::createMenuRequestHandler()
