@@ -3,19 +3,23 @@ import json
 
 HOST = '127.0.0.1'  # The server's hostname or IP address
 PORT = 5050        # The port used by the server
-
+SIZE_LEN = 4
+BUFFER_SIZE = 1024
+LOGIN = "1"
+SIGNUP = "2"
 
 def prepare_msg(code: int, msg_data: str):
-    return f"{code}{str(len(msg_data)).zfill(4)}{msg_data}"
+    return f"{code}{str(len(msg_data)).zfill(SIZE_LEN)}{msg_data}"
 
 login_temp = {
-    "name": "John",
+    "username": "John",
     "password": "Hammond"
 }
 
 register_temp = {
-    "name": "John",
-    "password": "Hammond"
+    "username": "John",
+    "password": "Hammond",
+    "mail": "john123@gmail.com"
 }
 
 def main():
@@ -24,19 +28,18 @@ def main():
         s.connect((HOST, PORT))
         print("[+] socket connected")
         s.sendall("hello".encode())
-        data = s.recv(1024)
+        data = s.recv(BUFFER_SIZE)
         print('Received: ', repr(data))
         string = input("1: login \n 2: sign up")
-        if string == "1":
-            s.sendall(prepare_msg(1, json.dumps(login_temp)).encode())
-        elif string == "2":
-            s.sendall(prepare_msg(2, json.dumps(login_temp)).encode())
+        if string == LOGIN:
+            s.sendall(prepare_msg(int(LOGIN), json.dumps(login_temp)).encode())
+        elif string == SIGNUP:
+            s.sendall(prepare_msg(int(SIGNUP), json.dumps(register_temp)).encode())
         else:
             print(f"[!] unknown command '{string}'")
 
 
-        data = s.recv(1024)
-
+        data = s.recv(BUFFER_SIZE)
         print('Received: ', repr(data))
 
 
