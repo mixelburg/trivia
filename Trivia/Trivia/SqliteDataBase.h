@@ -7,9 +7,9 @@ class SqliteDataBase : IDataBase {
 public:
 	virtual ~SqliteDataBase() = default;
 
-	auto isUser(std::string uname) const -> bool;
-	auto checkPassword(std::string uname, std::string pswd) -> bool;
-	auto addUser(std::string uname, std::string pswd, std::string email) -> void;
+	auto isUser(const std::string& uname) const -> bool;
+	auto checkPassword(const std::string& uname, const std::string& pswd) const -> bool;
+	auto addUser(const std::string& uname, const std::string& pswd, const std::string& email) const -> void;
 
 	auto open() -> bool override;
 	void close() override;

@@ -4,8 +4,7 @@
 
 #include <iostream>
 
-
-auto SqliteDataBase::isUser(std::string uname) const -> bool
+auto SqliteDataBase::isUser(const std::string& uname) const -> bool
 {
 	bool flag = false;
 	auto callback = [](void* data, int argc, char** argv, char** azColName)
@@ -25,7 +24,7 @@ auto SqliteDataBase::isUser(std::string uname) const -> bool
 	return false;
 }
 
-auto SqliteDataBase::checkPassword(std::string uname, std::string pswd) -> bool
+auto SqliteDataBase::checkPassword(const std::string& uname, const std::string& pswd) const -> bool
 {
 	bool flag = false;
 	auto callback = [](void* data, int argc, char** argv, char** azColName)
@@ -45,7 +44,7 @@ auto SqliteDataBase::checkPassword(std::string uname, std::string pswd) -> bool
 	return false;
 }
 
-auto SqliteDataBase::addUser(std::string uname, std::string pswd, std::string email) -> void
+auto SqliteDataBase::addUser(const std::string& uname, const std::string& pswd, const std::string& email) const -> void
 {
 	const std::string sqlCommand = "INSERT INTO USERS (NAME, EMAIL, PASSWORD) VALUES('" + uname + "', '" + pswd + "', '" + email + "');";
 	char* errMessage = nullptr;
