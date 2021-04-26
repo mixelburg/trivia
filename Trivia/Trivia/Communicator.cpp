@@ -8,6 +8,7 @@
 #define HELLO_LEN 5
 #define LEN_SIZE 4
 #define CODE_LEN 1
+#define SUCCESS 1
 
 Communicator::Communicator()
 {
@@ -114,9 +115,36 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		LoginRequest req;
 		if (clientRequest.id == LOGIN_CODE) {
 			req = JsonRequestPacketDeserializer::deserializeLoginRequest(clientRequest.buffer);
+			
+			//TO FILL - handle login request in the program
+
+			LoginResponse resStruct(SUCCESS);
+			
+			const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
+			std::string resInString;
+
+			for (const auto ch : res) {
+				resInString += ch;
+			}
+
+			Helper::sendData(clientSocket, resInString);
+
 		}
 		else if (clientRequest.id == SIGNUP_CODE) {
 			req = JsonRequestPacketDeserializer::deserializeSignupRequest(clientRequest.buffer);
+			
+			//TO FILL - handle signup request in the program 
+
+			SignupResponse resStruct(SUCCESS);
+
+			const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
+			std::string resInString;
+
+			for (const auto ch : res) {
+				resInString += ch;
+			}
+
+			Helper::sendData(clientSocket, resInString);
 		}
 
 	}
