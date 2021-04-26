@@ -4,7 +4,17 @@
 class LoginRequestHandler : public IRequestHandler
 {
 public:
+	/*
+	Function creats a LoginRequestHandler object
+	input: none
+	output: none
+	*/
 	LoginRequestHandler() = default;
+	/*
+	Function distructs a LoginRequestHandle object
+	input: none
+	output: none
+	*/
 	virtual ~LoginRequestHandler() override = default;
 	/*
 	Function checks if the request got from the client is valid and relevant
