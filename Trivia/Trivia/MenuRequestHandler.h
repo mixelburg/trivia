@@ -3,6 +3,7 @@
 
 class MenuRequestHandler : public IRequestHandler
 {
+public:
 	/*
 	Function creates a MenuRequstHandler object
 	input: none
