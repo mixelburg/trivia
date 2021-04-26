@@ -12,6 +12,7 @@
 #include <map>
 #include "IRequestHandler.h"
 #include "LoginRequestHandler.h"
+
 class Communicator
 {
 public:

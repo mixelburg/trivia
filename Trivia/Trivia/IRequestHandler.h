@@ -2,18 +2,21 @@
 
 #include <ctime>
 #include <vector>
-#include <cstddef>
 #include <string>
 
 class IRequestHandler;
 
-struct RequestInfo {
-	int id;
-	time_t receivalTime;
-	std::vector<int> buffer;
+struct IRequest {
+	
 };
 
-struct RequestResult {
+struct RequestInfo: public IRequest {
+	unsigned char id;
+	time_t receivalTime;
+	std::vector<unsigned char> buffer;
+};
+
+struct RequestResult: public IRequest {
 	std::string response;
 	IRequestHandler* newHandler;
 };
@@ -21,6 +24,8 @@ struct RequestResult {
 class IRequestHandler
 {
 public:
+	IRequestHandler() = default;
+	virtual ~IRequestHandler() = default;
 	virtual bool isRequestRelevant(const RequestInfo& reqInfo) = 0;
 	virtual RequestResult handleRequest(const RequestInfo& reqInfo) = 0;
 };

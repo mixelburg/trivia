@@ -27,19 +27,16 @@
     <ClCompile Include="Server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IRequestHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LoginRequestHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Communicator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sqlite3.c">
+    <ClCompile Include="JsonResponsePacketSerializer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SqliteDataBase.cpp">
+    <ClCompile Include="JsonRequestPacketDeserializer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,13 +59,13 @@
     <ClInclude Include="Communicator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IDataBase.h">
+    <ClInclude Include="JsonResponsePacketSerializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SqliteDataBase.h">
+    <ClInclude Include="JsonRequestPacketDeserializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sqlite3.h">
+    <ClInclude Include="Codes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

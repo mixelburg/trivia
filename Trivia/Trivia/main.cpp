@@ -6,6 +6,7 @@
 #include <iostream>
 #include <exception>
 #include "Communicator.h"
+#include "JsonResponsePacketSerializer.h"
 #define EXIT "EXIT"
 
 void getInput() {
