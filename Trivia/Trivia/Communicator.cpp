@@ -104,7 +104,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 
 		// splitting the request of the client
 		RequestInfo clientRequest;
-		clientRequest.id = Helper::getIntPartFromSocket(clientSocket, CODE_LEN);
+		clientRequest.id = Helper::getStringPartFromSocket(clientSocket, CODE_LEN)[0];
 		clientRequest.receivalTime = time(NULL);
 		auto reqDataLen = Helper::getIntPartFromSocket(clientSocket, LEN_SIZE);
 		auto jsonData = Helper::getStringPartFromSocket(clientSocket, reqDataLen);
