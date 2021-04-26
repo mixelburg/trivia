@@ -23,7 +23,7 @@ LoginRequest JsonRequestPacketDeserializer::deserializeLoginRequest(const std::v
 	}
 	delete reader;
 
-	loginReq.username = json.get("name", NULL).asString();
+	loginReq.username = json.get("username", NULL).asString();
 	loginReq.password = json.get("password", NULL).asString();
 
 	return loginReq;
@@ -50,7 +50,7 @@ SignupRequest JsonRequestPacketDeserializer::deserializeSignupRequest(const std:
 	}
 	delete reader;
 	
-	signupReq.username = json.get("name", NULL).asString();
+	signupReq.username = json.get("username", NULL).asString();
 	signupReq.password = json.get("password", NULL).asString();
 	signupReq.email = json.get("mail", NULL).asString();
 
