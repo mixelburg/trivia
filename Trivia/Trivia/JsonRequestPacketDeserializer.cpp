@@ -53,6 +53,6 @@ SignupRequest JsonRequestPacketDeserializer::deserializeSignupRequest(const std:
 	signupReq.username = json.get("username", NULL).asString();
 	signupReq.password = json.get("password", NULL).asString();
 	signupReq.email = json.get("mail", NULL).asString();
-
+	
 	return signupReq;
 }
