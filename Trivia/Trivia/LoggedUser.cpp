@@ -2,6 +2,11 @@
 
 #include <utility>
 
-LoggedUser::LoggedUser(std::string uname, std::string pswd) : _uname(std::move(uname)), _pswd(std::move(pswd))
+LoggedUser::LoggedUser(std::string uname) : _uname(std::move(uname))
 {
+}
+
+const std::string LoggedUser::getUsername()
+{
+    return _uname;
 }
