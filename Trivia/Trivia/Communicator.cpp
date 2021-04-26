@@ -4,11 +4,14 @@
 #include "Codes.h"
 #include "JsonResponsePacketSerializer.h"
 #include "JsonRequestPacketDeserializer.h"
+#include "LoginManager.h"
 #define LISTEN_PORT 5050
 #define HELLO_LEN 5
 #define LEN_SIZE 4
 #define CODE_LEN 1
 #define SUCCESS 1
+
+LoginManager gLoginManager(nullptr);
 
 Communicator::Communicator()
 {
@@ -85,7 +88,7 @@ void Communicator::acceptConnection()
 
 	std::cout << "Creating thread..." << std::endl;
 	//creating a thread for the client and detaching it from the function
-	IRequestHandler* reqHandler = new LoginRequestHandler();
+	IRequestHandler* reqHandler = new LoginRequestHandler(gLoginManager);
 	m_clients.insert(std::make_pair(client_socket, reqHandler));
 	std::thread t(&Communicator::handleNewClient, this, client_socket);
 	t.detach();
