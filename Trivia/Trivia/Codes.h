@@ -1,6 +1,6 @@
 #pragma once
-enum responseCodes {
-	LOGIN_CODE = 1,
-	SIGNUP_CODE = 2,
-	ERROR_CODE = 3
+enum Codes {
+	LOGIN_CODE = '1',
+	SIGNUP_CODE = '2',
+	ERROR_CODE = '3'
 };

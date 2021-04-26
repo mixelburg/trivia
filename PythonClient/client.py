@@ -23,7 +23,9 @@ def main():
         print("[+] socket opened")
         s.connect((HOST, PORT))
         print("[+] socket connected")
-        s.sendall("hello".encode());
+        s.sendall("hello".encode())
+        data = s.recv(1024)
+        print('Received: ', repr(data))
         string = input("1: login \n 2: sign up")
         if string == "1":
             s.sendall(prepare_msg(1, json.dumps(login_temp)).encode())
@@ -35,7 +37,7 @@ def main():
 
         data = s.recv(1024)
 
-    print('Received: ', repr(data))
+        print('Received: ', repr(data))
 
 
 if __name__ == '__main__':
