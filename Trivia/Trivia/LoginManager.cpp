@@ -5,7 +5,7 @@ auto LoginManager::login(const std::string& uname, const std::string& pswd) -> b
 {
 	if(_db.checkPassword(uname, pswd))
 	{
-		_users.emplace_back(uname, pswd);
+		_users.emplace_back(LoggedUser(uname));
 		return true;
 	}
 	return false;
