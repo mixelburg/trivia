@@ -1,6 +1,6 @@
 #pragma once
 #include "IRequestHandler.h"
-
+#include "LoginManager.h"
 class LoginRequestHandler : public IRequestHandler
 {
 public:
@@ -9,7 +9,7 @@ public:
 	input: none
 	output: none
 	*/
-	LoginRequestHandler() = default;
+	LoginRequestHandler(LoginManager& m);
 	/*
 	Function distructs a LoginRequestHandle object
 	input: none
@@ -30,7 +30,7 @@ public:
 	virtual RequestResult handleRequest(const RequestInfo& reqInfo) override;
 
 private:
-	//LoginManager& m_loginManager;
+	LoginManager& m_loginManager;
 	//RequestHandlerFactory& m_handlerFactory;
 
 	/*
