@@ -4,6 +4,8 @@
 #include "Codes.h"
 #include "JsonResponsePacketSerializer.h"
 #include "JsonRequestPacketDeserializer.h"
+#include "IDataBase.h"
+#include "SqliteDataBase.h"
 #include "LoginManager.h"
 #define LISTEN_PORT 5050
 #define HELLO_LEN 5
@@ -11,7 +13,8 @@
 #define CODE_LEN 1
 #define SUCCESS 1
 
-LoginManager gLoginManager(nullptr);
+IDataBase* gDataBase = new SqliteDataBase();
+LoginManager gLoginManager(gDataBase);
 
 Communicator::Communicator()
 {
