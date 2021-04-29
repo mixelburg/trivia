@@ -1,9 +1,8 @@
 #include "RequestHandlerFactory.h"
 
-LoginRequestHandler createLoginRequestHandler(IDataBase* dataBaseClass)
+LoginRequestHandler RequestHandlerFactory::createLoginRequestHandler(LoginManager& loginManager, RequestHandlerFactory& handlerFactory)
 {
-    LoginManager loginManagerObject(dataBaseClass);
-    return LoginRequestHandler(loginManagerObject);
+    return LoginRequestHandler(loginManager, handlerFactory);
 }
 
 MenuRequestHandler RequestHandlerFactory::createMenuRequestHandler()

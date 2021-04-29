@@ -3,6 +3,8 @@
 #include "MenuRequestHandler.h"
 #include "IDataBase.h"
 
+class LoginRequestHandler;
+
 class RequestHandlerFactory
 {
 public:
@@ -18,10 +20,10 @@ public:
 	~RequestHandlerFactory() = default;
 	/*
 	Function creates a login request handler 
-	input: none
+	input: pointer to the data base class
 	output: the handler that has been created
 	*/
-	LoginRequestHandler createLoginRequestHandler(IDataBase* dataBaseClass);
+	LoginRequestHandler createLoginRequestHandler(LoginManager& loginManager, RequestHandlerFactory& handlerFactory);
 	/*
 	Function returns the login manager
 	input: none
