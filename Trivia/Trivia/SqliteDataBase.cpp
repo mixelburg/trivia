@@ -55,6 +55,11 @@ auto SqliteDataBase::addUser(const std::string& uname, const std::string& pswd, 
 	}
 }
 
+auto SqliteDataBase::getQuestion(int num) const -> std::list<Question>
+{
+
+}
+
 auto SqliteDataBase::open() -> bool
 {
 	const auto res = sqlite3_open(_dbFilename.c_str(), &_db);
