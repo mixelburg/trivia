@@ -55,6 +55,31 @@ auto SqliteDataBase::addUser(const std::string& uname, const std::string& pswd, 
 	}
 }
 
+auto SqliteDataBase::getQuestion(const int num) const -> std::list<Question>
+{
+	std::list<Question> questions;
+	auto callback = [](void* data, int argc, char** argv, char** azColName)
+	{
+		std::vector<std::string> answers;
+		for (int i = 1; i <= 4; ++i)
+		{
+			answers.emplace_back(argv[i]);
+		}
+		static_cast<std::list<Question>*>(data)->push_back(Question(argv[0], answers, std::stoi(argv[5])));
+		return 0;
+	};
+
+	const std::string sqlCommand = "SELECT * FROM QUESTIONS LIMIT " + std::to_string(num) + ";";
+	char* errMessage = nullptr;
+	const auto res = sqlite3_exec(_db, sqlCommand.c_str(), callback, &questions, &errMessage);
+	if (res != SQLITE_OK)
+	{
+		std::cout << errMessage << std::endl;
+	}
+
+	return questions;
+}
+
 auto SqliteDataBase::open() -> bool
 {
 	const auto res = sqlite3_open(_dbFilename.c_str(), &_db);
