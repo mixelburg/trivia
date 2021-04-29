@@ -15,6 +15,7 @@
 
 IDataBase* gDataBase = new SqliteDataBase();
 LoginManager gLoginManager(gDataBase);
+RequestHandlerFactory gHandlerFactory;
 
 Communicator::Communicator()
 {
@@ -91,7 +92,7 @@ void Communicator::acceptConnection()
 
 	std::cout << "Creating thread..." << std::endl;
 	//creating a thread for the client and detaching it from the function
-	IRequestHandler* reqHandler = new LoginRequestHandler(gLoginManager);
+	IRequestHandler* reqHandler = new LoginRequestHandler(gLoginManager, gHandlerFactory);
 	m_clients.insert(std::make_pair(client_socket, reqHandler));
 	std::thread t(&Communicator::handleNewClient, this, client_socket);
 	t.detach();
@@ -120,6 +121,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 
 		LoginRequest req;
 		if (clientRequest.id == LOGIN_CODE) {
+			req = JsonRequestPacketDeserializer::deserializeLoginRequest(clientRequest.buffer);
 			
 			//TO FILL - handle login request in the program
 
@@ -136,6 +138,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 
 		}
 		else if (clientRequest.id == SIGNUP_CODE) {
+			req = JsonRequestPacketDeserializer::deserializeSignupRequest(clientRequest.buffer);
 			
 			//TO FILL - handle signup request in the program 
 
