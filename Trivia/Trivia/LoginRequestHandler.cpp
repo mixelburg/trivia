@@ -1,7 +1,8 @@
 #include "LoginRequestHandler.h"
 #include "Codes.h"
 #include "JsonRequestPacketDeserializer.h"
-
+#define SUCCESS 1
+#define FAIL 0
 LoginRequestHandler::LoginRequestHandler(LoginManager& loginManager, RequestHandlerFactory& handlerFactory):
     m_loginManager(loginManager), m_handlerFactory(handlerFactory)
 {
@@ -18,11 +19,11 @@ RequestResult LoginRequestHandler::handleRequest(const RequestInfo& reqInfo)
     if (reqInfo.id == LOGIN_CODE) {
         reqResult = login(reqInfo);
     }
-    /*
+    
     else {
         reqResult = signup(reqInfo);
     }
-    */
+    
     return reqResult;
 }
 
@@ -33,18 +34,37 @@ RequestResult LoginRequestHandler::login(const RequestInfo& reqInfo)
     try {
         if (m_loginManager.login(clientLoginRequest.username, clientLoginRequest.password)) {
             *reqResult.newHandler = m_handlerFactory.createMenuRequestHandler();
-            for (const auto ch : "Login approved") {
-                reqResult.response.push_back(ch);
-            }
+            reqResult.response.push_back(SUCCESS);
         }
         else {
             reqResult.newHandler = this;
-            for (const auto ch : "Login denied") {
-                reqResult.response.push_back(ch);
-            }
+            reqResult.response.push_back(FAIL);
+
         }
     }
     catch(...){
+        reqResult.newHandler = nullptr;
+    }
+    return reqResult;
+}
+
+RequestResult LoginRequestHandler::signup(const RequestInfo& reqInfo)
+{
+    RequestResult reqResult;
+    SignupRequest clientLoginRequest = JsonRequestPacketDeserializer::deserializeSignupRequest(reqInfo.buffer);
+    try {
+        if (m_loginManager.signup(clientLoginRequest.username, clientLoginRequest.password, clientLoginRequest.email)) {
+            *reqResult.newHandler = m_handlerFactory.createMenuRequestHandler();
+            reqResult.response.push_back(SUCCESS);
+
+        }
+        else {
+            reqResult.newHandler = this;
+            reqResult.response.push_back(FAIL);
+
+        }
+    }
+    catch (...) {
         reqResult.newHandler = nullptr;
     }
     return reqResult;
