@@ -2,7 +2,8 @@
 #include "Codes.h"
 #include "JsonRequestPacketDeserializer.h"
 
-LoginRequestHandler::LoginRequestHandler(LoginManager& m) : m_loginManager(m)
+LoginRequestHandler::LoginRequestHandler(LoginManager& loginManager, RequestHandlerFactory& handlerFactory):
+    m_loginManager(loginManager), m_handlerFactory(handlerFactory)
 {
 }
 

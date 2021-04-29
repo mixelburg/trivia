@@ -1,6 +1,10 @@
 #pragma once
 #include "IRequestHandler.h"
 #include "LoginManager.h"
+#include "RequestHandlerFactory.h"
+
+class RequestHandlerFactory;
+
 class LoginRequestHandler : public IRequestHandler
 {
 public:
@@ -9,7 +13,7 @@ public:
 	input: none
 	output: none
 	*/
-	LoginRequestHandler(LoginManager& m);
+	LoginRequestHandler(LoginManager& loginManager, RequestHandlerFactory& handlerFactory);
 	/*
 	Function distructs a LoginRequestHandle object
 	input: none
@@ -31,7 +35,7 @@ public:
 
 private:
 	LoginManager& m_loginManager;
-	//RequestHandlerFactory& m_handlerFactory;
+	RequestHandlerFactory& m_handlerFactory;
 
 	/*
 	Function performs a login
