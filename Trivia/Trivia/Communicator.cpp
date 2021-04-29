@@ -120,7 +120,6 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 
 		LoginRequest req;
 		if (clientRequest.id == LOGIN_CODE) {
-			req = JsonRequestPacketDeserializer::deserializeLoginRequest(clientRequest.buffer);
 			
 			//TO FILL - handle login request in the program
 
@@ -137,7 +136,6 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 
 		}
 		else if (clientRequest.id == SIGNUP_CODE) {
-			req = JsonRequestPacketDeserializer::deserializeSignupRequest(clientRequest.buffer);
 			
 			//TO FILL - handle signup request in the program 
 
