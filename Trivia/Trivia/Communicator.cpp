@@ -102,7 +102,7 @@ void Communicator::acceptConnection()
 void Communicator::handleNewClient(SOCKET clientSocket)
 {
 	std::cout << "Comms with the client..." << std::endl;
-
+	gDataBase->open();
 	try {
 		// sending and reciving hello message
 		Helper::sendData(clientSocket, "Hello");
@@ -123,10 +123,12 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		if (clientRequest.id == LOGIN_CODE) {
 			req = JsonRequestPacketDeserializer::deserializeLoginRequest(clientRequest.buffer);
 			
-			//TO FILL - handle login request in the program
+			RequestResult reqRes = gHandlerFactory.createLoginRequestHandler(gLoginManager, gHandlerFactory).handleRequest(clientRequest);
 
 			LoginResponse resStruct(SUCCESS);
-			
+			for (const auto ch : reqRes.response) {
+				std::cout << ch;
+			}
 			const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
 			std::string resInString;
 
