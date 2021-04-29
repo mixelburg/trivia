@@ -3,7 +3,7 @@
 #include "sqlite3.h"
 #include "IDataBase.h"
 
-class SqliteDataBase : IDataBase {
+class SqliteDataBase : public IDataBase {
 public:
 	virtual ~SqliteDataBase() = default;
 
