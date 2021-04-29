@@ -11,7 +11,6 @@
 #define HELLO_LEN 5
 #define LEN_SIZE 4
 #define CODE_LEN 1
-#define SUCCESS 1
 
 IDataBase* gDataBase = new SqliteDataBase();
 LoginManager gLoginManager(gDataBase);
@@ -121,14 +120,11 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 
 		LoginRequest req;
 		if (clientRequest.id == LOGIN_CODE) {
-			req = JsonRequestPacketDeserializer::deserializeLoginRequest(clientRequest.buffer);
 			
 			RequestResult reqRes = gHandlerFactory.createLoginRequestHandler(gLoginManager, gHandlerFactory).handleRequest(clientRequest);
 
-			LoginResponse resStruct(SUCCESS);
-			for (const auto ch : reqRes.response) {
-				std::cout << ch;
-			}
+			LoginResponse resStruct(reqRes.response[0]);
+			
 			const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
 			std::string resInString;
 
@@ -140,11 +136,10 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 
 		}
 		else if (clientRequest.id == SIGNUP_CODE) {
-			req = JsonRequestPacketDeserializer::deserializeSignupRequest(clientRequest.buffer);
 			
-			//TO FILL - handle signup request in the program 
+			RequestResult reqRes = gHandlerFactory.createLoginRequestHandler(gLoginManager, gHandlerFactory).handleRequest(clientRequest);
 
-			SignupResponse resStruct(SUCCESS);
+			SignupResponse resStruct(reqRes.response[0]);
 
 			const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
 			std::string resInString;
