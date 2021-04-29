@@ -1,6 +1,8 @@
 #pragma once
 #include "LoginRequestHandler.h"
 #include "MenuRequestHandler.h"
+#include "IDataBase.h"
+
 class RequestHandlerFactory
 {
 public:
@@ -19,7 +21,7 @@ public:
 	input: none
 	output: the handler that has been created
 	*/
-	LoginRequestHandler createLoginRequestHandler();
+	LoginRequestHandler createLoginRequestHandler(IDataBase* dataBaseClass);
 	/*
 	Function returns the login manager
 	input: none
