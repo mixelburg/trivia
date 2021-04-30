@@ -1,5 +1,7 @@
 #pragma comment (lib, "ws2_32.lib")
 
+// the master branch
+
 #include "WSAInitializer.h"
 #include "Server.h"
 #include <iostream>
