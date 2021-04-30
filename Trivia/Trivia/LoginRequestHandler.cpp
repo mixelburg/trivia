@@ -1,12 +1,19 @@
 #include "LoginRequestHandler.h"
+#include "Codes.h"
 
 bool LoginRequestHandler::isRequestRelevant(const RequestInfo& reqInfo)
 {
-    return false;
+    return reqInfo.id == LOGIN_CODE || reqInfo.id == SIGNUP_CODE ? true : false;
 }
 
 RequestResult LoginRequestHandler::handleRequest(const RequestInfo& reqInfo)
 {
-    RequestResult loginReqRes;
-    return loginReqRes;
+    RequestResult reqResult;
+    /*if (reqInfo.id == LOGIN_CODE) {
+        reqResult = login(reqInfo);
+    }
+    else {
+        reqResult = signup(reqInfo);
+    }*/
+    return reqResult;
 }

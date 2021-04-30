@@ -2,7 +2,6 @@
 
 #include <ctime>
 #include <vector>
-#include <cstddef>
 #include <string>
 
 class IRequestHandler;
@@ -12,13 +11,13 @@ struct IRequest {
 };
 
 struct RequestInfo: public IRequest {
-	int id;
+	unsigned char id;
 	time_t receivalTime;
-	std::vector<int> buffer;
+	std::vector<unsigned char> buffer;
 };
 
 struct RequestResult: public IRequest {
-	std::string response;
+	std::vector<unsigned char> response;
 	IRequestHandler* newHandler;
 };
 

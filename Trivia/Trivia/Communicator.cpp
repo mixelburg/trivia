@@ -1,8 +1,14 @@
 #include "Communicator.h"
 #include <iostream>
-
+#include <ctime>
+#include "Codes.h"
+#include "JsonResponsePacketSerializer.h"
+#include "JsonRequestPacketDeserializer.h"
 #define LISTEN_PORT 5050
 #define HELLO_LEN 5
+#define LEN_SIZE 4
+#define CODE_LEN 1
+#define SUCCESS 1
 
 Communicator::Communicator()
 {
@@ -91,9 +97,56 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 	std::cout << "Comms with the client..." << std::endl;
 
 	try {
+		// sending and reciving hello message
 		Helper::sendData(clientSocket, "Hello");
 		auto retVal = Helper::getStringPartFromSocket(clientSocket, HELLO_LEN);
 		std::cout << retVal << std::endl;
+
+		// splitting the request of the client
+		RequestInfo clientRequest;
+		clientRequest.id = Helper::getStringPartFromSocket(clientSocket, CODE_LEN)[0];
+		clientRequest.receivalTime = time(NULL);
+		auto reqDataLen = Helper::getIntPartFromSocket(clientSocket, LEN_SIZE);
+		auto jsonData = Helper::getStringPartFromSocket(clientSocket, reqDataLen);
+		for (const auto ch : jsonData) {
+			clientRequest.buffer.push_back(ch);
+		}
+
+		LoginRequest req;
+		if (clientRequest.id == LOGIN_CODE) {
+			req = JsonRequestPacketDeserializer::deserializeLoginRequest(clientRequest.buffer);
+			
+			//TO FILL - handle login request in the program
+
+			LoginResponse resStruct(SUCCESS);
+			
+			const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
+			std::string resInString;
+
+			for (const auto ch : res) {
+				resInString += ch;
+			}
+
+			Helper::sendData(clientSocket, resInString);
+
+		}
+		else if (clientRequest.id == SIGNUP_CODE) {
+			req = JsonRequestPacketDeserializer::deserializeSignupRequest(clientRequest.buffer);
+			
+			//TO FILL - handle signup request in the program 
+
+			SignupResponse resStruct(SUCCESS);
+
+			const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
+			std::string resInString;
+
+			for (const auto ch : res) {
+				resInString += ch;
+			}
+
+			Helper::sendData(clientSocket, resInString);
+		}
+
 	}
 	catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
