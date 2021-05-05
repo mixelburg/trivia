@@ -1,6 +1,6 @@
 #pragma comment (lib, "ws2_32.lib")
 
-//ver 2.00 DB
+//ver 2.00 Feature/DB_Stats
 
 #include "WSAInitializer.h"
 #include "Server.h"

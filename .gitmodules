@@ -1,0 +1,2 @@
+[submodule "vcpkg"]
+	url = https://gitlab.com/yohai_porat_advanced_programming/trivia.git
