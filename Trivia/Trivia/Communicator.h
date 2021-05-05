@@ -20,7 +20,7 @@ public:
 	cTor to init the socket and the fields
 	input + output: none
 	*/
-	Communicator();
+	Communicator(RequestHandlerFactory& handlerFactory);
 
 	//dTor
 	~Communicator();
@@ -55,6 +55,6 @@ private:
 	std::map<SOCKET, IRequestHandler*> m_clients;
 
 	//a factory to hanble the requests of the client
-	//RequestHandlerFactory& m_handlerFactory;
+	RequestHandlerFactory& m_handlerFactory;
 };
 

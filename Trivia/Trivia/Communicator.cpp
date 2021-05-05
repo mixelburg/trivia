@@ -14,9 +14,8 @@
 
 IDataBase* gDataBase = new SqliteDataBase();
 LoginManager gLoginManager(gDataBase);
-RequestHandlerFactory gHandlerFactory;
 
-Communicator::Communicator()
+Communicator::Communicator(RequestHandlerFactory& handlerFactory) : m_handlerFactory(handlerFactory)
 {
 	//setting the socket to communicate with the clients
 	m_serverSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -91,7 +90,7 @@ void Communicator::acceptConnection()
 
 	std::cout << "Creating thread..." << std::endl;
 	//creating a thread for the client and detaching it from the function
-	IRequestHandler* reqHandler = new LoginRequestHandler(gLoginManager, gHandlerFactory);
+	IRequestHandler* reqHandler = new LoginRequestHandler(gLoginManager, m_handlerFactory);
 	m_clients.insert(std::make_pair(client_socket, reqHandler));
 	std::thread t(&Communicator::handleNewClient, this, client_socket);
 	t.detach();
@@ -121,7 +120,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		LoginRequest req;
 		if (clientRequest.id == LOGIN_CODE) {
 			
-			RequestResult reqRes = gHandlerFactory.createLoginRequestHandler(gLoginManager, gHandlerFactory).handleRequest(clientRequest);
+			RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(gLoginManager, m_handlerFactory).handleRequest(clientRequest);
 
 			LoginResponse resStruct(reqRes.response[0]);
 			
@@ -137,7 +136,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		}
 		else if (clientRequest.id == SIGNUP_CODE) {
 			
-			RequestResult reqRes = gHandlerFactory.createLoginRequestHandler(gLoginManager, gHandlerFactory).handleRequest(clientRequest);
+			RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(gLoginManager, m_handlerFactory).handleRequest(clientRequest);
 
 			SignupResponse resStruct(reqRes.response[0]);
 
