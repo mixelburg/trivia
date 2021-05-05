@@ -37,7 +37,7 @@ public:
 	input: none
 	output: the names of the users
 	*/
-	std::vector<std::string> getAllUsers();
+	std::vector<std::string> getAllUsers() const;
 
 };
 
