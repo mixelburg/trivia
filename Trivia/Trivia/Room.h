@@ -40,6 +40,7 @@ public:
 	output: the names of the users
 	*/
 	std::vector<std::string> getAllUsers() const;
-
+	//getter for the state
+	const unsigned int getState() const;
 };
 
