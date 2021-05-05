@@ -19,6 +19,8 @@ public:
 	auto open() -> bool override;
 	void close() override;
 private:
+	auto getUserId(const std::string& uname) const -> int;
+	
 	sqlite3* _db;
 	std::string _dbFilename = "db.sqlite";
 };
