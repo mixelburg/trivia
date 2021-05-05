@@ -31,7 +31,7 @@ public:
 	input: the user
 	output: none
 	*/
-	void removeUser(const LoggedUser& loggedUser);
+	void removeUser(LoggedUser& loggedUser);
 	/*
 	Function gets all the users from the room
 	input: none
