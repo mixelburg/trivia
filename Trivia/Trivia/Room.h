@@ -20,6 +20,8 @@ private:
 	std::vector<LoggedUser> m_users;
 
 public:
+
+	Room(const RoomData& metaData);
 	/*
 	Function adds a user to the room
 	input: the user
@@ -38,6 +40,9 @@ public:
 	output: the names of the users
 	*/
 	std::vector<std::string> getAllUsers() const;
-
+	//getter for the state
+	const unsigned int getState() const;
+	//getter for the room data
+	const RoomData getData() const;
 };
 

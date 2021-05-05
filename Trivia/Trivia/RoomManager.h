@@ -11,7 +11,7 @@ public:
 	input: a logged user who creats the room, the room data
 	output: none
 	*/
-	void createRoom(const LoggedUser& loggedUser, const RoomData& roomData);
+	void createRoom(const LoggedUser& owner, const RoomData& roomData);
 	/*
 	Function deletes a room
 	input: the id of the room to be deleted
