@@ -42,5 +42,6 @@ public:
 	std::vector<std::string> getAllUsers() const;
 	//getter for the state
 	const unsigned int getState() const;
+	const RoomData getData() const;
 };
 

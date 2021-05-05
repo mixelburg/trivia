@@ -31,3 +31,8 @@ const unsigned int Room::getState() const
 {
 	return m_metadata.isActive;
 }
+
+const RoomData Room::getData() const
+{
+	return m_metadata;
+}
