@@ -89,15 +89,77 @@ auto SqliteDataBase::getPlayerAverageAnswerTime(const std::string& uname) const 
 		return 0;
 	};
 
-	const std::string sqlCommand = "SELECT AVG_ANSWER_TIME FROM STATISTICS WHERE USER_ID is " + std::to_string() + ";";
+	const std::string sqlCommand = "SELECT AVG_ANSWER_TIME FROM STATISTICS WHERE USER_ID is " + std::to_string(getUserId(uname)) + ";";
 	char* errMessage = nullptr;
-	const auto res = sqlite3_exec(_db, sqlCommand.c_str(), callback, &flag, &errMessage);
+	const auto res = sqlite3_exec(_db, sqlCommand.c_str(), callback, &avgTime, &errMessage);
 	if (res != SQLITE_OK)
 	{
 		std::cout << errMessage << std::endl;
 	}
 
 	return avgTime;
+}
+
+auto SqliteDataBase::getNumOfCorrectAnswers(const std::string& uname) const -> int
+{
+	int numCorrectAnswers = false;
+	auto callback = [](void* data, int argc, char** argv, char** azColName)
+	{
+		*static_cast<int*>(data) = std::stoi(argv[0]);
+		return 0;
+	};
+
+	const std::string sqlCommand = "SELECT NUM_ANSWERS_CORRECT FROM STATISTICS WHERE USER_ID is " + std::to_string(getUserId(uname)) + ";";
+	char* errMessage = nullptr;
+	const auto res = sqlite3_exec(_db, sqlCommand.c_str(), callback, &numCorrectAnswers, &errMessage);
+	if (res != SQLITE_OK)
+	{
+		std::cout << errMessage << std::endl;
+	}
+
+	return numCorrectAnswers;
+}
+
+auto SqliteDataBase::getNumOfTotalAnswers(const std::string& uname) const -> int
+{
+	int numAnswers = false;
+	auto callback = [](void* data, int argc, char** argv, char** azColName)
+	{
+		*static_cast<int*>(data) = std::stoi(argv[0]);
+		return 0;
+	};
+	
+
+	const std::string sqlCommand = "SELECT NUM_ANSWERS FROM STATISTICS WHERE USER_ID is " + std::to_string(getUserId(uname)) + ";";
+	char* errMessage = nullptr;
+	const auto res = sqlite3_exec(_db, sqlCommand.c_str(), callback, &numAnswers, &errMessage);
+	if (res != SQLITE_OK)
+	{
+		std::cout << errMessage << std::endl;
+	}
+
+	return numAnswers;
+}
+
+auto SqliteDataBase::getNumOfPlayerGames(const std::string& uname) const -> int
+{
+	int numGames = false;
+	auto callback = [](void* data, int argc, char** argv, char** azColName)
+	{
+		*static_cast<int*>(data) = std::stoi(argv[0]);
+		return 0;
+	};
+
+
+	const std::string sqlCommand = "SELECT NUM_GAMES FROM STATISTICS WHERE USER_ID is " + std::to_string(getUserId(uname)) + ";";
+	char* errMessage = nullptr;
+	const auto res = sqlite3_exec(_db, sqlCommand.c_str(), callback, &numGames, &errMessage);
+	if (res != SQLITE_OK)
+	{
+		std::cout << errMessage << std::endl;
+	}
+
+	return numGames;
 }
 
 auto SqliteDataBase::open() -> bool
