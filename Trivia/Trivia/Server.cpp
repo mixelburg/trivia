@@ -16,7 +16,7 @@ using std::endl;
 using std::flush;
 using std::cerr;
 
-Server::Server(): m_communicator()
+Server::Server(): m_handlerFactory(), m_communicator(m_handlerFactory), m_database()
 {
 }
 
