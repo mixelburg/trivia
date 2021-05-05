@@ -6,7 +6,7 @@ LoggedUser::LoggedUser(std::string uname) : _uname(std::move(uname))
 {
 }
 
-const std::string LoggedUser::getUsername()
+const std::string LoggedUser::getUsername() const
 {
     return _uname;
 }
