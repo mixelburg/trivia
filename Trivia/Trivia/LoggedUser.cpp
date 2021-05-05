@@ -10,3 +10,8 @@ bool LoggedUser::operator==(const LoggedUser& other)
 {
 	return this->_uname == other._uname;
 }
+
+std::string LoggedUser::getUname() const
+{
+	return _uname;
+}
