@@ -55,10 +55,12 @@ private:
 	*/
 	RequestInfo extractReqInfo(SOCKET clientSocket);
 	/*
-	
+	Function sends and recieve hello message from a new client
+	input: the client socket
+	output: none
 	*/
 	void welcome(SOCKET clientSocket);
-	
+	void handleLogin(SOCKET clientSocket, RequestInfo& clientRequest);
 	//server socket
 	SOCKET m_serverSocket;
 

@@ -107,20 +107,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 
 		LoginRequest req;
 		if (clientRequest.id == LOGIN_CODE) {
-			
-			RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory).handleRequest(clientRequest);
-			
-			LoginResponse resStruct(reqRes.response[0]);
-			
-			const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
-			std::string resInString;
-
-			for (const auto ch : res) {
-				resInString += ch;
-			}
-
-			Helper::sendData(clientSocket, resInString);
-
+			handleLogin(clientSocket, clientRequest);
 		}
 		else if (clientRequest.id == SIGNUP_CODE) {
 			
@@ -168,3 +155,18 @@ void Communicator::welcome(SOCKET clientSocket)
 	std::cout << retVal << std::endl;
 }
 
+void Communicator::handleLogin(SOCKET clientSocket, RequestInfo& clientRequest)
+{
+	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory).handleRequest(clientRequest);
+
+	LoginResponse resStruct(reqRes.response[0]);
+
+	const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
+	std::string resInString;
+
+	for (const auto ch : res) {
+		resInString += ch;
+	}
+
+	Helper::sendData(clientSocket, resInString);
+}
