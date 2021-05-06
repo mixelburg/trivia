@@ -99,10 +99,8 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 {
 	std::cout << "Comms with the client..." << std::endl;
 	try {
-		// sending and reciving hello message
-		Helper::sendData(clientSocket, "Hello");
-		auto retVal = Helper::getStringPartFromSocket(clientSocket, HELLO_LEN);
-		std::cout << retVal << std::endl;
+
+		welcome(clientSocket);
 
 		//creating struct with the request
 		RequestInfo clientRequest = extractReqInfo(clientSocket);
@@ -160,5 +158,13 @@ RequestInfo Communicator::extractReqInfo(SOCKET clientSocket)
 		clientRequest.buffer.push_back(ch);
 	}
 	return clientRequest;
+}
+
+void Communicator::welcome(SOCKET clientSocket)
+{
+	// sending and reciving hello message
+	Helper::sendData(clientSocket, "Hello");
+	auto retVal = Helper::getStringPartFromSocket(clientSocket, HELLO_LEN);
+	std::cout << retVal << std::endl;
 }
 

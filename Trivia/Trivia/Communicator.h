@@ -54,6 +54,11 @@ private:
 	output: the struct with the request
 	*/
 	RequestInfo extractReqInfo(SOCKET clientSocket);
+	/*
+	
+	*/
+	void welcome(SOCKET clientSocket);
+	
 	//server socket
 	SOCKET m_serverSocket;
 
