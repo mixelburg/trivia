@@ -48,7 +48,12 @@ private:
 	input + output: none
 	*/
 	void handleNewClient(SOCKET clientSocket);
-	
+	/*
+	Function extracst the client' request into RequestInfo struct
+	input: the client socket
+	output: the struct with the request
+	*/
+	RequestInfo extractReqInfo(SOCKET clientSocket);
 	//server socket
 	SOCKET m_serverSocket;
 

@@ -104,21 +104,14 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		auto retVal = Helper::getStringPartFromSocket(clientSocket, HELLO_LEN);
 		std::cout << retVal << std::endl;
 
-		// splitting the request of the client
-		RequestInfo clientRequest;
-		clientRequest.id = Helper::getStringPartFromSocket(clientSocket, CODE_LEN)[0];
-		clientRequest.receivalTime = time(NULL);
-		auto reqDataLen = Helper::getIntPartFromSocket(clientSocket, LEN_SIZE);
-		auto jsonData = Helper::getStringPartFromSocket(clientSocket, reqDataLen);
-		for (const auto ch : jsonData) {
-			clientRequest.buffer.push_back(ch);
-		}
+		//creating struct with the request
+		RequestInfo clientRequest = extractReqInfo(clientSocket);
 
 		LoginRequest req;
 		if (clientRequest.id == LOGIN_CODE) {
 			
 			RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory).handleRequest(clientRequest);
-
+			
 			LoginResponse resStruct(reqRes.response[0]);
 			
 			const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
@@ -152,5 +145,20 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		std::cout << e.what() << std::endl;
 	}
 
+}
+
+RequestInfo Communicator::extractReqInfo(SOCKET clientSocket)
+{
+	RequestInfo clientRequest;
+	// splitting the request of the client
+
+	clientRequest.id = Helper::getStringPartFromSocket(clientSocket, CODE_LEN)[0];
+	clientRequest.receivalTime = time(NULL);
+	auto reqDataLen = Helper::getIntPartFromSocket(clientSocket, LEN_SIZE);
+	auto jsonData = Helper::getStringPartFromSocket(clientSocket, reqDataLen);
+	for (const auto ch : jsonData) {
+		clientRequest.buffer.push_back(ch);
+	}
+	return clientRequest;
 }
 
