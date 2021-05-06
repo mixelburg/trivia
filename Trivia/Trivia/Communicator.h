@@ -12,6 +12,7 @@
 #include <map>
 #include "IRequestHandler.h"
 #include "LoginRequestHandler.h"
+#include "SqliteDataBase.h"
 
 class Communicator
 {
@@ -20,7 +21,7 @@ public:
 	cTor to init the socket and the fields
 	input + output: none
 	*/
-	Communicator(RequestHandlerFactory& handlerFactory);
+	Communicator(RequestHandlerFactory& handlerFactory, IDataBase& db);
 
 	//dTor
 	~Communicator();
@@ -29,7 +30,7 @@ public:
 	Function starts handle requests recived from clients
 	input + output: none
 	*/
-	void startHandleRequests();
+	void startHandleRequests(IDataBase& db);
 
 private:
 	/*
@@ -56,5 +57,9 @@ private:
 
 	//a factory to hanble the requests of the client
 	RequestHandlerFactory& m_handlerFactory;
+
+	IDataBase& m_dataBase;
+
+	LoginManager m_loginManager;
 };
 

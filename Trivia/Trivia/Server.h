@@ -20,7 +20,7 @@ class Server
 {
 public:
 	Server();
-	~Server() = default;
+	~Server();
 	/*
 	Function inits the server' commponents
 	input: none

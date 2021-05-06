@@ -12,10 +12,8 @@
 #define LEN_SIZE 4
 #define CODE_LEN 1
 
-IDataBase* gDataBase = new SqliteDataBase();
-LoginManager gLoginManager(gDataBase);
 
-Communicator::Communicator(RequestHandlerFactory& handlerFactory) : m_handlerFactory(handlerFactory)
+Communicator::Communicator(RequestHandlerFactory& handlerFactory, IDataBase& db) : m_handlerFactory(handlerFactory), m_dataBase(db), m_loginManager(&db)
 {
 	//setting the socket to communicate with the clients
 	m_serverSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -42,7 +40,7 @@ Communicator::~Communicator()
 	catch (...) {}
 }
 
-void Communicator::startHandleRequests()
+void Communicator::startHandleRequests(IDataBase& db)
 {
 	bindAndListen();
 }
@@ -90,7 +88,7 @@ void Communicator::acceptConnection()
 
 	std::cout << "Creating thread..." << std::endl;
 	//creating a thread for the client and detaching it from the function
-	IRequestHandler* reqHandler = new LoginRequestHandler(gLoginManager, m_handlerFactory);
+	IRequestHandler* reqHandler = new LoginRequestHandler(m_loginManager, m_handlerFactory);
 	m_clients.insert(std::make_pair(client_socket, reqHandler));
 	std::thread t(&Communicator::handleNewClient, this, client_socket);
 	t.detach();
@@ -100,7 +98,6 @@ void Communicator::acceptConnection()
 void Communicator::handleNewClient(SOCKET clientSocket)
 {
 	std::cout << "Comms with the client..." << std::endl;
-	gDataBase->open();
 	try {
 		// sending and reciving hello message
 		Helper::sendData(clientSocket, "Hello");
@@ -120,7 +117,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		LoginRequest req;
 		if (clientRequest.id == LOGIN_CODE) {
 			
-			RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(gLoginManager, m_handlerFactory).handleRequest(clientRequest);
+			RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory).handleRequest(clientRequest);
 
 			LoginResponse resStruct(reqRes.response[0]);
 			
@@ -136,7 +133,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		}
 		else if (clientRequest.id == SIGNUP_CODE) {
 			
-			RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(gLoginManager, m_handlerFactory).handleRequest(clientRequest);
+			RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory).handleRequest(clientRequest);
 
 			SignupResponse resStruct(reqRes.response[0]);
 
