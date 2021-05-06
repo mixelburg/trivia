@@ -60,7 +60,18 @@ private:
 	output: none
 	*/
 	void welcome(SOCKET clientSocket);
+	/*
+	Function handles with a login request from the client
+	input: the client socket, a struct contains the request information
+	output: none
+	*/
 	void handleLogin(SOCKET clientSocket, RequestInfo& clientRequest);
+	/*
+	Function handles with a signup request from the client
+	input: the client socket, a struct contains the request information
+	output: none
+	*/
+	void handleSignup(SOCKET clientSocket, RequestInfo& clientRequest);
 	//server socket
 	SOCKET m_serverSocket;
 
