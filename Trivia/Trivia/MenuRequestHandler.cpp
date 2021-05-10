@@ -7,5 +7,9 @@ bool MenuRequestHandler::isRequestRelevant(const RequestInfo& reqInfo)
 
 RequestResult MenuRequestHandler::handleRequest(const RequestInfo& reqInfo)
 {
+	switch (reqInfo.id)
+	{
+		case 
+	}
     return RequestResult();
 }
