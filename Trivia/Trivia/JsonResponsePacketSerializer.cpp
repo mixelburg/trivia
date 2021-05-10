@@ -79,3 +79,32 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
     //returning the complete message
     return buffer;
 }
+
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const GetPlayersInRoomResponse& playersResponse)
+{
+    std::vector<unsigned char> buffer;
+
+    //inserting the message code
+    buffer.push_back(playersResponse.code);
+
+    //get the names of the rooms from the rooms vector
+    std::string playersNames;
+    for (const auto player : playersResponse.players) {
+        playersNames += player + ", ";
+    }
+    playersNames = playersNames.substr(0, playersNames.size() - CHARS_TO_REMOVE);
+
+    //create the json object
+    Json::Value root;
+    root = "PlayersInRoom:" + playersNames;
+    auto jsonData = root.asString();
+
+    //insert the data' size + the data
+    std::string dataSize = Helper::getPaddedNumber(jsonData.length(), LEN_SIZE);
+    for (const auto ch : dataSize + jsonData) {
+        buffer.push_back(ch);
+    }
+
+    //returning the complete message
+    return buffer;
+}

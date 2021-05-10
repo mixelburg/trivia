@@ -5,6 +5,8 @@
 #include "Codes.h"
 #include "Room.h"
 
+#define NA 1
+
 struct IStatusResponse {
 public:
 	IStatusResponse(unsigned int status, unsigned char code):code(code), status(status) {}
@@ -35,8 +37,8 @@ struct GetRoomsResponse : public IStatusResponse {
 	std::vector<RoomData> rooms;
 };
 
-struct GetPlayersInRoomResponse {
-	GetPlayersInRoomResponse(std::vector<std::string> players) : players(players) {}
+struct GetPlayersInRoomResponse : public IStatusResponse {
+	GetPlayersInRoomResponse(std::vector<std::string> players) : IStatusResponse(NA, GET_PLAYERS_CODE), players(players) {}
 	std::vector<std::string> players;
 };
 
@@ -79,6 +81,12 @@ public:
 	output: buffer with the rooms response
 	*/
 	static std::vector<unsigned char> serializeResponse(const GetRoomsResponse& roomsResponse);
+	/*
+	Function serialize the players response to buffer
+	input: struct of the players response
+	output: buffer with the players response
+	*/
+	static std::vector<unsigned char> serializeResponse(const GetPlayersInRoomResponse& playersResponse);
 
 };
 
