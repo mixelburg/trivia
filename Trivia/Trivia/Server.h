@@ -14,12 +14,13 @@
 #include "IRequestHandler.h"
 #include "LoginRequestHandler.h"
 #include "Communicator.h"
+#include "SqliteDataBase.h"
 
 class Server
 {
 public:
 	Server();
-	~Server() = default;
+	~Server();
 	/*
 	Function inits the server' commponents
 	input: none
@@ -28,7 +29,7 @@ public:
 	void run();
 
 private:
-	//IDatabase m_database;
+	SqliteDataBase m_database;
 	Communicator m_communicator;
-	//RequestHandlerFactory m_handlerFactory;
+	RequestHandlerFactory m_handlerFactory;
 };

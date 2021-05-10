@@ -3,13 +3,13 @@
 #include "sqlite3.h"
 #include "IDataBase.h"
 
-class SqliteDataBase : IDataBase {
+class SqliteDataBase : public IDataBase {
 public:
 	virtual ~SqliteDataBase() = default;
 
-	auto isUser(const std::string& uname) const -> bool;
-	auto checkPassword(const std::string& uname, const std::string& pswd) const -> bool;
-	auto addUser(const std::string& uname, const std::string& pswd, const std::string& email) const -> void;
+	auto isUser(const std::string& uname) const -> bool override;
+	auto checkPassword(const std::string& uname, const std::string& pswd) const -> bool override;
+	auto addUser(const std::string& uname, const std::string& pswd, const std::string& email) const -> void override;
 
 	auto open() -> bool override;
 	void close() override;

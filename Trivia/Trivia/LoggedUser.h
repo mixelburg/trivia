@@ -4,11 +4,11 @@
 class LoggedUser
 {
 public:
-	LoggedUser(std::string uname, std::string pswd);
+	LoggedUser(std::string uname);
 	~LoggedUser() = default;
 
+	const std::string getUsername() const;
 	
 private:
 	std::string _uname;
-	std::string _pswd;
 };

@@ -16,12 +16,24 @@ using std::endl;
 using std::flush;
 using std::cerr;
 
-Server::Server(): m_communicator()
+Server::Server(): m_handlerFactory(), m_database(), m_communicator(m_handlerFactory, m_database)
 {
+	try {
+		m_database.open();
+	}
+	catch (...) {
+		std::cout << "Data base failed to open..." << std::endl;
+		exit(0);
+	}
+}
+
+Server::~Server()
+{
+	m_database.close();
 }
 
 void Server::run()
 {
-	m_communicator.startHandleRequests();
+	m_communicator.startHandleRequests(m_database);
 }
 
