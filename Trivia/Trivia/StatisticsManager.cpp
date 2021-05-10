@@ -1,6 +1,6 @@
 #include "StatisticsManager.h"
 
-auto StatisticsManager::getStatistics() -> std::vector<std::string>
+std::vector<std::string> StatisticsManager::getStatistics()
 {
 	std::vector<std::string> stats;
 	
@@ -9,9 +9,7 @@ auto StatisticsManager::getStatistics() -> std::vector<std::string>
 
 auto StatisticsManager::getHighScore() -> std::vector<std::string>
 {
-	std::vector<std::string> scores;
-	
-	return scores;
+	return _dataBase->getBestPlayers();
 }
 
 auto StatisticsManager::getUserStatistics(const std::string& uname) const -> std::vector<std::string>
