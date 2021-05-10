@@ -93,6 +93,12 @@ public:
 	output: buffer with the stats response
 	*/
 	static std::vector<unsigned char> serializeResponse(const GetPersonalStatsResponse& statsResponse);
+	/*
+	Function serialize the high scores response to buffer
+	input: struct of the  high scores response
+	output: buffer with the  high scores response
+	*/
+	static std::vector<unsigned char> serializeResponse(const GetHighScoreResponse& highScoresResponse);
 
 };
 

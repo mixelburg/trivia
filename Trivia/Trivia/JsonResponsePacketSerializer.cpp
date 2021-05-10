@@ -137,3 +137,32 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
     //returning the complete message
     return buffer;
 }
+
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const GetHighScoreResponse& highScoresResponse)
+{
+    std::vector<unsigned char> buffer;
+
+    //inserting the message code
+    buffer.push_back(highScoresResponse.code);
+
+    //inserting the scores to a string 
+    std::string scoreInString;
+    for (const auto score : highScoresResponse.highScore) {
+        scoreInString += score + ", ";
+    }
+    scoreInString = scoreInString.substr(0, scoreInString.size() - CHARS_TO_REMOVE);
+
+    //create the json object
+    Json::Value root;
+    root = "HighScores:" + scoreInString;
+    auto jsonData = root.asString();
+
+    //insert the data' size + the data
+    std::string dataSize = Helper::getPaddedNumber(jsonData.length(), LEN_SIZE);
+    for (const auto ch : dataSize + jsonData) {
+        buffer.push_back(ch);
+    }
+
+    //returning the complete message
+    return buffer;
+}
