@@ -73,7 +73,5 @@ public:
 	output: buffer with the login response
 	*/
 	static std::vector<unsigned char> serializeResponse(const IStatusResponse& codeResponse);
-	
-
 };
 

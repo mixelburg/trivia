@@ -50,4 +50,3 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
     //returning the complete message
     return buffer;
 }
-
