@@ -24,6 +24,11 @@ struct ErrorResponse {
 	std::string message;
 };
 
+// strcuts for version 2 
+struct LogoutResponse : public IStatusResponse {
+	LogoutResponse(unsigned int status) : IStatusResponse(status, LOGOUT_CODE) {}
+};
+
 class JsonResponsePacketSerializer
 {
 public:
