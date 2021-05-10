@@ -4,9 +4,12 @@
 class StatisticsManager
 {
 public:
-	auto getStatistics()->std::vector<std::string>;
+	StatisticsManager() = default;
+	~StatisticsManager() = default;
+	
+	std::vector<std::string> getStatistics();
 private:
 	auto getHighScore()->std::vector<std::string>;
 	auto getUserStatistics(const std::string& uname) const ->std::vector<std::string>;
-	IDataBase* _dataBase;
+	IDataBase* _dataBase = nullptr;
 };

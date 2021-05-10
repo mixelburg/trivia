@@ -15,11 +15,13 @@ public:
 	auto getNumOfCorrectAnswers(const std::string& uname) const -> int override;
 	auto getNumOfTotalAnswers(const std::string& uname) const -> int override;
 	auto getNumOfPlayerGames(const std::string& uname) const -> int override;
+	auto getBestPlayers() const -> std::vector<std::string> override;
 	
 	auto open() -> bool override;
 	void close() override;
 private:
 	auto getUserId(const std::string& uname) const -> int;
+	auto getUserName(const int id) const->std::string;
 	
 	sqlite3* _db;
 	std::string _dbFilename = "db.sqlite";

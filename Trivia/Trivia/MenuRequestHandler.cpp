@@ -63,3 +63,34 @@ RequestResult MenuRequestHandler::getPlayersInRoom(const RequestInfo& reqInfo)
 	
 	return res;
 }
+
+RequestResult MenuRequestHandler::getPersonalStats(const RequestInfo& reqInfo)
+{
+	RequestResult res;
+	res.newHandler = this;
+
+	
+	const GetPersonalStatsResponse rr();
+	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
+
+	return res;
+}
+
+RequestResult MenuRequestHandler::getHighScore(const RequestInfo& reqInfo)
+{
+	RequestResult res;
+	res.newHandler = this;
+
+	const GetHighScoreResponse rr();
+	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
+
+	return res;
+}
+
+RequestResult MenuRequestHandler::joinRoom(const RequestInfo& reqInfo)
+{
+}
+
+RequestResult MenuRequestHandler::createRoom(const RequestInfo& reqInfo)
+{
+}
