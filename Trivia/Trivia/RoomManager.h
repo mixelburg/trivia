@@ -30,6 +30,8 @@ public:
 	output: vector with the rooms (room's data)
 	*/
 	const std::vector<RoomData> getRooms();
+
+	const std::vector<std::string> getAllUsers(const int id);
 private:
 
 	std::map<unsigned int, Room> m_rooms; // a map with the rooms

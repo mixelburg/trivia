@@ -16,7 +16,7 @@ struct RequestInfo: IRequest {
 	std::vector<unsigned char> buffer;
 };
 
-struct RequestResult: public IRequest {
+struct RequestResult: IRequest {
 	std::vector<unsigned char> response;
 	IRequestHandler* newHandler;
 };

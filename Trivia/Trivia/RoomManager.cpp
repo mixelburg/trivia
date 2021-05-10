@@ -20,8 +20,18 @@ unsigned int RoomManager::getRoomState(const int id)
 const std::vector<RoomData> RoomManager::getRooms()
 {
 	std::vector<RoomData> roomsData;
-	for (const auto room : m_rooms) {
+	for (const auto& room : m_rooms) {
 		roomsData.push_back(room.second.getData());
 	}
 	return roomsData;
+}
+
+const std::vector<std::string> RoomManager::getAllUsers(const int id)
+{
+	for (const auto& pair : m_rooms)
+	{
+		if (pair.first == id) return pair.second.getAllUsers();
+	}
+	
+	return std::vector<std::string>;
 }
