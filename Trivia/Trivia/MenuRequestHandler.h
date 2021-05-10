@@ -1,5 +1,10 @@
 #pragma once
 #include "IRequestHandler.h"
+#include "LoggedUser.h"
+#include "RoomManager.h"
+
+class StatisticsManager;
+class RequestHandlerFactory;
 
 class MenuRequestHandler : public IRequestHandler
 {
@@ -31,10 +36,10 @@ public:
 
 private:
 	//fields
-	//LoggedUser m_user;
-	//RoomManager& m_roomManager;
-	//StatisticsManager& m_statisticsManager;
-	//RequestHandlerFactory& m_handlerFactory;
+	LoggedUser m_user;
+	RoomManager& m_roomManager;
+	StatisticsManager& m_statisticsManager;
+	RequestHandlerFactory& m_handlerFactory;
 
 	//methods
 	RequestResult signout(const RequestInfo& reqInfo);
