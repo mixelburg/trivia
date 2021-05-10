@@ -108,3 +108,32 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
     //returning the complete message
     return buffer;
 }
+
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const GetPersonalStatsResponse& statsResponse)
+{
+    std::vector<unsigned char> buffer;
+
+    //inserting the message code
+    buffer.push_back(statsResponse.code);
+
+    //inserting the stats to a string 
+    std::string statsInString;
+    for (const auto statistic : statsResponse.statistics) {
+        statsInString += statistic + ", ";
+    }
+    statsInString = statsInString.substr(0, statsInString.size() - CHARS_TO_REMOVE);
+
+    //create the json object
+    Json::Value root;
+    root = "UserStatistics:" + statsInString;
+    auto jsonData = root.asString();
+
+    //insert the data' size + the data
+    std::string dataSize = Helper::getPaddedNumber(jsonData.length(), LEN_SIZE);
+    for (const auto ch : dataSize + jsonData) {
+        buffer.push_back(ch);
+    }
+
+    //returning the complete message
+    return buffer;
+}

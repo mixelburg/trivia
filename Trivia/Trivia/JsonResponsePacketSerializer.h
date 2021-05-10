@@ -43,8 +43,8 @@ struct GetPlayersInRoomResponse : public IStatusResponse {
 };
 
 struct GetHighScoreResponse : public IStatusResponse {
-	GetHighScoreResponse(unsigned int status, std::vector<std::string> statistics) : IStatusResponse(status, GET_HIGH_SCORE_CODE), statistics(statistics) {}
-	std::vector<std::string> statistics;
+	GetHighScoreResponse(unsigned int status, std::vector<std::string> highScore) : IStatusResponse(status, GET_HIGH_SCORE_CODE), highScore(highScore) {}
+	std::vector<std::string> highScore;
 };
 
 struct GetPersonalStatsResponse : public IStatusResponse {
@@ -87,6 +87,12 @@ public:
 	output: buffer with the players response
 	*/
 	static std::vector<unsigned char> serializeResponse(const GetPlayersInRoomResponse& playersResponse);
+	/*
+	Function serialize the stats response to buffer
+	input: struct of the stats response
+	output: buffer with the stats response
+	*/
+	static std::vector<unsigned char> serializeResponse(const GetPersonalStatsResponse& statsResponse);
 
 };
 
