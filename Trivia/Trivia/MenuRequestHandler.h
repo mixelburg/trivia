@@ -2,9 +2,9 @@
 #include "IRequestHandler.h"
 #include "LoggedUser.h"
 #include "RoomManager.h"
+#include "StatisticsManager.h"
+#include "RequestHandlerFactory.h"
 
-class StatisticsManager;
-class RequestHandlerFactory;
 
 class MenuRequestHandler : public IRequestHandler
 {

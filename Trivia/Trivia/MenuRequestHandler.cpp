@@ -35,6 +35,7 @@ RequestResult MenuRequestHandler::signout(const RequestInfo& reqInfo)
 {
 	RequestResult res;
 
+	// TODO: fix this shit
 	res.newHandler = new LoginRequestHandler();
 	
 	return res;
@@ -56,7 +57,6 @@ RequestResult MenuRequestHandler::getPlayersInRoom(const RequestInfo& reqInfo)
 	RequestResult res;
 	res.newHandler = this;
 
-	
 	const GetPlayersInRoomResponse rr(m_roomManager.getRoomState());
 
 	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
@@ -69,8 +69,7 @@ RequestResult MenuRequestHandler::getPersonalStats(const RequestInfo& reqInfo)
 	RequestResult res;
 	res.newHandler = this;
 
-	
-	const GetPersonalStatsResponse rr();
+	const GetPersonalStatsResponse rr(1, m_statisticsManager.getUserStatistics());
 	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
 
 	return res;
@@ -81,7 +80,7 @@ RequestResult MenuRequestHandler::getHighScore(const RequestInfo& reqInfo)
 	RequestResult res;
 	res.newHandler = this;
 
-	const GetHighScoreResponse rr();
+	const GetHighScoreResponse rr(1, m_statisticsManager.getHighScore());
 	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
 
 	return res;
@@ -89,8 +88,26 @@ RequestResult MenuRequestHandler::getHighScore(const RequestInfo& reqInfo)
 
 RequestResult MenuRequestHandler::joinRoom(const RequestInfo& reqInfo)
 {
+
+	RequestResult res;
+	res.newHandler = this;
+
+	// TODO: add room join
+	const JoinRoomResponse rr();
+	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
+
+	return res;
 }
 
 RequestResult MenuRequestHandler::createRoom(const RequestInfo& reqInfo)
 {
+	RequestResult res;
+	res.newHandler = this;
+
+	// TODO: add room creation
+	m_roomManager.createRoom(m_user, );
+	const CreateRoomResponse rr(1);
+	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
+
+	return res;
 }
