@@ -86,3 +86,34 @@ GetPlayersInRoomRequest JsonRequestPacketDeserializer::deserializeGetPlayersRequ
 
 	return getPlayersReq;
 }
+
+JoinRoomRequest JsonRequestPacketDeserializer::deserializeJoinRoomRequest(const std::vector<unsigned char>& buffer)
+{
+	JoinRoomRequest joinRoomReq;
+
+	//insreting the buffer into a string
+	std::string jsonStr;
+	for (const auto ch : buffer) {
+		jsonStr += ch;
+	}
+
+	//creating json objects to parse the data
+	Json::CharReaderBuilder builder;
+	Json::CharReader* reader = builder.newCharReader();
+
+	//creating json object to hold the data
+	Json::Value json;
+	std::string errors;
+
+	//parsing the std::string to a json object
+	if (!reader->parse(jsonStr.c_str(), jsonStr.c_str() + jsonStr.size(), &json, &errors)) {
+		delete reader;
+		throw std::exception("Failed to deserialize");
+	}
+	delete reader;
+
+	joinRoomReq.roomId = json.get("roomId", NULL).asInt();
+
+	return joinRoomReq;
+
+}
