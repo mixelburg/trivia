@@ -34,9 +34,9 @@ RequestResult MenuRequestHandler::handleRequest(const RequestInfo& reqInfo)
 RequestResult MenuRequestHandler::signout(const RequestInfo& reqInfo)
 {
 	RequestResult res;
+	LoginRequestHandler h = m_handlerFactory.createLoginRequestHandler();
 
-	// TODO: fix this shit
-	res.newHandler = new LoginRequestHandler();
+	res.newHandler = &h;
 	
 	return res;
 }
