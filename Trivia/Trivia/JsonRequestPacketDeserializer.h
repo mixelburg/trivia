@@ -43,5 +43,24 @@ public:
 	output: signup request struct
 	*/
 	static SignupRequest deserializeSignupRequest(const std::vector<unsigned char>& buffer);
+	/*
+	Function deserialize a client request into GetPlayersInRoomRequest
+	input: a buffer with the data of the request (json)
+	output: GetPlayersInRoomRequest request struct
+	*/
+	static GetPlayersInRoomRequest deserializeGetPlayersRequest(const std::vector<unsigned char>& buffer);
+	/*
+	Function deserialize a client request into JoinRoomRequest
+	input: a buffer with the data of the request (json)
+	output: JoinRoomRequest request struct
+	*/
+	static JoinRoomRequest deserializeJoinRoomRequest(const std::vector<unsigned char>& buffer);
+	/*
+	Function deserialize a client request into CreateRoomRequest
+	input: a buffer with the data of the request (json)
+	output: CreateRoomRequest request struct
+	*/
+	static CreateRoomRequest deserializeCreateRoomRequest(const std::vector<unsigned char>& buffer);
+
 };
 
