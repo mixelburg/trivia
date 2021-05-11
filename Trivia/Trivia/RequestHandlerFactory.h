@@ -1,6 +1,10 @@
 #pragma once
 #include "LoginRequestHandler.h"
 #include "MenuRequestHandler.h"
+
+class LoginRequestHandler;
+class MenuRequestHandler;
+
 class RequestHandlerFactory
 {
 public:
@@ -31,7 +35,7 @@ public:
 	input: none
 	output: the handler that has been created
 	*/
-	MenuRequestHandler createMenuRequestHandler();
+	MenuRequestHandler createMenuRequestHandler(LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory);
 	/*
 	Function returns the statistics manager
 	input: none

@@ -33,5 +33,5 @@ const std::vector<std::string> RoomManager::getAllUsers(const int id)
 		if (pair.first == id) return pair.second.getAllUsers();
 	}
 	
-	return std::vector<std::string>;
+	return std::vector<std::string>();
 }

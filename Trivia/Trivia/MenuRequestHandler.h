@@ -5,6 +5,7 @@
 #include "StatisticsManager.h"
 #include "RequestHandlerFactory.h"
 
+class RequestHandlerFactory;
 
 class MenuRequestHandler : public IRequestHandler
 {
@@ -14,7 +15,7 @@ public:
 	input: none
 	output: none
 	*/
-	MenuRequestHandler() = default;
+	MenuRequestHandler(LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory);
 	/*
 	Function distructs a MenuRequestHandler object
 	input: none
