@@ -70,9 +70,9 @@ public:
 	*/
 	static std::vector<unsigned char> serializeResponse(const ErrorResponse& errResponse);
 	/*
-	Function serialize the login response to buffer
-	input: strcut of the login response
-	output: buffer with the login response
+	Function serialize the status response to buffer
+	input: strcut of the status response
+	output: buffer with the status response
 	*/
 	static std::vector<unsigned char> serializeResponse(const IStatusResponse& codeResponse);
 	/*
