@@ -3,6 +3,10 @@
 #include "JsonResponsePacketSerializer.h"
 #include "LoginRequestHandler.h"
 
+MenuRequestHandler::MenuRequestHandler(LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory) : m_user(user), m_roomManager(roomManager), m_statisticsManager(statisticsManager), m_handlerFactory(handlerFactory)
+{
+}
+
 bool MenuRequestHandler::isRequestRelevant(const RequestInfo& reqInfo)
 {
     return false;
@@ -57,10 +61,10 @@ RequestResult MenuRequestHandler::getPlayersInRoom(const RequestInfo& reqInfo)
 	RequestResult res;
 	res.newHandler = this;
 
-	const GetPlayersInRoomResponse rr(m_roomManager.getRoomState());
+	/*const GetPlayersInRoomResponse rr(m_roomManager.getRoomState());
 
 	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
-	
+	*/
 	return res;
 }
 
@@ -69,8 +73,8 @@ RequestResult MenuRequestHandler::getPersonalStats(const RequestInfo& reqInfo)
 	RequestResult res;
 	res.newHandler = this;
 
-	const GetPersonalStatsResponse rr(1, m_statisticsManager.getUserStatistics());
-	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
+	/*const GetPersonalStatsResponse rr(1, m_statisticsManager.getUserStatistics());
+	res.response = JsonResponsePacketSerializer::serializeResponse(rr);*/
 
 	return res;
 }
@@ -92,9 +96,9 @@ RequestResult MenuRequestHandler::joinRoom(const RequestInfo& reqInfo)
 	RequestResult res;
 	res.newHandler = this;
 
-	// TODO: add room join
-	const JoinRoomResponse rr();
-	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
+	//// TODO: add room join
+	//const JoinRoomResponse rr();
+	//res.response = JsonResponsePacketSerializer::serializeResponse(rr);
 
 	return res;
 }
@@ -104,10 +108,10 @@ RequestResult MenuRequestHandler::createRoom(const RequestInfo& reqInfo)
 	RequestResult res;
 	res.newHandler = this;
 
-	// TODO: add room creation
-	m_roomManager.createRoom(m_user, );
-	const CreateRoomResponse rr(1);
-	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
+	//// TODO: add room creation
+	//m_roomManager.createRoom(m_user, );
+	//const CreateRoomResponse rr(1);
+	//res.response = JsonResponsePacketSerializer::serializeResponse(rr);
 
 	return res;
 }
