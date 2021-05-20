@@ -29,7 +29,7 @@ public:
 	input: none
 	output: vector with the rooms (room's data)
 	*/
-	const std::vector<RoomData> getRooms();
+	std::vector<RoomData> getRooms();
 
 	const std::vector<std::string> getAllUsers(const int id);
 private:
