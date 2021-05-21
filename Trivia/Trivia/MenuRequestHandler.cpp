@@ -75,10 +75,8 @@ RequestResult MenuRequestHandler::getPersonalStats(const RequestInfo& reqInfo)
 	RequestResult res;
 	res.newHandler = this;
 
-	// TODO: deal with it
-	//const std::string uname = JsonRequestPacketDeserializer::
-	//const GetPersonalStatsResponse rr(1, m_statisticsManager.getUserStatistics());
-	//res.response = JsonResponsePacketSerializer::serializeResponse(rr);
+	const GetPersonalStatsResponse rr(1, m_statisticsManager.getUserStatistics(m_user.getUname()));
+	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
 
 	return res;
 }
@@ -100,17 +98,11 @@ RequestResult MenuRequestHandler::joinRoom(const RequestInfo& reqInfo)
 	RequestResult res;
 	res.newHandler = this;
 
-	// TODO: deal with it
-	//const int id = JsonRequestPacketDeserializer::deserializeJoinRoomRequest(reqInfo.buffer).roomId;
-	//for (const auto& room: m_roomManager.getRooms())
-	//{
-	//	if (room.id == id)
-	//	{
-	//		
-	//	}
-	//}
-	//const JoinRoomResponse rr();
-	//res.response = JsonResponsePacketSerializer::serializeResponse(rr);
+	const int id = JsonRequestPacketDeserializer::deserializeJoinRoomRequest(reqInfo.buffer).roomId;
+	m_roomManager.addUser(m_user, id);
+	
+	const JoinRoomResponse rr(1);
+	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
 
 	return res;
 }
@@ -122,9 +114,7 @@ RequestResult MenuRequestHandler::createRoom(const RequestInfo& reqInfo)
 
 	const auto data = JsonRequestPacketDeserializer::deserializeCreateRoomRequest(reqInfo.buffer);
 
-	// TODO change room id generation implementation
 	RoomData roomData;
-	roomData.id = m_roomManager.getRooms().size() + 1;
 	roomData.isActive = true;
 	roomData.maxPlayers = data.maxUsers;
 	roomData.name = data.roomName;

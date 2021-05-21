@@ -1,7 +1,8 @@
 #include "RoomManager.h"
 
-void RoomManager::createRoom(const LoggedUser& owner, const RoomData& roomData)
+void RoomManager::createRoom(const LoggedUser& owner, RoomData& roomData)
 {
+	roomData.id = m_currRoomId++;
 	Room newRoom(roomData);
 	newRoom.addUser(owner);
 	m_rooms.emplace(std::make_pair(roomData.id, newRoom));
@@ -24,6 +25,17 @@ std::vector<RoomData> RoomManager::getRooms()
 		roomsData.push_back(room.second.getData());
 	}
 	return roomsData;
+}
+
+void RoomManager::addUser(const LoggedUser& user, const int roomId)
+{
+	for (auto& pair: m_rooms)
+	{
+		if (pair.first == roomId)
+		{
+			pair.second.addUser(user);
+		}
+	}
 }
 
 const std::vector<std::string> RoomManager::getAllUsers(const int id)
