@@ -5,7 +5,7 @@
 class Question
 {
 public:
-	Question(std::string question, std::vector<std::string> answers, const int answer)
+	Question(const std::string& question, const std::vector<std::string>& answers, const int& answer)
 		: _question(std::move(question)),
 		  _answers(std::move(answers)),
 		  _answer(answer)
