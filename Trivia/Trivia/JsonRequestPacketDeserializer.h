@@ -67,6 +67,6 @@ private:
 	input: the buffer to parse
 	output: the json value
 	*/
-	const Json::Value parseToJson(const std::vector<unsigned int>& buffer);
+	static const Json::Value parseToJson(const std::vector<unsigned char>& buffer);
 };
 

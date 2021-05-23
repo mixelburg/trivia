@@ -5,22 +5,7 @@ LoginRequest JsonRequestPacketDeserializer::deserializeLoginRequest(const std::v
 {
 	LoginRequest loginReq;
 
-	std::string jsonStr;
-	for (const auto ch : buffer) {
-		jsonStr += ch;
-	}
-	
-	Json::CharReaderBuilder builder;
-	Json::CharReader* reader = builder.newCharReader();
-
-	Json::Value json;
-	std::string errors;
-
-	if (!reader->parse(jsonStr.c_str(), jsonStr.c_str() + jsonStr.size(), &json, &errors)) {
-		delete reader;
-		throw std::exception("Failed to deserialize");
-	}
-	delete reader;
+	const Json::Value json = parseToJson(buffer);
 
 	loginReq.username = json.get("username", NULL).asString();
 	loginReq.password = json.get("password", NULL).asString();
@@ -32,22 +17,7 @@ SignupRequest JsonRequestPacketDeserializer::deserializeSignupRequest(const std:
 {
 	SignupRequest signupReq;
 
-	std::string jsonStr;
-	for (const auto ch : buffer) {
-		jsonStr += ch;
-	}
-
-	Json::CharReaderBuilder builder;
-	Json::CharReader* reader = builder.newCharReader();
-
-	Json::Value json;
-	std::string errors;
-
-	if (!reader->parse(jsonStr.c_str(), jsonStr.c_str() + jsonStr.size(), &json, &errors)) {
-		delete reader;
-		throw std::exception("Failed to deserialize");
-	}
-	delete reader;
+	const Json::Value json = parseToJson(buffer);
 	
 	signupReq.username = json.get("username", NULL).asString();
 	signupReq.password = json.get("password", NULL).asString();
@@ -60,26 +30,7 @@ GetPlayersInRoomRequest JsonRequestPacketDeserializer::deserializeGetPlayersRequ
 {
 	GetPlayersInRoomRequest getPlayersReq;
 
-	//insreting the buffer into a string
-	std::string jsonStr;
-	for (const auto ch : buffer) {
-		jsonStr += ch;
-	}
-
-	//creating json objects to parse the data
-	Json::CharReaderBuilder builder;
-	Json::CharReader* reader = builder.newCharReader();
-
-	//creating json object to hold the data
-	Json::Value json;
-	std::string errors;
-
-	//parsing the std::string to a json object
-	if (!reader->parse(jsonStr.c_str(), jsonStr.c_str() + jsonStr.size(), &json, &errors)) {
-		delete reader;
-		throw std::exception("Failed to deserialize");
-	}
-	delete reader;
+	const Json::Value json = parseToJson(buffer);
 
 	getPlayersReq.roomId = json.get("roomId", NULL).asInt();
 
@@ -90,26 +41,7 @@ JoinRoomRequest JsonRequestPacketDeserializer::deserializeJoinRoomRequest(const 
 {
 	JoinRoomRequest joinRoomReq;
 
-	//insreting the buffer into a string
-	std::string jsonStr;
-	for (const auto ch : buffer) {
-		jsonStr += ch;
-	}
-
-	//creating json objects to parse the data
-	Json::CharReaderBuilder builder;
-	Json::CharReader* reader = builder.newCharReader();
-
-	//creating json object to hold the data
-	Json::Value json;
-	std::string errors;
-
-	//parsing the std::string to a json object
-	if (!reader->parse(jsonStr.c_str(), jsonStr.c_str() + jsonStr.size(), &json, &errors)) {
-		delete reader;
-		throw std::exception("Failed to deserialize");
-	}
-	delete reader;
+	const Json::Value json = parseToJson(buffer);
 
 	joinRoomReq.roomId = json.get("roomId", NULL).asInt();
 
@@ -121,26 +53,7 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(co
 {
 	CreateRoomRequest createRoomReq;
 
-	//insreting the buffer into a string
-	std::string jsonStr;
-	for (const auto ch : buffer) {
-		jsonStr += ch;
-	}
-
-	//creating json objects to parse the data
-	Json::CharReaderBuilder builder;
-	Json::CharReader* reader = builder.newCharReader();
-
-	//creating json object to hold the data
-	Json::Value json;
-	std::string errors;
-
-	//parsing the std::string to a json object
-	if (!reader->parse(jsonStr.c_str(), jsonStr.c_str() + jsonStr.size(), &json, &errors)) {
-		delete reader;
-		throw std::exception("Failed to deserialize");
-	}
-	delete reader;
+	const Json::Value json = parseToJson(buffer);
 
 	createRoomReq.roomName = json.get("name", NULL).asString();
 	createRoomReq.maxUsers = json.get("maxUsers", NULL).asInt();
@@ -150,7 +63,7 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(co
 	return createRoomReq;
 }
 
-const Json::Value JsonRequestPacketDeserializer::parseToJson(const std::vector<unsigned int>& buffer)
+const Json::Value JsonRequestPacketDeserializer::parseToJson(const std::vector<unsigned char>& buffer)
 {
 
 	//insreting the buffer into a string
