@@ -4,11 +4,15 @@
 class LoggedUser
 {
 public:
-	LoggedUser(std::string uname);
+	LoggedUser(std::string uname, std::string pswd);
 	~LoggedUser() = default;
 
-	const std::string getUsername() const;
-	
+	//Overloading == operator
+	bool operator==(const LoggedUser& other);
+	//getter for the username field
+	std::string getUname() const;
+
 private:
 	std::string _uname;
+	std::string _pswd;
 };

@@ -2,11 +2,16 @@
 
 #include <utility>
 
-LoggedUser::LoggedUser(std::string uname) : _uname(std::move(uname))
+LoggedUser::LoggedUser(std::string uname, std::string pswd) : _uname(std::move(uname)), _pswd(std::move(pswd))
 {
 }
 
-const std::string LoggedUser::getUsername() const
+bool LoggedUser::operator==(const LoggedUser& other)
 {
-    return _uname;
+	return this->_uname == other._uname;
+}
+
+std::string LoggedUser::getUname() const
+{
+	return _uname;
 }
