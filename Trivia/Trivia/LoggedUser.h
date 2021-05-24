@@ -4,7 +4,7 @@
 class LoggedUser
 {
 public:
-	LoggedUser(std::string uname, std::string pswd);
+	LoggedUser(const std::string& uname, const std::string& pswd);
 	~LoggedUser() = default;
 
 	//Overloading == operator

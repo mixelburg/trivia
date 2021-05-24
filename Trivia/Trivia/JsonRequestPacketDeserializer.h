@@ -1,9 +1,9 @@
 #pragma once
 #include "IRequestHandler.h"
 #include "Codes.h"
+#include "json/json.h"
 #include <vector>
 #include <string>
-
 struct LoginRequest {
 	std::string username;
 	std::string password;
@@ -32,7 +32,7 @@ class JsonRequestPacketDeserializer
 {
 public:
 	/*
-	Function deserialize a client request into LoginRequest 
+	Function deserialize a client request into LoginRequest
 	input: a buffer with the data of the request (json)
 	output: login request struct
 	*/
@@ -61,6 +61,12 @@ public:
 	output: CreateRoomRequest request struct
 	*/
 	static CreateRoomRequest deserializeCreateRoomRequest(const std::vector<unsigned char>& buffer);
-
+private:
+	/*
+	Function parsing a buffer of chars to json value object
+	input: the buffer to parse
+	output: the json value
+	*/
+	static const Json::Value parseToJson(const std::vector<unsigned char>& buffer);
 };
 
