@@ -8,7 +8,7 @@ MenuRequestHandler::MenuRequestHandler(LoggedUser& user, RoomManager& roomManage
 {
 }
 
-bool MenuRequestHandler::isRequestRelevant(const RequestInfo& reqInfo)
+const bool MenuRequestHandler::isRequestRelevant(const RequestInfo& reqInfo)
 {
     return false;
 }

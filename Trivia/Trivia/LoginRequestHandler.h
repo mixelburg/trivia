@@ -25,7 +25,7 @@ public:
 	input: struct with the client' request
 	output: boolean answer if the request is relevant
 	*/
-	virtual bool isRequestRelevant(const RequestInfo& reqInfo) override;
+	const virtual bool isRequestRelevant(const RequestInfo& reqInfo) override;
 	/*
 	Function handles with the client request
 	input: struct with the client' request

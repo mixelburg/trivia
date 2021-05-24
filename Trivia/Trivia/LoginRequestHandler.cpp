@@ -8,7 +8,7 @@ LoginRequestHandler::LoginRequestHandler(LoginManager& loginManager, RequestHand
 {
 }
 
-bool LoginRequestHandler::isRequestRelevant(const RequestInfo& reqInfo)
+const bool LoginRequestHandler::isRequestRelevant(const RequestInfo& reqInfo)
 {
     return reqInfo.id == LOGIN_CODE || reqInfo.id == SIGNUP_CODE ? true : false;
 }
