@@ -16,10 +16,15 @@ using std::endl;
 using std::flush;
 using std::cerr;
 
-Server::Server(): m_handlerFactory(), m_database(), m_communicator(m_handlerFactory, m_database)
+Server::Server(): m_communicator(m_handlerFactory, *m_database)
 {
+	m_database = new SqliteDataBase();
+	LoginManager loginManager(m_database);
+	RoomManager roomManager();
+	StatisticsManager statisticsManager(m_database);
+	m_handlerFactory = new RequestHandlerFactory(m_database, loginManager, roomManager, statisticsManager);
 	try {
-		m_database.open();
+		(*m_database).open();
 	}
 	catch (...) {
 		std::cout << "Data base failed to open..." << std::endl;
@@ -29,11 +34,12 @@ Server::Server(): m_handlerFactory(), m_database(), m_communicator(m_handlerFact
 
 Server::~Server()
 {
-	m_database.close();
+	(*m_database).close();
+	delete m_database;
 }
 
 void Server::run()
 {
-	m_communicator.startHandleRequests(m_database);
+	m_communicator.startHandleRequests(*m_database);
 }
 

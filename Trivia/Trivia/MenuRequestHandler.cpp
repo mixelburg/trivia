@@ -4,7 +4,8 @@
 #include "JsonRequestPacketDeserializer.h"
 #include "LoginRequestHandler.h"
 
-MenuRequestHandler::MenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory) : m_user(user), m_roomManager(roomManager), m_statisticsManager(statisticsManager), m_handlerFactory(handlerFactory)
+MenuRequestHandler::MenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory, LoginManager& loginManager) 
+	: m_user(user), m_roomManager(roomManager), m_statisticsManager(statisticsManager), m_handlerFactory(handlerFactory), m_loginManager(loginManager)
 {
 }
 
@@ -45,7 +46,7 @@ RequestResult MenuRequestHandler::handleRequest(const RequestInfo& reqInfo)
 RequestResult MenuRequestHandler::signout(const RequestInfo& reqInfo)
 {
 	RequestResult res;
-	LoginRequestHandler h = m_handlerFactory.createLoginRequestHandler();
+	LoginRequestHandler h = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory);
 
 	res.newHandler = &h;
 	

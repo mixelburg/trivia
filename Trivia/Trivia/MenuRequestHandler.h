@@ -15,7 +15,7 @@ public:
 	input: none
 	output: none
 	*/
-	MenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory);
+	MenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory, LoginManager& loginManager);
 	/*
 	Function distructs a MenuRequestHandler object
 	input: none
@@ -41,6 +41,7 @@ private:
 	RoomManager& m_roomManager;
 	StatisticsManager& m_statisticsManager;
 	RequestHandlerFactory& m_handlerFactory;
+	LoginManager& m_loginManager;
 
 	//methods
 	RequestResult signout(const RequestInfo& reqInfo);

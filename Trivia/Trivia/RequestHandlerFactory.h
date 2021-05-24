@@ -35,7 +35,7 @@ public:
 	input: none
 	output: the handler that has been created
 	*/
-	MenuRequestHandler createMenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory);
+	MenuRequestHandler createMenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory, LoginManager& loginManager);
 	/*
 	Function returns the statistics manager
 	input: none
