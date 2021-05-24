@@ -15,7 +15,7 @@ public:
 	input: none
 	output: none
 	*/
-	MenuRequestHandler(LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory);
+	MenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory);
 	/*
 	Function distructs a MenuRequestHandler object
 	input: none

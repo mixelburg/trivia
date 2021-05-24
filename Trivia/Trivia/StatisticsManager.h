@@ -4,7 +4,7 @@
 class StatisticsManager
 {
 public:
-	StatisticsManager() = default;
+	StatisticsManager(IDataBase* dataBase);
 	~StatisticsManager() = default;
 	
 	std::vector<std::string> getStatistics();

@@ -4,13 +4,19 @@
 #include "JsonRequestPacketDeserializer.h"
 #include "LoginRequestHandler.h"
 
-MenuRequestHandler::MenuRequestHandler(LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory) : m_user(user), m_roomManager(roomManager), m_statisticsManager(statisticsManager), m_handlerFactory(handlerFactory)
+MenuRequestHandler::MenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory) : m_user(user), m_roomManager(roomManager), m_statisticsManager(statisticsManager), m_handlerFactory(handlerFactory)
 {
 }
 
 const bool MenuRequestHandler::isRequestRelevant(const RequestInfo& reqInfo)
 {
-    return false;
+	return reqInfo.id == LOGOUT_CODE ||
+		reqInfo.id == GET_ROOMS_CODE ||
+		reqInfo.id == GET_PLAYERS_CODE ||
+		reqInfo.id == GET_HIGH_SCORE_CODE ||
+		reqInfo.id == GET_STATS_CODE ||
+		reqInfo.id == JOIN_ROOM_CODE ||
+		reqInfo.id == CREATE_ROOM_CODE ? true : false;
 }
 
 RequestResult MenuRequestHandler::handleRequest(const RequestInfo& reqInfo)

@@ -9,7 +9,7 @@ auto LoginManager::login(const std::string& uname, const std::string& pswd) -> b
 {
 	if(_db->checkPassword(uname, pswd))
 	{
-		_users.emplace_back(LoggedUser(uname));
+		_users.emplace_back(LoggedUser(uname, pswd));
 		return true;
 	}
 	return false;
@@ -23,5 +23,18 @@ auto LoginManager::signup(const std::string& uname, const std::string& pswd, con
 		return login(uname, pswd);
 	}
 	return false;
+}
+
+const LoggedUser& LoginManager::getUserByName(const std::string& uname) const
+{
+	for (const LoggedUser& user : _users) {
+		if (uname == user.getUname()) {
+			return user;
+		}
+	}
+	
+	//Just for the compailer :)
+	LoggedUser invalidUser("","");
+	return invalidUser;
 }
 
