@@ -23,7 +23,7 @@ public:
 	input: none
 	output: the handler that has been created
 	*/
-	LoginRequestHandler createLoginRequestHandler();
+	LoginRequestHandler createLoginRequestHandler(LoginManager& loginManager, RequestHandlerFactory& handlerFactory);
 	/*
 	Function returns the login manager
 	input: none

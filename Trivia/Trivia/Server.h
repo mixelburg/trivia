@@ -29,7 +29,7 @@ public:
 	void run();
 
 private:
-	SqliteDataBase m_database;
+	IDataBase& m_database;
 	Communicator m_communicator;
 	RequestHandlerFactory m_handlerFactory;
 };
