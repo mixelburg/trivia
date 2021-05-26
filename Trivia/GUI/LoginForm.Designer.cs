@@ -54,7 +54,7 @@
             // textBoxUname
             // 
             this.textBoxUname.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxUname.Location = new System.Drawing.Point(123, 165);
+            this.textBoxUname.Location = new System.Drawing.Point(131, 170);
             this.textBoxUname.Name = "textBoxUname";
             this.textBoxUname.Size = new System.Drawing.Size(298, 64);
             this.textBoxUname.TabIndex = 1;
@@ -63,7 +63,7 @@
             // textBoxPass
             // 
             this.textBoxPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxPass.Location = new System.Drawing.Point(123, 266);
+            this.textBoxPass.Location = new System.Drawing.Point(131, 271);
             this.textBoxPass.Name = "textBoxPass";
             this.textBoxPass.Size = new System.Drawing.Size(298, 64);
             this.textBoxPass.TabIndex = 2;
@@ -72,7 +72,7 @@
             // pictureBoxUname
             // 
             this.pictureBoxUname.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxUname.Image")));
-            this.pictureBoxUname.Location = new System.Drawing.Point(53, 165);
+            this.pictureBoxUname.Location = new System.Drawing.Point(61, 170);
             this.pictureBoxUname.Name = "pictureBoxUname";
             this.pictureBoxUname.Size = new System.Drawing.Size(64, 64);
             this.pictureBoxUname.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -82,7 +82,7 @@
             // pictureBoxPass
             // 
             this.pictureBoxPass.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPass.Image")));
-            this.pictureBoxPass.Location = new System.Drawing.Point(53, 266);
+            this.pictureBoxPass.Location = new System.Drawing.Point(61, 271);
             this.pictureBoxPass.Name = "pictureBoxPass";
             this.pictureBoxPass.Size = new System.Drawing.Size(64, 64);
             this.pictureBoxPass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -115,7 +115,7 @@
             this.Controls.Add(this.textBoxUname);
             this.Controls.Add(this.loginButton);
             this.Name = "LoginForm";
-            this.Text = "LoginForm1";
+            this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUname)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPass)).EndInit();
             this.ResumeLayout(false);
