@@ -18,6 +18,10 @@ namespace GUI
         [STAThread]
         static void Main()
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+
             // Establish the remote endpoint 
             IPAddress ipAddr = Dns.Resolve("localhost").AddressList[0];
             IPEndPoint localEndPoint = new IPEndPoint(ipAddr, 5050);
@@ -26,18 +30,20 @@ namespace GUI
             Socket sender = new Socket(ipAddr.AddressFamily,
                        SocketType.Stream, ProtocolType.Tcp);
 
+            Form toRun = new LoginForm(ref sender);
 
-            // Connect Socket to the remote 
-            sender.Connect(localEndPoint);
+            // Connect Socket to the remote
+            try
+            {
+                sender.Connect(localEndPoint);
+            }
+            catch (System.Net.Sockets.SocketException e)
+            {
+                Console.WriteLine(e.Message);
+                toRun = new ConnectionErrorForm(e.Message);
+            }
 
-            // We print EndPoint information 
-            // that we are connected
-            Console.WriteLine("Socket connected to -> {0} ",
-                          sender.RemoteEndPoint.ToString());
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm(ref sender));
+            Application.Run(toRun);
         }
     }
 }
