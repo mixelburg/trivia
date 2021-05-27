@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace GUI
 {
     public struct LoginRequestData
@@ -41,6 +42,8 @@ namespace GUI
             };
             var request = Serializer.SerializeLoginRequest(data);
 
+
+            Console.WriteLine("Hello world");
         }
 
         private void signupButton_Click(object sender, EventArgs e)
