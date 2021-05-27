@@ -10,25 +10,42 @@ using System.Windows.Forms;
 
 namespace GUI
 {
-    public struct LoginRequestData {
-        public string uname;
-        public string pass;
-    }
-    public struct SignupRequestData {
-        public string uname;
-        public string pass;
-        public string mail;
-    }
-    public partial class Form1 : Form
+    public partial class LoginForm : Form
     {
-        public Form1()
+        public LoginForm()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+
+            loginStatusLabel.Text = "[!] Login Failed \n incorrect username or password";
+            loginStatusLabel.ForeColor = Color.Red;
+          
+        }
+
+        private void signupButton_Click(object sender, EventArgs e)
+        {
+            var newForm = new SignupForm
+            {
+                Location = Location,
+                StartPosition = FormStartPosition.Manual
+            };
+            newForm.FormClosing += delegate { Close(); };
+            newForm.Show();
+            Hide();
+        }
+
+        private void textBoxPass_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void textBoxUname_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

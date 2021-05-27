@@ -35,8 +35,12 @@
             this.pictureBoxUname = new System.Windows.Forms.PictureBox();
             this.pictureBoxPass = new System.Windows.Forms.PictureBox();
             this.AuthorizationLabel = new System.Windows.Forms.Label();
+            this.loginStatusLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.signupButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUname)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPass)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // loginButton
@@ -44,12 +48,13 @@
             this.loginButton.AccessibleName = "";
             this.loginButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.loginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.loginButton.Location = new System.Drawing.Point(161, 472);
+            this.loginButton.Location = new System.Drawing.Point(182, 369);
             this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(174, 57);
+            this.loginButton.Size = new System.Drawing.Size(141, 50);
             this.loginButton.TabIndex = 0;
             this.loginButton.Text = "login";
             this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
             // textBoxUname
             // 
@@ -58,7 +63,7 @@
             this.textBoxUname.Name = "textBoxUname";
             this.textBoxUname.Size = new System.Drawing.Size(298, 64);
             this.textBoxUname.TabIndex = 1;
-            this.textBoxUname.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBoxUname.TextChanged += new System.EventHandler(this.textBoxUname_TextChanged);
             // 
             // textBoxPass
             // 
@@ -68,6 +73,7 @@
             this.textBoxPass.Size = new System.Drawing.Size(298, 64);
             this.textBoxPass.TabIndex = 2;
             this.textBoxPass.UseSystemPasswordChar = true;
+            this.textBoxPass.TextChanged += new System.EventHandler(this.textBoxPass_TextChanged);
             // 
             // pictureBoxUname
             // 
@@ -100,7 +106,38 @@
             this.AuthorizationLabel.Text = "Authorization";
             this.AuthorizationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.AuthorizationLabel.UseMnemonic = false;
-            this.AuthorizationLabel.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // loginStatusLabel
+            // 
+            this.loginStatusLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.loginStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.loginStatusLabel.Location = new System.Drawing.Point(0, 0);
+            this.loginStatusLabel.Name = "loginStatusLabel";
+            this.loginStatusLabel.Size = new System.Drawing.Size(506, 122);
+            this.loginStatusLabel.TabIndex = 6;
+            this.loginStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.loginStatusLabel);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 487);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(506, 122);
+            this.panel1.TabIndex = 7;
+            // 
+            // signupButton
+            // 
+            this.signupButton.AccessibleName = "";
+            this.signupButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.signupButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.signupButton.Location = new System.Drawing.Point(389, 369);
+            this.signupButton.Name = "signupButton";
+            this.signupButton.Size = new System.Drawing.Size(105, 50);
+            this.signupButton.TabIndex = 8;
+            this.signupButton.Text = "signup";
+            this.signupButton.UseVisualStyleBackColor = true;
+            this.signupButton.Click += new System.EventHandler(this.signupButton_Click);
             // 
             // LoginForm
             // 
@@ -108,16 +145,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(506, 609);
+            this.Controls.Add(this.signupButton);
+            this.Controls.Add(this.loginButton);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.AuthorizationLabel);
             this.Controls.Add(this.pictureBoxPass);
             this.Controls.Add(this.pictureBoxUname);
             this.Controls.Add(this.textBoxPass);
             this.Controls.Add(this.textBoxUname);
-            this.Controls.Add(this.loginButton);
             this.Name = "LoginForm";
             this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUname)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPass)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -131,5 +171,8 @@
         private System.Windows.Forms.PictureBox pictureBoxUname;
         private System.Windows.Forms.PictureBox pictureBoxPass;
         private System.Windows.Forms.Label AuthorizationLabel;
+        private System.Windows.Forms.Label loginStatusLabel;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button signupButton;
     }
 }
