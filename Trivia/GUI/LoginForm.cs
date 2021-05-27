@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Sockets;
 using System.Windows.Forms;
 
 
@@ -24,11 +25,11 @@ namespace GUI
     }
     public partial class LoginForm : Form
     {
-        public LoginForm()
+        public LoginForm(ref Socket sock)
         {
-            InitializeComponent();
+            InitializeComponent(ref sock);
         }
-
+       
         private void loginButton_Click(object sender, EventArgs e)
         {
 

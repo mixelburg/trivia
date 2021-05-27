@@ -1,4 +1,5 @@
-﻿namespace GUI
+﻿using System.Net.Sockets;
+namespace GUI
 {
     partial class LoginForm
     {
@@ -6,7 +7,7 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
+        private Socket socket;
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -26,8 +27,11 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        private void InitializeComponent(ref Socket sock)
         {
+            // inting the socket to the form
+            this.socket = sock;
+
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.loginButton = new System.Windows.Forms.Button();
             this.textBoxUname = new System.Windows.Forms.TextBox();
