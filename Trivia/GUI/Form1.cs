@@ -10,6 +10,10 @@ using System.Windows.Forms;
 
 namespace GUI
 {
+    public struct LoginRequest {
+        public string uname;
+        public string pass;
+    }
     public partial class Form1 : Form
     {
         public Form1()
