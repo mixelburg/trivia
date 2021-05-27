@@ -11,11 +11,23 @@ namespace GUI
         /// <summary>
         /// Function serialize a login request to send the server
         /// </summary>
-        /// <param username="uname"></param>
-        /// <param password="pass"></param>
+        /// <param Object of the login data="loginReq"></param>
         /// <returns> A string with the serialized request </returns>
-        public static string SerializeLoginRequest(LoginRequest loginReq) {
-            string request = JsonConvert.SerializeObject(loginReq, Formatting.Indented);
+        public static string SerializeLoginRequest(LoginRequestData loginReq) {
+            string request = "1";
+            string jsonData = JsonConvert.SerializeObject(loginReq, Formatting.Indented);
+            request += jsonData.Length + jsonData;
+            return request;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="signupReq"></param>
+        /// <returns></returns>
+        public static string SerializeSignupRequest(SignupRequestData signupReq) {
+            string request = "2";
+            string jsonData = JsonConvert.SerializeObject(signupReq, Formatting.Indented);
+            request += jsonData.Length + jsonData;
             return request;
         }
     }
