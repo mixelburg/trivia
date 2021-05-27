@@ -10,6 +10,15 @@ using System.Windows.Forms;
 
 namespace GUI
 {
+    public struct LoginRequestData {
+        public string uname;
+        public string pass;
+    }
+    public struct SignupRequestData {
+        public string uname;
+        public string pass;
+        public string mail;
+    }
     public partial class Form1 : Form
     {
         public Form1()
