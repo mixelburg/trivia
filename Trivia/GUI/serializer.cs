@@ -1,13 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
+﻿using Newtonsoft.Json;
 
 namespace GUI
 {
+    public struct LoginRequestData
+    {
+        public string uname;
+        public string pass;
+    }
+    public struct SignupRequestData
+    {
+        public string uname;
+        public string pass;
+        public string mail;
+    }
+
     class Serializer
     {
         /// <summary>
