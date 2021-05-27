@@ -37,6 +37,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.signupButton = new System.Windows.Forms.Button();
+            this.loginButton = new System.Windows.Forms.Button();
+            this.statusLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUname)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -125,12 +127,38 @@
             this.signupButton.Text = "signup";
             this.signupButton.UseVisualStyleBackColor = true;
             // 
+            // loginButton
+            // 
+            this.loginButton.AccessibleName = "";
+            this.loginButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.loginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.loginButton.Location = new System.Drawing.Point(382, 0);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(124, 46);
+            this.loginButton.TabIndex = 25;
+            this.loginButton.Text = "login";
+            this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.statusLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.statusLabel.Location = new System.Drawing.Point(0, 467);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(506, 142);
+            this.statusLabel.TabIndex = 26;
+            this.statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // SignupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(506, 609);
+            this.Controls.Add(this.statusLabel);
+            this.Controls.Add(this.loginButton);
             this.Controls.Add(this.signupButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textBox1);
@@ -159,5 +187,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button signupButton;
+        private System.Windows.Forms.Button loginButton;
+        private System.Windows.Forms.Label statusLabel;
     }
 }

@@ -1,20 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Sockets;
 using System.Windows.Forms;
 
 namespace GUI
 {
     public partial class SignupForm : Form
     {
-        public SignupForm()
+        private Socket _socket;
+        public SignupForm(ref Socket socket)
         {
+            _socket = socket;
             InitializeComponent();
         }
+
+        private void loginButton_Click(object sender, System.EventArgs e)
+        {
+            var newForm = new LoginForm(ref _socket)
+            {
+                Location = Location,
+                StartPosition = FormStartPosition.Manual
+            };
+            newForm.Closing += delegate { Close(); };
+            newForm.Show();
+            Hide();
+        }
     }
+
 }

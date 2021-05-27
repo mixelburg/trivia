@@ -35,25 +35,6 @@ namespace GUI
             Console.WriteLine("Socket connected to -> {0} ",
                           sender.RemoteEndPoint.ToString());
 
-           /* // Creation of messagge that
-            // we will send to Server
-            byte[] messageSent = Encoding.ASCII.GetBytes("Test Client<EOF>");
-            int byteSent = sender.Send(messageSent);
-
-            // Data buffer
-            byte[] messageReceived = new byte[1024];
-
-            int byteRecv = sender.Receive(messageReceived);
-            Console.WriteLine("Message from Server -> {0}",
-                  Encoding.ASCII.GetString(messageReceived,
-                                             0, byteRecv));
-*/
-            /*// Close Socket  
-            Console.WriteLine("Closing socket");
-            sender.Shutdown(SocketShutdown.Both);
-            sender.Close();
-*/
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm(ref sender));
