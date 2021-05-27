@@ -33,7 +33,14 @@ namespace GUI
 
             loginStatusLabel.Text = "[!] Login Failed \n incorrect username or password";
             loginStatusLabel.ForeColor = Color.Red;
-          
+
+            LoginRequestData data = new LoginRequestData
+            {
+                uname = textBoxUname.Text,
+                pass = textBoxPass.Text
+            };
+            var request = Serializer.SerializeLoginRequest(data);
+
         }
 
         private void signupButton_Click(object sender, EventArgs e)

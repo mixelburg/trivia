@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+
 namespace GUI
 {
-    class serializer
+    class Serializer
     {
         /// <summary>
         /// Function serialize a login request to send the server
