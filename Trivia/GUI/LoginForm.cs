@@ -41,9 +41,16 @@ namespace GUI
                 uname = textBoxUname.Text,
                 pass = textBoxPass.Text
             };
-            var request = Serializer.SerializeLoginRequest(data);
+            string request = Serializer.SerializeLoginRequest(data);
 
+            byte[] messageSent = Encoding.ASCII.GetBytes(request);
+            this.socket.Send(messageSent);
+            byte[] messageReceived = new byte[1024];
 
+            int byteRecv = this.socket.Receive(messageReceived);
+            Console.WriteLine("Message from Server -> {0}",
+                  Encoding.ASCII.GetString(messageReceived,
+                                             0, byteRecv));
             Console.WriteLine("Hello world");
         }
 

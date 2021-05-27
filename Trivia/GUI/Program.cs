@@ -35,7 +35,7 @@ namespace GUI
             Console.WriteLine("Socket connected to -> {0} ",
                           sender.RemoteEndPoint.ToString());
 
-            // Creation of messagge that
+           /* // Creation of messagge that
             // we will send to Server
             byte[] messageSent = Encoding.ASCII.GetBytes("Test Client<EOF>");
             int byteSent = sender.Send(messageSent);
@@ -47,12 +47,12 @@ namespace GUI
             Console.WriteLine("Message from Server -> {0}",
                   Encoding.ASCII.GetString(messageReceived,
                                              0, byteRecv));
-
-            // Close Socket  
+*/
+            /*// Close Socket  
             Console.WriteLine("Closing socket");
             sender.Shutdown(SocketShutdown.Both);
             sender.Close();
-
+*/
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

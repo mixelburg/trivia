@@ -105,6 +105,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		// splitting the request of the client
 		RequestInfo clientRequest;
 		clientRequest.id = Helper::getStringPartFromSocket(clientSocket, CODE_LEN)[0];
+		std::cout << "Recevied!" << std::endl;
 		clientRequest.receivalTime = time(NULL);
 		auto reqDataLen = Helper::getIntPartFromSocket(clientSocket, LEN_SIZE);
 		auto jsonData = Helper::getStringPartFromSocket(clientSocket, reqDataLen);
