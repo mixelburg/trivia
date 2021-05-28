@@ -4,13 +4,16 @@
 #include "Codes.h"
 #include "JsonResponsePacketSerializer.h"
 #include "JsonRequestPacketDeserializer.h"
+#include "IDataBase.h"
+#include "SqliteDataBase.h"
+#include "LoginManager.h"
 #define LISTEN_PORT 5050
 #define HELLO_LEN 5
 #define LEN_SIZE 4
 #define CODE_LEN 1
-#define SUCCESS 1
 
-Communicator::Communicator()
+
+Communicator::Communicator(RequestHandlerFactory& handlerFactory, IDataBase& db) : m_handlerFactory(handlerFactory), m_dataBase(db), m_loginManager(&db)
 {
 	//setting the socket to communicate with the clients
 	m_serverSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -37,7 +40,7 @@ Communicator::~Communicator()
 	catch (...) {}
 }
 
-void Communicator::startHandleRequests()
+void Communicator::startHandleRequests(IDataBase& db)
 {
 	bindAndListen();
 }
@@ -85,69 +88,29 @@ void Communicator::acceptConnection()
 
 	std::cout << "Creating thread..." << std::endl;
 	//creating a thread for the client and detaching it from the function
-	IRequestHandler* reqHandler = new LoginRequestHandler();
+	IRequestHandler* reqHandler = new LoginRequestHandler(m_loginManager, m_handlerFactory);
 	m_clients.insert(std::make_pair(client_socket, reqHandler));
 	std::thread t(&Communicator::handleNewClient, this, client_socket);
 	t.detach();
-	
+
 }
 
 void Communicator::handleNewClient(SOCKET clientSocket)
 {
 	std::cout << "Comms with the client..." << std::endl;
-
 	try {
-		// sending and reciving hello message
-		Helper::sendData(clientSocket, "Hello");
-		auto retVal = Helper::getStringPartFromSocket(clientSocket, HELLO_LEN);
-		std::cout << retVal << std::endl;
 
-		// splitting the request of the client
-		RequestInfo clientRequest;
-		clientRequest.id = Helper::getStringPartFromSocket(clientSocket, CODE_LEN)[0];
-		std::cout << "Recevied!" << std::endl;
-		clientRequest.receivalTime = time(NULL);
-		auto reqDataLen = Helper::getIntPartFromSocket(clientSocket, LEN_SIZE);
-		auto jsonData = Helper::getStringPartFromSocket(clientSocket, reqDataLen);
-		for (const auto ch : jsonData) {
-			clientRequest.buffer.push_back(ch);
-		}
+		welcome(clientSocket);
 
-		LoginRequest req;
+		//creating struct with the request
+		RequestInfo clientRequest = extractReqInfo(clientSocket);
+
 		if (clientRequest.id == LOGIN_CODE) {
-			req = JsonRequestPacketDeserializer::deserializeLoginRequest(clientRequest.buffer);
-			
-			//TO FILL - handle login request in the program
-
-			LoginResponse resStruct(SUCCESS);
-			
-			const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
-			std::string resInString;
-
-			for (const auto ch : res) {
-				resInString += ch;
-			}
-
-			Helper::sendData(clientSocket, resInString);
-
+			handleLogin(clientSocket, clientRequest);
 		}
 		else if (clientRequest.id == SIGNUP_CODE) {
-			req = JsonRequestPacketDeserializer::deserializeSignupRequest(clientRequest.buffer);
-			
-			//TO FILL - handle signup request in the program 
-
-			SignupResponse resStruct(SUCCESS);
-
-			const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
-			std::string resInString;
-
-			for (const auto ch : res) {
-				resInString += ch;
-			}
-
-			Helper::sendData(clientSocket, resInString);
+			handleSignup(clientSocket, clientRequest);
 		}
-
 	}
 	catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
@@ -155,3 +118,57 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 
 }
 
+RequestInfo Communicator::extractReqInfo(SOCKET clientSocket)
+{
+	RequestInfo clientRequest;
+	// splitting the request of the client
+
+	clientRequest.id = Helper::getStringPartFromSocket(clientSocket, CODE_LEN)[0];
+	clientRequest.receivalTime = time(NULL);
+	auto reqDataLen = Helper::getIntPartFromSocket(clientSocket, LEN_SIZE);
+	auto jsonData = Helper::getStringPartFromSocket(clientSocket, reqDataLen);
+	for (const auto ch : jsonData) {
+		clientRequest.buffer.push_back(ch);
+	}
+	return clientRequest;
+}
+
+void Communicator::welcome(SOCKET clientSocket)
+{
+	// sending and reciving hello message
+	Helper::sendData(clientSocket, "Hello");
+	auto retVal = Helper::getStringPartFromSocket(clientSocket, HELLO_LEN);
+	std::cout << retVal << std::endl;
+}
+
+void Communicator::handleLogin(SOCKET clientSocket, RequestInfo& clientRequest)
+{
+	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory).handleRequest(clientRequest);
+
+	LoginResponse resStruct(reqRes.response[0]);
+
+	const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
+	std::string resInString;
+
+	for (const auto ch : res) {
+		resInString += ch;
+	}
+
+	Helper::sendData(clientSocket, resInString);
+}
+
+void Communicator::handleSignup(SOCKET clientSocket, RequestInfo& clientRequest)
+{
+	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory).handleRequest(clientRequest);
+
+	SignupResponse resStruct(reqRes.response[0]);
+
+	const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
+	std::string resInString;
+
+	for (const auto ch : res) {
+		resInString += ch;
+	}
+
+	Helper::sendData(clientSocket, resInString);
+}

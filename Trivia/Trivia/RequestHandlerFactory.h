@@ -1,7 +1,7 @@
 #pragma once
 #include "LoginRequestHandler.h"
 #include "MenuRequestHandler.h"
-
+#include "IDataBase.h"
 class LoginRequestHandler;
 class MenuRequestHandler;
 
@@ -12,42 +12,42 @@ public:
 	Function creats a RequestHandlerFactory object
 	input + output: none
 	*/
-	RequestHandlerFactory() = default;
+	RequestHandlerFactory(IDataBase* database, LoginManager* loginManager, RoomManager* roomManager, StatisticsManager* statisticsManager);
 	/*
 	Function distructs a RequestHandlerFactory object
 	input + output: none
 	*/
-	~RequestHandlerFactory() = default;
+	~RequestHandlerFactory();
 	/*
-	Function creates a login request handler 
+	Function creates a login request handler
 	input: none
 	output: the handler that has been created
 	*/
-	LoginRequestHandler createLoginRequestHandler();
+	LoginRequestHandler createLoginRequestHandler(LoginManager& loginManager, RequestHandlerFactory& handlerFactory);
 	/*
 	Function returns the login manager
 	input: none
 	output: the login manager
 	*/
-	//LoginManager& getLoginManager();
+	LoginManager& getLoginManager();
 	/*
 	Function creates a menu request handler
 	input: none
 	output: the handler that has been created
 	*/
-	MenuRequestHandler createMenuRequestHandler(LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory);
+	MenuRequestHandler createMenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory, LoginManager& loginManager);
 	/*
 	Function returns the statistics manager
 	input: none
 	output: the statistics manager
 	*/
-	//StatisticsManager& getStatisticsManager();
+	StatisticsManager& getStatisticsManager();
 	/*
 	Function returns the room manager
 	input: none
 	output: the room manager
 	*/
-	//RoomManager& getRoomManager();
+	RoomManager& getRoomManager();
 	/*
 	Function creates a room admin request handler
 	input: none
@@ -73,10 +73,10 @@ public:
 	*/
 	//GameManager& getGameManager();
 private:
-	//IDatabase* m_database;
-	//LoginManager m_loginManager;
-	//RoomManager m_roomManager;
-	//StatisticsManager m_statisticsManager;
+	IDataBase* m_database;
+	LoginManager* m_loginManagerPtr;
+	RoomManager* m_roomManagerPtr;
+	StatisticsManager* m_statisticsManagerPtr;
 	//GameManager m_gameManager;
 };
 

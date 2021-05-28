@@ -15,7 +15,7 @@ public:
 	virtual auto getNumOfTotalAnswers(const std::string& uname) const -> int = 0;
 	virtual auto getNumOfPlayerGames(const std::string& uname) const -> int = 0;
 	virtual auto getBestPlayers() const->std::vector<std::string> = 0;
-	
+
 	virtual bool open() = 0;
 	virtual void close() = 0;
 };

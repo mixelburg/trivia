@@ -1,9 +1,13 @@
 #include "StatisticsManager.h"
 
+StatisticsManager::StatisticsManager(IDataBase* dataBase) : _dataBase(dataBase)
+{
+}
+
 std::vector<std::string> StatisticsManager::getStatistics()
 {
 	std::vector<std::string> stats;
-	
+
 	return stats;
 }
 
