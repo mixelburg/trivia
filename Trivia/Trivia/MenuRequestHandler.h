@@ -1,5 +1,11 @@
 #pragma once
 #include "IRequestHandler.h"
+#include "LoggedUser.h"
+#include "RoomManager.h"
+#include "StatisticsManager.h"
+#include "RequestHandlerFactory.h"
+
+class RequestHandlerFactory;
 
 class MenuRequestHandler : public IRequestHandler
 {
@@ -9,7 +15,7 @@ public:
 	input: none
 	output: none
 	*/
-	MenuRequestHandler() = default;
+	MenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory, LoginManager& loginManager);
 	/*
 	Function distructs a MenuRequestHandler object
 	input: none
@@ -21,7 +27,7 @@ public:
 	input: struct with the client' request
 	output: boolean answer if the request is relevant
 	*/
-	virtual bool isRequestRelevant(const RequestInfo& reqInfo) override;
+	const virtual bool isRequestRelevant(const RequestInfo& reqInfo) override;
 	/*
 	Function handles with the client request
 	input: struct with the client' request
@@ -31,10 +37,11 @@ public:
 
 private:
 	//fields
-	//LoggedUser m_user;
-	//RoomManager& m_roomManager;
-	//StatisticsManager& m_statisticsManager;
-	//RequestHandlerFactory& m_handlerFactory;
+	LoggedUser m_user;
+	RoomManager& m_roomManager;
+	StatisticsManager& m_statisticsManager;
+	RequestHandlerFactory& m_handlerFactory;
+	LoginManager& m_loginManager;
 
 	//methods
 	RequestResult signout(const RequestInfo& reqInfo);

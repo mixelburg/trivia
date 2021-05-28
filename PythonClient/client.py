@@ -12,12 +12,12 @@ def prepare_msg(code: int, msg_data: str):
     return f"{code}{str(len(msg_data)).zfill(SIZE_LEN)}{msg_data}"
 
 login_temp = {
-    "username": "John",
+    "username": "Johny2",
     "password": "Hammond"
 }
 
 register_temp = {
-    "username": "John",
+    "username": "Johny2",
     "password": "Hammond",
     "mail": "john123@gmail.com"
 }
