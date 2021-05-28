@@ -18,16 +18,11 @@ namespace GUI
         public LoginForm(ref Socket socket)
         {
             _socket = socket;
-
             InitializeComponent();
         }
 
         private void loginButton_Click(object sender, EventArgs e)
         {
- //            statusLabel.Text = @"[!] Login Failed 
- // incorrect username or password";
- //            statusLabel.ForeColor = Color.Red;
-
             LoginRequestData data = new LoginRequestData
             {
                 uname = textBoxUname.Text,
