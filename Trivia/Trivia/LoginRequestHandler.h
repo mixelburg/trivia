@@ -1,5 +1,9 @@
 #pragma once
 #include "IRequestHandler.h"
+#include "LoginManager.h"
+#include "RequestHandlerFactory.h"
+
+class RequestHandlerFactory;
 
 class LoginRequestHandler : public IRequestHandler
 {
@@ -9,7 +13,7 @@ public:
 	input: none
 	output: none
 	*/
-	LoginRequestHandler() = default;
+	LoginRequestHandler(LoginManager& loginManager, RequestHandlerFactory& handlerFactory);
 	/*
 	Function distructs a LoginRequestHandle object
 	input: none
@@ -21,7 +25,7 @@ public:
 	input: struct with the client' request
 	output: boolean answer if the request is relevant
 	*/
-	virtual bool isRequestRelevant(const RequestInfo& reqInfo) override;
+	const virtual bool isRequestRelevant(const RequestInfo& reqInfo) override;
 	/*
 	Function handles with the client request
 	input: struct with the client' request
@@ -30,8 +34,8 @@ public:
 	virtual RequestResult handleRequest(const RequestInfo& reqInfo) override;
 
 private:
-	//LoginManager& m_loginManager;
-	//RequestHandlerFactory& m_handlerFactory;
+	LoginManager& m_loginManager;
+	RequestHandlerFactory& m_handlerFactory;
 
 	/*
 	Function performs a login

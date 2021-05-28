@@ -2,5 +2,12 @@
 enum Codes {
 	LOGIN_CODE = '1',
 	SIGNUP_CODE = '2',
-	ERROR_CODE = '3'
+	ERROR_CODE = '3',
+	LOGOUT_CODE = '4',
+	GET_ROOMS_CODE = '5',
+	GET_PLAYERS_CODE = '6',
+	GET_HIGH_SCORE_CODE = '7',
+	GET_STATS_CODE = '8',
+	JOIN_ROOM_CODE = '9',
+	CREATE_ROOM_CODE = 'A'
 };
