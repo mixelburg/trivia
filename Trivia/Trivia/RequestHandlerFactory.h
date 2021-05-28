@@ -12,12 +12,12 @@ public:
 	Function creats a RequestHandlerFactory object
 	input + output: none
 	*/
-	RequestHandlerFactory(IDataBase* database, LoginManager& loginManager, RoomManager& roomManager, StatisticsManager& statisticsManager);
+	RequestHandlerFactory(IDataBase* database, LoginManager* loginManager, RoomManager* roomManager, StatisticsManager* statisticsManager);
 	/*
 	Function distructs a RequestHandlerFactory object
 	input + output: none
 	*/
-	~RequestHandlerFactory() = default;
+	~RequestHandlerFactory();
 	/*
 	Function creates a login request handler 
 	input: none
@@ -74,9 +74,9 @@ public:
 	//GameManager& getGameManager();
 private:
 	IDataBase* m_database;
-	LoginManager& m_loginManager;
-	RoomManager& m_roomManager;
-	StatisticsManager& m_statisticsManager;
+	LoginManager* m_loginManagerPtr;
+	RoomManager* m_roomManagerPtr;
+	StatisticsManager* m_statisticsManagerPtr;
 	//GameManager m_gameManager;
 };
 

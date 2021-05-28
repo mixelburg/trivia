@@ -1,6 +1,6 @@
 #include "RequestHandlerFactory.h"
 
-RequestHandlerFactory::RequestHandlerFactory(IDataBase* database, LoginManager& loginManager, RoomManager& roomManager, StatisticsManager& statisticsManager) : m_database(database), m_loginManager(loginManager), m_roomManager(roomManager), m_statisticsManager(statisticsManager)
+RequestHandlerFactory::RequestHandlerFactory(IDataBase* database, LoginManager* loginManager, RoomManager* roomManager, StatisticsManager* statisticsManager) : m_database(database), m_loginManagerPtr(loginManager), m_roomManagerPtr(roomManager), m_statisticsManagerPtr(statisticsManager)
 {
 }
 
@@ -11,7 +11,7 @@ LoginRequestHandler RequestHandlerFactory::createLoginRequestHandler(LoginManage
 
 LoginManager& RequestHandlerFactory::getLoginManager()
 {
-    return m_loginManager;
+    return *m_loginManagerPtr;
 }
 
 MenuRequestHandler RequestHandlerFactory::createMenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory, LoginManager& loginManager)
@@ -21,10 +21,17 @@ MenuRequestHandler RequestHandlerFactory::createMenuRequestHandler(const LoggedU
 
 StatisticsManager& RequestHandlerFactory::getStatisticsManager()
 {
-    return m_statisticsManager;
+    return *m_statisticsManagerPtr;
 }
 
 RoomManager& RequestHandlerFactory::getRoomManager()
 {
-    return m_roomManager;
+    return *m_roomManagerPtr;
+}
+
+RequestHandlerFactory::~RequestHandlerFactory()
+{
+    delete m_loginManagerPtr;
+    delete m_statisticsManagerPtr;
+    delete m_roomManagerPtr;
 }

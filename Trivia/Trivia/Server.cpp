@@ -16,13 +16,14 @@ using std::endl;
 using std::flush;
 using std::cerr;
 
-Server::Server(): m_communicator(m_handlerFactory, *m_database)
+Server::Server()
 {
 	m_database = new SqliteDataBase();
-	LoginManager loginManager(m_database);
-	RoomManager roomManager();
-	StatisticsManager statisticsManager(m_database);
-	m_handlerFactory = new RequestHandlerFactory(m_database, loginManager, roomManager, statisticsManager);
+	LoginManager* loginManagerPtr = new LoginManager(m_database);
+	RoomManager* roomManagerPtr = new RoomManager();
+	StatisticsManager* statisticsManagerPtr = new StatisticsManager(m_database);
+	m_handlerFactory = new RequestHandlerFactory(m_database, loginManagerPtr, roomManagerPtr, statisticsManagerPtr);
+	m_communicator = new Communicator(*m_handlerFactory, *m_database);
 	try {
 		(*m_database).open();
 	}
@@ -34,12 +35,14 @@ Server::Server(): m_communicator(m_handlerFactory, *m_database)
 
 Server::~Server()
 {
+	delete m_handlerFactory;
+	delete m_communicator;
 	(*m_database).close();
 	delete m_database;
 }
 
 void Server::run()
 {
-	m_communicator.startHandleRequests(*m_database);
+	(*m_communicator).startHandleRequests(*m_database);
 }
 
