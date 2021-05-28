@@ -18,14 +18,15 @@ namespace GUI
         public LoginForm(ref Socket socket)
         {
             _socket = socket;
+
             InitializeComponent();
         }
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            statusLabel.Text = @"[!] Login Failed 
- incorrect username or password";
-            statusLabel.ForeColor = Color.Red;
+ //            statusLabel.Text = @"[!] Login Failed 
+ // incorrect username or password";
+ //            statusLabel.ForeColor = Color.Red;
 
             LoginRequestData data = new LoginRequestData
             {
@@ -39,6 +40,14 @@ namespace GUI
             byte[] messageReceived = new byte[1024];
 
             int byteRecv = _socket.Receive(messageReceived);
+            string msg = Encoding.ASCII.GetString(messageReceived, 0, byteRecv);
+            if (msg[0] == '0')
+            {
+                statusLabel.Text = @"[!] Login Failed 
+    incorrect username or password";
+                statusLabel.ForeColor = Color.Red;
+            }
+
             Console.WriteLine(@"Message from Server -> {0}",
                 Encoding.ASCII.GetString(messageReceived,
                     0, byteRecv));

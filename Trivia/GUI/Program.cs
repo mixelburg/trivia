@@ -36,6 +36,16 @@ namespace GUI
             try
             {
                 sender.Connect(localEndPoint);
+                byte[] messageReceived = new byte[1024];
+                int byteRecv = sender.Receive(messageReceived);
+                Console.WriteLine(@"Message from Server -> {0}",
+                    Encoding.ASCII.GetString(messageReceived,
+                        0, byteRecv));
+
+                string request = "hello";
+
+                byte[] messageSent = Encoding.ASCII.GetBytes(request);
+                sender.Send(messageSent);
             }
             catch (System.Net.Sockets.SocketException e)
             {
