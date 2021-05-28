@@ -30,6 +30,6 @@ public:
 
 private:
 	IDataBase* m_database;
-	Communicator m_communicator;
-	RequestHandlerFactory m_handlerFactory;
+	Communicator* m_communicator;
+	RequestHandlerFactory* m_handlerFactory;
 };
