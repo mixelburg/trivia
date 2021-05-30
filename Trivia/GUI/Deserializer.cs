@@ -19,7 +19,7 @@ namespace GUI
         /// <param string with the server response="res"></param>
         /// <returns></returns>
         public static StatusStruct deserializeStatusMsg(ref string res) {
-            StatusStruct serverRes = JsonConvert.DeserializeObject<StatusStruct>(res);
+             StatusStruct serverRes = JsonConvert.DeserializeObject<StatusStruct>(res);
             return serverRes;
         }
     }
