@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GUI
 {
+    public struct LoginRequestData
+    {
+        public string username;
+        public string password;
+    }
+    public struct SignupRequestData
+    {
+        public string username;
+        public string password;
+        public string mail;
+    }
+
     class Serializer
     {
         /// <summary>
@@ -14,10 +21,12 @@ namespace GUI
         /// </summary>
         /// <param Object of the login data="loginReq"></param>
         /// <returns> A string with the serialized request </returns>
+        public const int LengthSize = 4;
         public static string SerializeLoginRequest(LoginRequestData loginReq) {
             string request = "1";
             string jsonData = JsonConvert.SerializeObject(loginReq, Formatting.Indented);
-            request += jsonData.Length + jsonData;
+            request += jsonData.Length.ToString().PadLeft(LengthSize, '0');          
+            request += jsonData;
             return request;
         }
         /// <summary>

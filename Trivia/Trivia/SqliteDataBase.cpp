@@ -46,7 +46,7 @@ auto SqliteDataBase::checkPassword(const std::string& uname, const std::string& 
 
 auto SqliteDataBase::addUser(const std::string& uname, const std::string& pswd, const std::string& email) const -> void
 {
-	const std::string sqlCommand = "INSERT INTO USERS (NAME, EMAIL, PASSWORD) VALUES('" + uname + "', '" + pswd + "', '" + email + "');";
+	const std::string sqlCommand = "INSERT INTO USERS (NAME, PASSWORD, EMAIL) VALUES('" + uname + "', '" + pswd + "', '" + email + "');";
 	char* errMessage = nullptr;
 	const auto res = sqlite3_exec(_db, sqlCommand.c_str(), nullptr, nullptr, &errMessage);
 	if (res != SQLITE_OK)
@@ -128,7 +128,7 @@ auto SqliteDataBase::getNumOfTotalAnswers(const std::string& uname) const -> int
 		*static_cast<int*>(data) = std::stoi(argv[0]);
 		return 0;
 	};
-	
+
 
 	const std::string sqlCommand = "SELECT NUM_ANSWERS FROM STATISTICS WHERE USER_ID is " + std::to_string(getUserId(uname)) + ";";
 	char* errMessage = nullptr;

@@ -9,7 +9,7 @@
 
 struct IStatusResponse {
 public:
-	IStatusResponse(unsigned int status, unsigned char code):code(code), status(status) {}
+	IStatusResponse(unsigned int status, unsigned char code) :code(code), status(status) {}
 	unsigned int status;
 	unsigned char code;
 };

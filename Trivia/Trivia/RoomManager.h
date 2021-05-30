@@ -11,7 +11,7 @@ public:
 	input: a logged user who creats the room, the room data
 	output: none
 	*/
-	void createRoom(const LoggedUser& owner, const RoomData& roomData);
+	void createRoom(const LoggedUser& owner, RoomData& roomData);
 	/*
 	Function deletes a room
 	input: the id of the room to be deleted
@@ -29,11 +29,14 @@ public:
 	input: none
 	output: vector with the rooms (room's data)
 	*/
-	const std::vector<RoomData> getRooms();
+	std::vector<RoomData> getRooms();
+
+	void addUser(const LoggedUser& user, const int roomId);
 
 	const std::vector<std::string> getAllUsers(const int id);
 private:
 
 	std::map<unsigned int, Room> m_rooms; // a map with the rooms
+	int m_currRoomId = 0;
 };
 
