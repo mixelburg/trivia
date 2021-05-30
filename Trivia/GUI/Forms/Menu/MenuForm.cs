@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using GUI.Forms.Menu;
 
@@ -25,26 +18,27 @@ namespace GUI
         {
             // TODO: send logout request to server
 
-            var newForm = new LoginForm(ref _socket)
-            {
-                Location = Location,
-                StartPosition = FormStartPosition.Manual
-            };
-            newForm.Closing += delegate { Close(); };
-            newForm.Show();
-            Hide();
+            Util.OpenNewForm(new LoginForm(ref _socket), this);
         }
 
         private void joinRoomButton_Click(object sender, EventArgs e)
         {
-            var newForm = new JoinRoomForm(ref _socket)
-            {
-                Location = Location,
-                StartPosition = FormStartPosition.Manual
-            };
-            newForm.Closing += delegate { Close(); };
-            newForm.Show();
-            Hide();
+            Util.OpenNewForm(new JoinRoomForm(ref _socket), this);
+        }
+
+        private void createRoomButton_Click(object sender, EventArgs e)
+        {
+            Util.OpenNewForm(new CreateRoomForm(ref _socket), this);
+        }
+
+        private void myStatusButton_Click(object sender, EventArgs e)
+        {
+            Util.OpenNewForm(new MyStatus(ref _socket), this);
+        }
+
+        private void bestScoresButton_Click(object sender, EventArgs e)
+        {
+            Util.OpenNewForm(new BestScoresForm(ref _socket), this);
         }
     }
 }

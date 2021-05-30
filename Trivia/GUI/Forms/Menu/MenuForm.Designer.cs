@@ -70,6 +70,7 @@
             this.createRoomButton.TabIndex = 2;
             this.createRoomButton.Text = "Create room";
             this.createRoomButton.UseVisualStyleBackColor = true;
+            this.createRoomButton.Click += new System.EventHandler(this.createRoomButton_Click);
             // 
             // myStatusButton
             // 
@@ -81,6 +82,7 @@
             this.myStatusButton.TabIndex = 3;
             this.myStatusButton.Text = "My status";
             this.myStatusButton.UseVisualStyleBackColor = true;
+            this.myStatusButton.Click += new System.EventHandler(this.myStatusButton_Click);
             // 
             // bestScoresButton
             // 
@@ -92,6 +94,7 @@
             this.bestScoresButton.TabIndex = 4;
             this.bestScoresButton.Text = "Best scores";
             this.bestScoresButton.UseVisualStyleBackColor = true;
+            this.bestScoresButton.Click += new System.EventHandler(this.bestScoresButton_Click);
             // 
             // label1
             // 

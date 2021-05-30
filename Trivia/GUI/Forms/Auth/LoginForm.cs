@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GUI.Forms.Menu;
 
 namespace GUI
 {
@@ -23,6 +24,7 @@ namespace GUI
 
         private void loginButton_Click(object sender, EventArgs e)
         {
+
             LoginRequestData data = new LoginRequestData
             {
                 username = textBoxUname.Text,
@@ -58,14 +60,7 @@ namespace GUI
 
         private void signupButton_Click(object sender, EventArgs e)
         {
-            var newForm = new SignupForm(ref _socket)
-            {
-                Location = Location,
-                StartPosition = FormStartPosition.Manual
-            };
-            newForm.Closing += delegate { Close(); };
-            newForm.Show();
-            Hide();
+            Util.OpenNewForm(new SignupForm(ref _socket), this);
         }
     }
 }

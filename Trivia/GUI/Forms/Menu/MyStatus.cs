@@ -11,11 +11,10 @@ using System.Windows.Forms;
 
 namespace GUI.Forms.Menu
 {
-    public partial class JoinRoomForm : Form
+    public partial class MyStatus : Form
     {
         private Socket _socket;
-
-        public JoinRoomForm(ref Socket socket)
+        public MyStatus(ref Socket socket)
         {
             _socket = socket;
             InitializeComponent();
