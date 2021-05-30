@@ -40,11 +40,15 @@ namespace GUI
             int byteRecv = _socket.Receive(messageReceived);
             string msg = Encoding.ASCII.GetString(messageReceived, 0, byteRecv);
 
+            Deserializer.StatusStruct serverResponse = Deserializer.deserializeStatusMsg(ref msg);
             //act by server's answer
-            if (msg[0] == '0') // fail
+            if (serverResponse.status == false) // fail
             {
                 statusLabel.Text = @"[!] Login Failed incorrect username or password";
                 statusLabel.ForeColor = Color.Red;
+            }
+            else {
+                signupButton_Click(sender, e);
             }
 
             Console.WriteLine(@"Message from Server -> {0}",
