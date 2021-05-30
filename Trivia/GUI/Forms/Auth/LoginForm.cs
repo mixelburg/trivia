@@ -44,13 +44,13 @@ namespace GUI
 
             Deserializer.StatusStruct serverResponse = Deserializer.deserializeStatusMsg(ref msg);
             //act by server's answer
-            if (serverResponse.status == false) // fail
+            if (serverResponse.status == "0") // fail
             {
                 statusLabel.Text = @"[!] Login Failed incorrect username or password";
                 statusLabel.ForeColor = Color.Red;
             }
             else {
-                Util.OpenNewForm(new SignupForm(ref _socket), this);
+                Util.OpenNewForm(new MenuForm(ref _socket), this);
             }
 
             Console.WriteLine(@"Message from Server -> {0}",

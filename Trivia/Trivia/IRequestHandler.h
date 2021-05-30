@@ -11,7 +11,7 @@ struct IRequest {
 };
 
 struct RequestInfo : IRequest {
-	unsigned char id;
+	unsigned char id = 0;
 	time_t receivalTime;
 	std::vector<unsigned char> buffer;
 };
