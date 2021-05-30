@@ -39,7 +39,7 @@
             // signOutButton
             // 
             this.signOutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.signOutButton.Location = new System.Drawing.Point(154, 166);
+            this.signOutButton.Location = new System.Drawing.Point(170, 162);
             this.signOutButton.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.signOutButton.Name = "signOutButton";
             this.signOutButton.Size = new System.Drawing.Size(328, 56);
@@ -51,18 +51,19 @@
             // joinRoomButton
             // 
             this.joinRoomButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.joinRoomButton.Location = new System.Drawing.Point(154, 235);
+            this.joinRoomButton.Location = new System.Drawing.Point(170, 231);
             this.joinRoomButton.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.joinRoomButton.Name = "joinRoomButton";
             this.joinRoomButton.Size = new System.Drawing.Size(328, 56);
             this.joinRoomButton.TabIndex = 1;
             this.joinRoomButton.Text = "Join room";
             this.joinRoomButton.UseVisualStyleBackColor = true;
+            this.joinRoomButton.Click += new System.EventHandler(this.joinRoomButton_Click);
             // 
             // createRoomButton
             // 
             this.createRoomButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.createRoomButton.Location = new System.Drawing.Point(154, 304);
+            this.createRoomButton.Location = new System.Drawing.Point(170, 300);
             this.createRoomButton.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.createRoomButton.Name = "createRoomButton";
             this.createRoomButton.Size = new System.Drawing.Size(328, 56);
@@ -73,7 +74,7 @@
             // myStatusButton
             // 
             this.myStatusButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.myStatusButton.Location = new System.Drawing.Point(154, 373);
+            this.myStatusButton.Location = new System.Drawing.Point(170, 369);
             this.myStatusButton.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.myStatusButton.Name = "myStatusButton";
             this.myStatusButton.Size = new System.Drawing.Size(328, 56);
@@ -84,7 +85,7 @@
             // bestScoresButton
             // 
             this.bestScoresButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bestScoresButton.Location = new System.Drawing.Point(154, 442);
+            this.bestScoresButton.Location = new System.Drawing.Point(170, 438);
             this.bestScoresButton.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.bestScoresButton.Name = "bestScoresButton";
             this.bestScoresButton.Size = new System.Drawing.Size(328, 56);
@@ -98,24 +99,24 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(660, 66);
+            this.label1.Size = new System.Drawing.Size(682, 66);
             this.label1.TabIndex = 5;
             this.label1.Text = "The Trivia";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Form1
+            // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(660, 629);
+            this.ClientSize = new System.Drawing.Size(682, 653);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.bestScoresButton);
             this.Controls.Add(this.myStatusButton);
             this.Controls.Add(this.createRoomButton);
             this.Controls.Add(this.joinRoomButton);
             this.Controls.Add(this.signOutButton);
-            this.Name = "Form1";
+            this.Name = "MenuForm";
             this.Text = "Form1";
             this.ResumeLayout(false);
 
