@@ -25,8 +25,8 @@ namespace GUI
         {
             LoginRequestData data = new LoginRequestData
             {
-                uname = textBoxUname.Text,
-                pass = textBoxPass.Text
+                username = textBoxUname.Text,
+                password = textBoxPass.Text
             };
             string request = Serializer.SerializeLoginRequest(data);
             
