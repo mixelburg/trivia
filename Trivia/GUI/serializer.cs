@@ -4,13 +4,13 @@ namespace GUI
 {
     public struct LoginRequestData
     {
-        public string uname;
-        public string pass;
+        public string username;
+        public string password;
     }
     public struct SignupRequestData
     {
-        public string uname;
-        public string pass;
+        public string username;
+        public string password;
         public string mail;
     }
 

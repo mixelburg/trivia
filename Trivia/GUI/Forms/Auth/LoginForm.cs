@@ -27,21 +27,25 @@ namespace GUI
 
             LoginRequestData data = new LoginRequestData
             {
-                uname = textBoxUname.Text,
-                pass = textBoxPass.Text
+                username = textBoxUname.Text,
+                password = textBoxPass.Text
             };
+            //serialize
             string request = Serializer.SerializeLoginRequest(data);
             
+            //sending message
             byte[] messageSent = Encoding.ASCII.GetBytes(request);
             _socket.Send(messageSent);
             byte[] messageReceived = new byte[1024];
 
+            //receiveing message
             int byteRecv = _socket.Receive(messageReceived);
             string msg = Encoding.ASCII.GetString(messageReceived, 0, byteRecv);
-            if (msg[0] == '0')
+
+            //act by server's answer
+            if (msg[0] == '0') // fail
             {
-                statusLabel.Text = @"[!] Login Failed 
-    incorrect username or password";
+                statusLabel.Text = @"[!] Login Failed incorrect username or password";
                 statusLabel.ForeColor = Color.Red;
             }
 
