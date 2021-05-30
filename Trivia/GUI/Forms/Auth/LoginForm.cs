@@ -50,7 +50,7 @@ namespace GUI
                 statusLabel.ForeColor = Color.Red;
             }
             else {
-                Util.OpenNewForm(new SignupForm(ref _socket), this);
+                Util.OpenNewForm(new MenuForm(ref _socket), this);
             }
 
             Console.WriteLine(@"Message from Server -> {0}",

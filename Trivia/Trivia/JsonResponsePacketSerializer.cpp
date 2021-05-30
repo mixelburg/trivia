@@ -17,12 +17,13 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
 
     //create the json object
     Json::Value root;
-    root = "message:" + errResponse.message;
-    auto jsonData = root.asString();
+
+    root["message"] = errResponse.message;
+    std::string out = root.toStyledString();
 
     //insert the data' size + the data
-    std::string dataSize = Helper::getPaddedNumber(jsonData.length(), LEN_SIZE);
-    for (const auto ch : dataSize + jsonData) {
+    std::string dataSize = Helper::getPaddedNumber(out.length(), LEN_SIZE);
+    for (const auto ch : dataSize + out) {
         buffer.push_back(ch);
     }
 
@@ -33,18 +34,19 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
 std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const IStatusResponse& statusResponse)
 {
     std::vector<unsigned char> buffer;
-
+    
     //insert the message code
     buffer.push_back(statusResponse.code);
 
     //create the json object
     Json::Value root;
-    root = "status:" + std::to_string(statusResponse.status);
-    auto jsonData = root.asString();
+    
+    root["status"] = std::to_string(statusResponse.status);
+    std::string out = root.toStyledString();
 
     //insert the data' size + the data
-    std::string dataSize = Helper::getPaddedNumber(jsonData.length(), LEN_SIZE);
-    for (const auto ch : dataSize + jsonData) {
+    std::string dataSize = Helper::getPaddedNumber(out.length(), LEN_SIZE);
+    for (const auto ch : dataSize + out) {
         buffer.push_back(ch);
     }
 
@@ -67,12 +69,14 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
     roomsNames = roomsNames.substr(0, roomsNames.size() - CHARS_TO_REMOVE);
     //create the json object
     Json::Value root;
-    root = "status:" + std::to_string(roomsResponse.status) + ",rooms:" + roomsNames;
-    auto jsonData = root.asString();
+
+    root["status"] = std::to_string(roomsResponse.status);
+    root["rooms"] = roomsNames;
+    std::string out = root.toStyledString();
 
     //insert the data' size + the data
-    std::string dataSize = Helper::getPaddedNumber(jsonData.length(), LEN_SIZE);
-    for (const auto ch : dataSize + jsonData) {
+    std::string dataSize = Helper::getPaddedNumber(out.length(), LEN_SIZE);
+    for (const auto ch : dataSize + out) {
         buffer.push_back(ch);
     }
 
@@ -96,12 +100,12 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
 
     //create the json object
     Json::Value root;
-    root = "PlayersInRoom:" + playersNames;
-    auto jsonData = root.asString();
+    root["PlayersInRoom"] = playersNames;
+    std::string out = root.toStyledString();
 
     //insert the data' size + the data
-    std::string dataSize = Helper::getPaddedNumber(jsonData.length(), LEN_SIZE);
-    for (const auto ch : dataSize + jsonData) {
+    std::string dataSize = Helper::getPaddedNumber(out.length(), LEN_SIZE);
+    for (const auto ch : dataSize + out) {
         buffer.push_back(ch);
     }
 
@@ -125,12 +129,13 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
 
     //create the json object
     Json::Value root;
-    root = "UserStatistics:" + statsInString;
-    auto jsonData = root.asString();
+
+    root["UserStatistics"] = statsInString;
+    std::string out = root.toStyledString();
 
     //insert the data' size + the data
-    std::string dataSize = Helper::getPaddedNumber(jsonData.length(), LEN_SIZE);
-    for (const auto ch : dataSize + jsonData) {
+    std::string dataSize = Helper::getPaddedNumber(out.length(), LEN_SIZE);
+    for (const auto ch : dataSize + out) {
         buffer.push_back(ch);
     }
 
@@ -154,12 +159,12 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
 
     //create the json object
     Json::Value root;
-    root = "HighScores:" + scoreInString;
-    auto jsonData = root.asString();
+    root["HighScores"] = scoreInString;
+    std::string out = root.toStyledString();
 
     //insert the data' size + the data
-    std::string dataSize = Helper::getPaddedNumber(jsonData.length(), LEN_SIZE);
-    for (const auto ch : dataSize + jsonData) {
+    std::string dataSize = Helper::getPaddedNumber(out.length(), LEN_SIZE);
+    for (const auto ch : dataSize + out) {
         buffer.push_back(ch);
     }
 
