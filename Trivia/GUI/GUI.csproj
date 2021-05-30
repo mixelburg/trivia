@@ -75,6 +75,7 @@
     <Compile Include="ConnectionErrorForm.Designer.cs">
       <DependentUpon>ConnectionErrorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Deserializer.cs" />
     <Compile Include="Forms\Menu\JoinRoomForm.cs">
       <SubType>Form</SubType>
     </Compile>
