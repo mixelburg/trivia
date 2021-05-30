@@ -9,9 +9,10 @@ namespace GUI
 {
     class Deserializer
     {
+        public const int Start_Index = 5;
         public struct StatusStruct
         {
-            public bool status;
+            public string status;
         }
         /// <summary>
         /// Function extract the status for the server response
@@ -19,7 +20,9 @@ namespace GUI
         /// <param string with the server response="res"></param>
         /// <returns></returns>
         public static StatusStruct deserializeStatusMsg(ref string res) {
+            res = res.Substring(Start_Index);
             StatusStruct serverRes = JsonConvert.DeserializeObject<StatusStruct>(res);
+
             return serverRes;
         }
     }

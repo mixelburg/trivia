@@ -101,15 +101,16 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 	try {
 
 		welcome(clientSocket);
-
 		//creating struct with the request
-		RequestInfo clientRequest = extractReqInfo(clientSocket);
+		while (true) {
+			RequestInfo clientRequest = extractReqInfo(clientSocket);
 
-		if (clientRequest.id == LOGIN_CODE) {
-			handleLogin(clientSocket, clientRequest);
-		}
-		else if (clientRequest.id == SIGNUP_CODE) {
-			handleSignup(clientSocket, clientRequest);
+			if (clientRequest.id == LOGIN_CODE) {
+				handleLogin(clientSocket, clientRequest);
+			}
+			else if (clientRequest.id == SIGNUP_CODE) {
+				handleSignup(clientSocket, clientRequest);
+			}
 		}
 	}
 	catch (const std::exception& e) {
