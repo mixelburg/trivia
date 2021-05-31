@@ -41,7 +41,8 @@ namespace GUI
         public static string SerializeSignupRequest(SignupRequestData signupReq) {
             string request = codesClass.signupCode;
             string jsonData = JsonConvert.SerializeObject(signupReq, Formatting.Indented);
-            request += jsonData.Length + jsonData;
+            request += jsonData.Length.ToString().PadLeft(LengthSize, '0');
+            request += jsonData;
             return request;
         }
     }
