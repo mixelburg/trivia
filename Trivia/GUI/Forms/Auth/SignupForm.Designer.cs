@@ -35,7 +35,7 @@
             this.textBoxPass = new System.Windows.Forms.TextBox();
             this.textBoxUname = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxMail = new System.Windows.Forms.TextBox();
             this.signupButton = new System.Windows.Forms.Button();
             this.loginButton = new System.Windows.Forms.Button();
             this.statusLabel = new System.Windows.Forms.Label();
@@ -109,7 +109,7 @@
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
-            // textBox1
+            // textBoxMail
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox1.Location = new System.Drawing.Point(101, 234);
@@ -169,7 +169,7 @@
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.signupButton);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxMail);
             this.Controls.Add(this.pictureBoxPass);
             this.Controls.Add(this.pictureBoxUname);
             this.Controls.Add(this.textBoxPass);
@@ -194,7 +194,7 @@
         private System.Windows.Forms.TextBox textBoxPass;
         private System.Windows.Forms.TextBox textBoxUname;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxMail;
         private System.Windows.Forms.Button signupButton;
         private System.Windows.Forms.Button loginButton;
         private System.Windows.Forms.Label statusLabel;
