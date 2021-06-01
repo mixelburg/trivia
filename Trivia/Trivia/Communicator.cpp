@@ -113,6 +113,12 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 			else if (clientRequest.id == SIGNUP_CODE) {
 				currentStatus = handleSignup(clientSocket, clientRequest);
 			}
+			else if (clientRequest.id == LOGOUT_CODE)
+			{
+				// TODO: FIX IT
+				delete currentStatus.newHandler;
+				currentStatus.newHandler = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory);
+			}
 			else {
 				currentStatus = currentStatus.newHandler->handleRequest(clientRequest);
 				for (const auto ch : currentStatus.response) {
