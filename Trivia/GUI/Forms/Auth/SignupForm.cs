@@ -35,7 +35,7 @@ namespace GUI
                 mail = textBoxMail.Text
             };
             //serialize
-            string request = Serializer.SerializeSignupRequest(data);
+            string request = Serializer.SerializeSignupRequest(ref data);
             
             //sending message
             byte[] messageSent = Encoding.ASCII.GetBytes(request);

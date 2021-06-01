@@ -30,8 +30,9 @@ namespace GUI
         struct codesClass {
             public static string loginCode = "1";
             public static string signupCode = "2";
+            public static string createRommCode = "A";
         }
-        public static string SerializeLoginRequest(LoginRequestData loginReq) {
+        public static string SerializeLoginRequest(ref LoginRequestData loginReq) {
             string request = codesClass.loginCode;
             string jsonData = JsonConvert.SerializeObject(loginReq, Formatting.Indented);
             request += jsonData.Length.ToString().PadLeft(LengthSize, '0');          
@@ -43,7 +44,7 @@ namespace GUI
         /// </summary>
         /// <param name="signupReq"></param>
         /// <returns></returns>
-        public static string SerializeSignupRequest(SignupRequestData signupReq) {
+        public static string SerializeSignupRequest(ref SignupRequestData signupReq) {
             string request = codesClass.signupCode;
             string jsonData = JsonConvert.SerializeObject(signupReq, Formatting.Indented);
             request += jsonData.Length.ToString().PadLeft(LengthSize, '0');
@@ -51,7 +52,7 @@ namespace GUI
             return request;
         }
         public static string SerializeCreateRoomRequest(ref CreateRoomData createRoomReq) {
-            string request = "A";
+            string request = codesClass.createRommCode;
             string jsonData = JsonConvert.SerializeObject(createRoomReq, Formatting.Indented);
             request += jsonData.Length.ToString().PadLeft(LengthSize, '0');
             request += jsonData;

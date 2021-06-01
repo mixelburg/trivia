@@ -111,13 +111,13 @@
             // 
             // textBoxMail
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(101, 234);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 8, 2, 2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(224, 53);
-            this.textBox1.TabIndex = 11;
-            this.textBox1.UseSystemPasswordChar = true;
+            this.textBoxMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxMail.Location = new System.Drawing.Point(101, 234);
+            this.textBoxMail.Margin = new System.Windows.Forms.Padding(2, 8, 2, 2);
+            this.textBoxMail.Name = "textBox1";
+            this.textBoxMail.Size = new System.Drawing.Size(224, 53);
+            this.textBoxMail.TabIndex = 11;
+            this.textBoxMail.UseSystemPasswordChar = true;
             // 
             // signupButton
             // 
