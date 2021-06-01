@@ -23,6 +23,11 @@ namespace GUI
             newForm.Show();
             Hide();
         }
+
+        private void signupButton_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 
 }
