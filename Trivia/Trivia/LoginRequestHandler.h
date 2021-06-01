@@ -32,6 +32,8 @@ public:
 	output: struct contains the handle of the request
 	*/
 	virtual RequestResult handleRequest(const RequestInfo& reqInfo) override;
+	//getter for new user
+	const LoggedUser& getNewUser() const;
 
 private:
 	LoginManager& m_loginManager;
@@ -49,5 +51,6 @@ private:
 	output: struct with the result of the signup
 	*/
 	RequestResult signup(const RequestInfo& reqInfo);
+	LoggedUser m_newUser;
 };
 

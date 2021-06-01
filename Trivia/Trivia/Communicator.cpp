@@ -11,7 +11,8 @@
 #define HELLO_LEN 5
 #define LEN_SIZE 4
 #define CODE_LEN 1
-
+#define LOGIN "login"
+#define MENU "menu"
 
 Communicator::Communicator(RequestHandlerFactory& handlerFactory, IDataBase& db) : m_handlerFactory(handlerFactory), m_dataBase(db), m_loginManager(&db)
 {
@@ -152,8 +153,9 @@ void Communicator::welcome(SOCKET clientSocket)
 
 RequestResult Communicator::handleLogin(SOCKET clientSocket, RequestInfo& clientRequest)
 {
-	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory)->handleRequest(clientRequest);
-
+	LoginRequestHandler* s = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory);
+	RequestResult reqRes = (*s).handleRequest(clientRequest);
+	m_handlerFactory.updateHandlers(reqRes, MENU, &(*s).getNewUser());
 	LoginResponse resStruct(reqRes.response[0]);
 
 	const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
@@ -169,8 +171,9 @@ RequestResult Communicator::handleLogin(SOCKET clientSocket, RequestInfo& client
 
 RequestResult Communicator::handleSignup(SOCKET clientSocket, RequestInfo& clientRequest)
 {
-	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory)->handleRequest(clientRequest);
-
+	LoginRequestHandler* s = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory);
+	RequestResult reqRes = (*s).handleRequest(clientRequest);
+	m_handlerFactory.updateHandlers(reqRes, MENU, &(*s).getNewUser());
 	SignupResponse resStruct(reqRes.response[0]);
 
 	const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);

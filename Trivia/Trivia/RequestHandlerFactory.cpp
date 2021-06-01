@@ -33,7 +33,7 @@ RoomManager& RequestHandlerFactory::getRoomManager()
     return *m_roomManagerPtr;
 }
 
-void RequestHandlerFactory::updateHandlers(RequestResult& reqRes, const std::string& newHandlerName, LoggedUser* userPtr)
+void RequestHandlerFactory::updateHandlers(RequestResult& reqRes, const std::string& newHandlerName, const LoggedUser* userPtr)
 {
     IRequestHandler* temp = nullptr;
     temp = reqRes.newHandler;
