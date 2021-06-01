@@ -151,7 +151,7 @@ RequestInfo Communicator::extractReqInfo(SOCKET clientSocket)
 
 void Communicator::welcome(SOCKET clientSocket)
 {
-	// sending and reciving hello message
+	// sending and receiving hello message
 	Helper::sendData(clientSocket, "Hello");
 	auto retVal = Helper::getStringPartFromSocket(clientSocket, HELLO_LEN);
 	std::cout << retVal << std::endl;
@@ -161,8 +161,9 @@ RequestResult Communicator::handleLogin(SOCKET clientSocket, RequestInfo& client
 {
 	LoginRequestHandler* s = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory);
 	RequestResult reqRes = (*s).handleRequest(clientRequest);
-	m_handlerFactory.updateHandlers(reqRes, MENU, &(*s).getNewUser());
 	LoginResponse resStruct(reqRes.response[0]);
+	// TODO: change handler
+	reqRes.newHandler = m_handlerFactory.createMenuRequestHandler(s->getNewUser(),  m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory, m_loginManager);
 
 	const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
 	std::string resInString;
@@ -179,8 +180,10 @@ RequestResult Communicator::handleSignup(SOCKET clientSocket, RequestInfo& clien
 {
 	LoginRequestHandler* s = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory);
 	RequestResult reqRes = (*s).handleRequest(clientRequest);
-	m_handlerFactory.updateHandlers(reqRes, MENU, &(*s).getNewUser());
+	reqRes.newHandler = s;
 	SignupResponse resStruct(reqRes.response[0]);
+	// TODO: change handler
+	reqRes.newHandler = m_handlerFactory.createMenuRequestHandler(s->getNewUser(),  m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory, m_loginManager);
 
 	const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
 	std::string resInString;

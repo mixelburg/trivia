@@ -33,19 +33,6 @@ RoomManager& RequestHandlerFactory::getRoomManager()
     return *m_roomManagerPtr;
 }
 
-void RequestHandlerFactory::updateHandlers(RequestResult& reqRes, const std::string& newHandlerName, const LoggedUser* userPtr)
-{
-    IRequestHandler* temp = nullptr;
-    temp = reqRes.newHandler;
-    if (newHandlerName == LOGIN) {
-        reqRes.newHandler = createLoginRequestHandler(*m_loginManagerPtr, *this);
-    }
-    else if (newHandlerName == MENU) {
-        reqRes.newHandler = createMenuRequestHandler(*userPtr, *m_roomManagerPtr, *m_statisticsManagerPtr, *this, *m_loginManagerPtr);
-    }
-    delete temp;
-}
-
 RequestHandlerFactory::~RequestHandlerFactory()
 {
     delete m_loginManagerPtr;

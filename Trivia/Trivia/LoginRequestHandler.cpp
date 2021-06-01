@@ -24,6 +24,7 @@ RequestResult LoginRequestHandler::handleRequest(const RequestInfo& reqInfo)
         reqResult = signup(reqInfo);
     }
 
+
     return reqResult;
 }
 
