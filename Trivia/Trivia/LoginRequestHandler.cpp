@@ -34,7 +34,7 @@ RequestResult LoginRequestHandler::login(const RequestInfo& reqInfo)
     try {
         if (m_loginManager.login(clientLoginRequest.username, clientLoginRequest.password)) {
             const LoggedUser& currUser = m_loginManager.getUserByName(clientLoginRequest.username);
-            *reqResult.newHandler = m_handlerFactory.createMenuRequestHandler(currUser, m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory, m_loginManager);
+            reqResult.newHandler = m_handlerFactory.createMenuRequestHandler(currUser, m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory, m_loginManager);
             reqResult.response.push_back(SUCCESS);
         }
         else {
@@ -56,7 +56,7 @@ RequestResult LoginRequestHandler::signup(const RequestInfo& reqInfo)
     try {
         if (m_loginManager.signup(clientLoginRequest.username, clientLoginRequest.password, clientLoginRequest.email)) {
             const LoggedUser& newUser = m_loginManager.getUserByName(clientLoginRequest.username);
-            *reqResult.newHandler = m_handlerFactory.createMenuRequestHandler(newUser, m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory, m_loginManager);
+            reqResult.newHandler = m_handlerFactory.createMenuRequestHandler(newUser, m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory, m_loginManager);
             reqResult.response.push_back(SUCCESS);
 
         }

@@ -65,13 +65,13 @@ private:
 	input: the client socket, a struct contains the request information
 	output: none
 	*/
-	void handleLogin(SOCKET clientSocket, RequestInfo& clientRequest);
+	RequestResult handleLogin(SOCKET clientSocket, RequestInfo& clientRequest);
 	/*
 	Function handles with a signup request from the client
 	input: the client socket, a struct contains the request information
 	output: none
 	*/
-	void handleSignup(SOCKET clientSocket, RequestInfo& clientRequest);
+	RequestResult handleSignup(SOCKET clientSocket, RequestInfo& clientRequest);
 	//server socket
 	SOCKET m_serverSocket;
 

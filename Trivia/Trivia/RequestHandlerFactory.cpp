@@ -4,9 +4,9 @@ RequestHandlerFactory::RequestHandlerFactory(IDataBase* database, LoginManager* 
 {
 }
 
-LoginRequestHandler RequestHandlerFactory::createLoginRequestHandler(LoginManager& loginManager, RequestHandlerFactory& handlerFactory)
+LoginRequestHandler* RequestHandlerFactory::createLoginRequestHandler(LoginManager& loginManager, RequestHandlerFactory& handlerFactory)
 {
-    return LoginRequestHandler(loginManager, handlerFactory);
+    return new LoginRequestHandler(loginManager, handlerFactory);
 }
 
 LoginManager& RequestHandlerFactory::getLoginManager()
@@ -14,9 +14,9 @@ LoginManager& RequestHandlerFactory::getLoginManager()
     return *m_loginManagerPtr;
 }
 
-MenuRequestHandler RequestHandlerFactory::createMenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory, LoginManager& loginManager)
+MenuRequestHandler* RequestHandlerFactory::createMenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory, LoginManager& loginManager)
 {
-    return MenuRequestHandler(user, roomManager, statisticsManager, handlerFactory, loginManager);
+    return new MenuRequestHandler(user, roomManager, statisticsManager, handlerFactory, loginManager);
 }
 
 StatisticsManager& RequestHandlerFactory::getStatisticsManager()

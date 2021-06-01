@@ -25,7 +25,7 @@ namespace GUI
                 password = textBoxPass.Text
             };
             //serialize
-            string request = Serializer.SerializeLoginRequest(data);
+            string request = Serializer.SerializeLoginRequest(ref data);
             
             //sending message
             byte[] messageSent = Encoding.ASCII.GetBytes(request);

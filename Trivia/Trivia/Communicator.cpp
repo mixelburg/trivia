@@ -97,6 +97,8 @@ void Communicator::acceptConnection()
 
 void Communicator::handleNewClient(SOCKET clientSocket)
 {
+	RequestResult currentStatus;
+	std::string resInString = "";
 	std::cout << "Comms with the client..." << std::endl;
 	try {
 
@@ -104,12 +106,18 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		//creating struct with the request
 		while (true) {
 			RequestInfo clientRequest = extractReqInfo(clientSocket);
-
 			if (clientRequest.id == LOGIN_CODE) {
-				handleLogin(clientSocket, clientRequest);
+				currentStatus = handleLogin(clientSocket, clientRequest);
 			}
 			else if (clientRequest.id == SIGNUP_CODE) {
-				handleSignup(clientSocket, clientRequest);
+				currentStatus = handleSignup(clientSocket, clientRequest);
+			}
+			else {
+				currentStatus = currentStatus.newHandler->handleRequest(clientRequest);
+				for (const auto ch : currentStatus.response) {
+					resInString += ch;
+				}
+				Helper::sendData(clientSocket, resInString);
 			}
 		}
 	}
@@ -142,9 +150,9 @@ void Communicator::welcome(SOCKET clientSocket)
 	std::cout << retVal << std::endl;
 }
 
-void Communicator::handleLogin(SOCKET clientSocket, RequestInfo& clientRequest)
+RequestResult Communicator::handleLogin(SOCKET clientSocket, RequestInfo& clientRequest)
 {
-	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory).handleRequest(clientRequest);
+	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory)->handleRequest(clientRequest);
 
 	LoginResponse resStruct(reqRes.response[0]);
 
@@ -156,11 +164,12 @@ void Communicator::handleLogin(SOCKET clientSocket, RequestInfo& clientRequest)
 	}
 
 	Helper::sendData(clientSocket, resInString);
+	return reqRes;
 }
 
-void Communicator::handleSignup(SOCKET clientSocket, RequestInfo& clientRequest)
+RequestResult Communicator::handleSignup(SOCKET clientSocket, RequestInfo& clientRequest)
 {
-	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory).handleRequest(clientRequest);
+	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory)->handleRequest(clientRequest);
 
 	SignupResponse resStruct(reqRes.response[0]);
 
@@ -172,4 +181,7 @@ void Communicator::handleSignup(SOCKET clientSocket, RequestInfo& clientRequest)
 	}
 
 	Helper::sendData(clientSocket, resInString);
+	return reqRes;
+
 }
+

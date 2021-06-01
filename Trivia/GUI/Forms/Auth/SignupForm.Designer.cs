@@ -61,7 +61,7 @@
             // 
             this.pictureBoxPass.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPass.Image")));
             this.pictureBoxPass.Location = new System.Drawing.Point(49, 171);
-            this.pictureBoxPass.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBoxPass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBoxPass.Name = "pictureBoxPass";
             this.pictureBoxPass.Size = new System.Drawing.Size(48, 52);
             this.pictureBoxPass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -72,7 +72,7 @@
             // 
             this.pictureBoxUname.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxUname.Image")));
             this.pictureBoxUname.Location = new System.Drawing.Point(49, 109);
-            this.pictureBoxUname.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBoxUname.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBoxUname.Name = "pictureBoxUname";
             this.pictureBoxUname.Size = new System.Drawing.Size(48, 52);
             this.pictureBoxUname.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -93,7 +93,7 @@
             // 
             this.textBoxUname.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxUname.Location = new System.Drawing.Point(101, 109);
-            this.textBoxUname.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxUname.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxUname.Name = "textBoxUname";
             this.textBoxUname.Size = new System.Drawing.Size(224, 53);
             this.textBoxUname.TabIndex = 7;
@@ -114,7 +114,7 @@
             this.textBoxMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxMail.Location = new System.Drawing.Point(101, 234);
             this.textBoxMail.Margin = new System.Windows.Forms.Padding(2, 8, 2, 2);
-            this.textBoxMail.Name = "textBoxMail";
+            this.textBoxMail.Name = "textBox1";
             this.textBoxMail.Size = new System.Drawing.Size(224, 53);
             this.textBoxMail.TabIndex = 11;
             this.textBoxMail.UseSystemPasswordChar = true;
@@ -125,7 +125,7 @@
             this.signupButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.signupButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.signupButton.Location = new System.Drawing.Point(140, 323);
-            this.signupButton.Margin = new System.Windows.Forms.Padding(2);
+            this.signupButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.signupButton.Name = "signupButton";
             this.signupButton.Size = new System.Drawing.Size(106, 41);
             this.signupButton.TabIndex = 13;
@@ -139,7 +139,7 @@
             this.loginButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.loginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.loginButton.Location = new System.Drawing.Point(286, 0);
-            this.loginButton.Margin = new System.Windows.Forms.Padding(2);
+            this.loginButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(93, 37);
             this.loginButton.TabIndex = 25;
@@ -175,7 +175,7 @@
             this.Controls.Add(this.textBoxPass);
             this.Controls.Add(this.textBoxUname);
             this.Controls.Add(this.SignupLabes);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "SignupForm";
             this.Text = "SignupForm";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPass)).EndInit();
