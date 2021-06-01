@@ -72,6 +72,12 @@ public:
 	output: the game manager
 	*/
 	//GameManager& getGameManager();
+	/*
+	Function updates the handlers to track the client status 
+	input: ref to an object with the request result of the user, the name of the new handler, pointer to the logged user (if needed)
+	output: none
+	*/
+	void updateHandlers(RequestResult& reqRes, const std::string& newHandlerName, LoggedUser* userPtr);
 private:
 	IDataBase* m_database;
 	LoginManager* m_loginManagerPtr;
