@@ -97,6 +97,7 @@ void Communicator::acceptConnection()
 
 void Communicator::handleNewClient(SOCKET clientSocket)
 {
+	RequestResult currentStatus;
 	std::cout << "Comms with the client..." << std::endl;
 	try {
 
@@ -104,12 +105,14 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		//creating struct with the request
 		while (true) {
 			RequestInfo clientRequest = extractReqInfo(clientSocket);
-
 			if (clientRequest.id == LOGIN_CODE) {
-				handleLogin(clientSocket, clientRequest);
+				currentStatus = handleLogin(clientSocket, clientRequest);
 			}
 			else if (clientRequest.id == SIGNUP_CODE) {
-				handleSignup(clientSocket, clientRequest);
+				currentStatus = handleSignup(clientSocket, clientRequest);
+			}
+			else {
+				currentStatus.newHandler->handleRequest(clientRequest);
 			}
 		}
 	}
@@ -142,7 +145,7 @@ void Communicator::welcome(SOCKET clientSocket)
 	std::cout << retVal << std::endl;
 }
 
-void Communicator::handleLogin(SOCKET clientSocket, RequestInfo& clientRequest)
+RequestResult Communicator::handleLogin(SOCKET clientSocket, RequestInfo& clientRequest)
 {
 	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory).handleRequest(clientRequest);
 
@@ -156,9 +159,10 @@ void Communicator::handleLogin(SOCKET clientSocket, RequestInfo& clientRequest)
 	}
 
 	Helper::sendData(clientSocket, resInString);
+	return reqRes;
 }
 
-void Communicator::handleSignup(SOCKET clientSocket, RequestInfo& clientRequest)
+RequestResult Communicator::handleSignup(SOCKET clientSocket, RequestInfo& clientRequest)
 {
 	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory).handleRequest(clientRequest);
 
@@ -172,4 +176,7 @@ void Communicator::handleSignup(SOCKET clientSocket, RequestInfo& clientRequest)
 	}
 
 	Helper::sendData(clientSocket, resInString);
+	return reqRes;
+
 }
+
