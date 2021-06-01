@@ -27,13 +27,16 @@ namespace GUI.Forms.Menu
 
         private void createButton_Click(object sender, EventArgs e)
         {
-            /*LoginRequestData data = new LoginRequestData
+            //create the create room data object to send
+            CreateRoomData data = new CreateRoomData
             {
-                username = textBoxUname.Text,
-                password = textBoxPass.Text
+                name = roomNameTextBox.Text,
+                maxUsers = Int32.Parse(numPlayersTextBox.Text),
+                questionCount = Int32.Parse(numQuestionsTextBox.Text),
+                answerTimeout = Int32.Parse(questionTimeTextBox.Text)
             };
-            //serialize
-            string request = Serializer.SerializeLoginRequest(data);
+            //serialize the object
+            string request = Serializer.SerializeCreateRoomRequest(ref data);
 
             //sending message
             byte[] messageSent = Encoding.ASCII.GetBytes(request);
@@ -48,17 +51,19 @@ namespace GUI.Forms.Menu
             //act by server's answer
             if (serverResponse.status == "0") // fail
             {
-                statusLabel.Text = @"[!] Login Failed incorrect username or password";
+                statusLabel.Text = @"[!] CreateRoom Failed";
                 statusLabel.ForeColor = Color.Red;
             }
             else
             {
+                // TO DO : change the form to the admin room form
                 Util.OpenNewForm(new MenuForm(ref _socket), this);
             }
 
-            Console.WriteLine(@"Message from Server -> {0}",
+            Console.WriteLine(@"Message from Server about createRoom -> {0}",
                 Encoding.ASCII.GetString(messageReceived,
-                    0, byteRecv));*/
+                    0, byteRecv));
         }
+
     }
 }

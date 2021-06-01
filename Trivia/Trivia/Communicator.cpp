@@ -98,6 +98,7 @@ void Communicator::acceptConnection()
 void Communicator::handleNewClient(SOCKET clientSocket)
 {
 	RequestResult currentStatus;
+	std::string resInString = "";
 	std::cout << "Comms with the client..." << std::endl;
 	try {
 
@@ -112,7 +113,11 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 				currentStatus = handleSignup(clientSocket, clientRequest);
 			}
 			else {
-				currentStatus.newHandler->handleRequest(clientRequest);
+				currentStatus = currentStatus.newHandler->handleRequest(clientRequest);
+				for (const auto ch : currentStatus.response) {
+					resInString += ch;
+				}
+				Helper::sendData(clientSocket, resInString);
 			}
 		}
 	}
@@ -147,7 +152,7 @@ void Communicator::welcome(SOCKET clientSocket)
 
 RequestResult Communicator::handleLogin(SOCKET clientSocket, RequestInfo& clientRequest)
 {
-	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory).handleRequest(clientRequest);
+	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory)->handleRequest(clientRequest);
 
 	LoginResponse resStruct(reqRes.response[0]);
 
@@ -164,7 +169,7 @@ RequestResult Communicator::handleLogin(SOCKET clientSocket, RequestInfo& client
 
 RequestResult Communicator::handleSignup(SOCKET clientSocket, RequestInfo& clientRequest)
 {
-	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory).handleRequest(clientRequest);
+	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory)->handleRequest(clientRequest);
 
 	SignupResponse resStruct(reqRes.response[0]);
 
