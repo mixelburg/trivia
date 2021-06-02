@@ -32,11 +32,6 @@ namespace GUI
 
     class Serializer
     {
-        /// <summary>
-        /// Function serialize a login request to send the server
-        /// </summary>
-        /// <param Object of the login data="loginReq"></param>
-        /// <returns> A string with the serialized request </returns>
         public const int LengthSize = 4;
         struct codesClass {
             public static string loginCode = "1";

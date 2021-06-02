@@ -26,15 +26,8 @@ namespace GUI
             };
             //serialize
             string request = Serializer.SerializeLoginRequest(ref data);
-            
-            //sending message
-            byte[] messageSent = Encoding.ASCII.GetBytes(request);
-            _socket.Send(messageSent);
-            byte[] messageReceived = new byte[1024];
 
-            //receiveing message
-            int byteRecv = _socket.Receive(messageReceived);
-            string msg = Encoding.ASCII.GetString(messageReceived, 0, byteRecv);
+            string msg = Util.SendRequest(_socket, request);
 
             Deserializer.StatusStruct serverResponse = Deserializer.deserializeStatusMsg(ref msg);
             //act by server's answer
@@ -47,9 +40,7 @@ namespace GUI
                 Util.OpenNewForm(new MenuForm(ref _socket), this);
             }
 
-            Console.WriteLine(@"Message from Server -> {0}",
-                Encoding.ASCII.GetString(messageReceived,
-                    0, byteRecv));
+
         }
 
         private void signupButton_Click(object sender, EventArgs e)
