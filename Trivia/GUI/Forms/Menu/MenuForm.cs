@@ -8,6 +8,7 @@ namespace GUI
     public partial class MenuForm : Form
     {
         private Socket _socket;
+
         public MenuForm(ref Socket socket)
         {
             _socket = socket;

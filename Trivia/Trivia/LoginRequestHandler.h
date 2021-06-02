@@ -42,6 +42,7 @@ private:
 	input: struct with the login information
 	output: struct with the result of the login
 	*/
+
 	RequestResult login(const RequestInfo& reqInfo);
 	/*
 	Function performs a signup
