@@ -55,57 +55,29 @@ namespace GUI
             return request;
         }
 
-        public static string SerializeLoginRequest(ref LoginRequestData loginReq) {
-            // string request = codesClass.loginCode;
-            // string jsonData = JsonConvert.SerializeObject(loginReq, Formatting.Indented);
-            // request += jsonData.Length.ToString().PadLeft(LengthSize, '0');          
-            // request += jsonData;
-            // return request;
-
+        public static string SerializeLoginRequest(ref LoginRequestData loginReq)
+        {
             return SerializeRequest(ref loginReq, ref codesClass.loginCode);
         }
 
         public static string SerializeSignupRequest(ref SignupRequestData signupReq)
         {
-            // string request = codesClass.signupCode;
-            // string jsonData = JsonConvert.SerializeObject(signupReq, Formatting.Indented);
-            // request += jsonData.Length.ToString().PadLeft(LengthSize, '0');
-            // request += jsonData;
-            // return request;
-
-            return SerializeRequest(ref signupReq, ref codesClass.loginCode);
+            return SerializeRequest(ref signupReq, ref codesClass.signupCode);
         }
 
-        public static string SerializeCreateRoomRequest(ref CreateRoomData createRoomReq) {
-            // string request = codesClass.createRoomCode;
-            // string jsonData = JsonConvert.SerializeObject(createRoomReq, Formatting.Indented);
-            // request += jsonData.Length.ToString().PadLeft(LengthSize, '0');
-            // request += jsonData;
-            // return request;
-
-            return SerializeRequest(ref createRoomReq, ref codesClass.loginCode);
+        public static string SerializeCreateRoomRequest(ref CreateRoomData createRoomReq)
+        {
+            return SerializeRequest(ref createRoomReq, ref codesClass.createRoomCode);
         }
 
         public static string SerializeJoinRoomRequest(ref JoinRoomData joinRoomData)
         {
-            // string request = codesClass.joinRoomCode;
-            // string jsonData = JsonConvert.SerializeObject(joinRoomData, Formatting.Indented);
-            // request += jsonData.Length.ToString().PadLeft(LengthSize, '0');
-            // request += jsonData;
-            // return request;
-
-            return SerializeRequest(ref joinRoomData, ref codesClass.loginCode);
+            return SerializeRequest(ref joinRoomData, ref codesClass.joinRoomCode);
         }
 
         public static string SerializeGetPlayersRequest(ref GetPlayersData getPlayersData)
         {
-            // string request = codesClass.getPlayersCode;
-            // string jsonData = JsonConvert.SerializeObject(getPlayersData, Formatting.Indented);
-            // request += jsonData.Length.ToString().PadLeft(LengthSize, '0');
-            // request += jsonData;
-            // return request;
-
-            return SerializeRequest(ref getPlayersData, ref codesClass.loginCode);
+            return SerializeRequest(ref getPlayersData, ref codesClass.getPlayersCode);
         }
         
     }
