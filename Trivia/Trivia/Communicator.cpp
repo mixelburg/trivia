@@ -115,7 +115,6 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 			}
 			else if (clientRequest.id == LOGOUT_CODE)
 			{
-				// TODO: FIX IT
 				delete currentStatus.newHandler;
 				currentStatus.newHandler = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory);
 			}
@@ -164,7 +163,7 @@ RequestResult Communicator::handleLogin(SOCKET clientSocket, RequestInfo& client
 	LoginResponse resStruct(reqRes.response[0]);
 	// TODO: change handler
 	reqRes.newHandler = m_handlerFactory.createMenuRequestHandler(s->getNewUser(),  m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory, m_loginManager);
-
+	delete s; // deleteing old handler
 	const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
 	std::string resInString;
 
@@ -184,7 +183,7 @@ RequestResult Communicator::handleSignup(SOCKET clientSocket, RequestInfo& clien
 	SignupResponse resStruct(reqRes.response[0]);
 	// TODO: change handler
 	reqRes.newHandler = m_handlerFactory.createMenuRequestHandler(s->getNewUser(),  m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory, m_loginManager);
-
+	delete s;// deleteing old handler
 	const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
 	std::string resInString;
 
