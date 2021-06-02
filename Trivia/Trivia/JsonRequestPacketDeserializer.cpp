@@ -26,7 +26,8 @@ SignupRequest JsonRequestPacketDeserializer::deserializeSignupRequest(const std:
 	return signupReq;
 }
 
-GetPlayersInRoomRequest JsonRequestPacketDeserializer::deserializeGetPlayersRequest(const std::vector<unsigned char>& buffer)
+GetPlayersInRoomRequest JsonRequestPacketDeserializer::deserializeGetPlayersRequest(
+	const std::vector<unsigned char>& buffer)
 {
 	GetPlayersInRoomRequest getPlayersReq;
 
@@ -46,7 +47,6 @@ JoinRoomRequest JsonRequestPacketDeserializer::deserializeJoinRoomRequest(const 
 	joinRoomReq.roomId = json.get("roomId", NULL).asInt();
 
 	return joinRoomReq;
-
 }
 
 CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(const std::vector<unsigned char>& buffer)
@@ -65,10 +65,10 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(co
 
 const Json::Value JsonRequestPacketDeserializer::parseToJson(const std::vector<unsigned char>& buffer)
 {
-
 	//insreting the buffer into a string
 	std::string jsonStr;
-	for (const auto ch : buffer) {
+	for (const auto ch : buffer)
+	{
 		jsonStr += ch;
 	}
 
@@ -81,7 +81,8 @@ const Json::Value JsonRequestPacketDeserializer::parseToJson(const std::vector<u
 	std::string errors;
 
 	//parsing the std::string to a json object
-	if (!reader->parse(jsonStr.c_str(), jsonStr.c_str() + jsonStr.size(), &json, &errors)) {
+	if (!reader->parse(jsonStr.c_str(), jsonStr.c_str() + jsonStr.size(), &json, &errors))
+	{
 		delete reader;
 		throw std::exception("Failed to deserialize");
 	}

@@ -10,9 +10,11 @@
 #include "JsonResponsePacketSerializer.h"
 #define EXIT "EXIT"
 
-void getInput() {
+void getInput()
+{
 	std::string clientInput = "";
-	while (clientInput != EXIT) {
+	while (clientInput != EXIT)
+	{
 		std::cin >> clientInput;
 	}
 	exit(0);

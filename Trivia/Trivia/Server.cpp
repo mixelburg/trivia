@@ -19,15 +19,17 @@ using std::cerr;
 Server::Server()
 {
 	m_database = new SqliteDataBase();
-	LoginManager* loginManagerPtr = new LoginManager(m_database);
-	RoomManager* roomManagerPtr = new RoomManager();
-	StatisticsManager* statisticsManagerPtr = new StatisticsManager(m_database);
+	auto loginManagerPtr = new LoginManager(m_database);
+	auto roomManagerPtr = new RoomManager();
+	auto statisticsManagerPtr = new StatisticsManager(m_database);
 	m_handlerFactory = new RequestHandlerFactory(m_database, loginManagerPtr, roomManagerPtr, statisticsManagerPtr);
 	m_communicator = new Communicator(*m_handlerFactory, *m_database);
-	try {
+	try
+	{
 		(*m_database).open();
 	}
-	catch (...) {
+	catch (...)
+	{
 		std::cout << "Data base failed to open..." << std::endl;
 		exit(0);
 	}
@@ -45,4 +47,3 @@ void Server::run()
 {
 	(*m_communicator).startHandleRequests(*m_database);
 }
-
