@@ -57,7 +57,7 @@ char* Helper::getPartFromSocket(SOCKET sc, int bytesNum, int flags)
 {
 	if (bytesNum == 0)
 	{
-		return "";
+		return (char*)"";
 	}
 
 	auto data = new char[bytesNum + 1];
