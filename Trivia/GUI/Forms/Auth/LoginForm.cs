@@ -19,8 +19,6 @@ namespace GUI
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            Util.OpenNewForm(new JoinRoomForm(ref _socket), this);
-
             LoginRequestData data = new LoginRequestData
             {
                 username = textBoxUname.Text,
