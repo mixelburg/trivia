@@ -9,8 +9,8 @@ class LoginManager
 public:
 	LoginManager(IDataBase* db);
 
-	auto login(const std::string& uname, const std::string& pswd) -> bool;
-	auto signup(const std::string& uname, const std::string& pswd, const std::string& email) -> bool;
+	bool login(const std::string& uname, const std::string& pswd);
+	bool signup(const std::string& uname, const std::string& pswd, const std::string& email);
 	const LoggedUser& getUserByName(const std::string& uname) const;
 
 

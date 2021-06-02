@@ -15,25 +15,26 @@ public:
 	input: none
 	output: none
 	*/
-	MenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory, LoginManager& loginManager);
+	MenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager,
+	                   RequestHandlerFactory& handlerFactory, LoginManager& loginManager);
 	/*
 	Function distructs a MenuRequestHandler object
 	input: none
 	output: none
 	*/
-	virtual ~MenuRequestHandler() override = default;
+	~MenuRequestHandler() override = default;
 	/*
 	Function checks if the request got from the client is valid and relevant
 	input: struct with the client' request
 	output: boolean answer if the request is relevant
 	*/
-	const virtual bool isRequestRelevant(const RequestInfo& reqInfo) override;
+	const bool isRequestRelevant(const RequestInfo& reqInfo) override;
 	/*
 	Function handles with the client request
 	input: struct with the client' request
 	output: struct contains the handle of the request
 	*/
-	virtual RequestResult handleRequest(const RequestInfo& reqInfo) override;
+	RequestResult handleRequest(const RequestInfo& reqInfo) override;
 
 private:
 	//fields
@@ -51,7 +52,4 @@ private:
 	RequestResult getHighScore(const RequestInfo& reqInfo);
 	RequestResult joinRoom(const RequestInfo& reqInfo);
 	RequestResult createRoom(const RequestInfo& reqInfo);
-
-
 };
-

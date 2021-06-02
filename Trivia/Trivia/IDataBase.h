@@ -2,19 +2,20 @@
 #include "Question.h"
 #include <list>
 
-class IDataBase {
+class IDataBase
+{
 public:
 	virtual ~IDataBase() = default;
 
-	virtual auto isUser(const std::string& uname) const -> bool = 0;
-	virtual auto checkPassword(const std::string& uname, const std::string& pswd) const -> bool = 0;
-	virtual auto addUser(const std::string& uname, const std::string& pswd, const std::string& email) const -> void = 0;
-	virtual auto getQuestion(int num) const->std::list<Question> = 0;
-	virtual auto getPlayerAverageAnswerTime(const std::string& uname) const -> float = 0;
-	virtual auto getNumOfCorrectAnswers(const std::string& uname) const -> int = 0;
-	virtual auto getNumOfTotalAnswers(const std::string& uname) const -> int = 0;
-	virtual auto getNumOfPlayerGames(const std::string& uname) const -> int = 0;
-	virtual auto getBestPlayers() const->std::vector<std::string> = 0;
+	virtual bool isUser(const std::string& uname) const = 0;
+	virtual bool checkPassword(const std::string& uname, const std::string& pswd) const = 0;
+	virtual void addUser(const std::string& uname, const std::string& pswd, const std::string& email) const = 0;
+	virtual std::list<Question> getQuestion(int num) const = 0;
+	virtual float getPlayerAverageAnswerTime(const std::string& uname) const = 0;
+	virtual int getNumOfCorrectAnswers(const std::string& uname) const = 0;
+	virtual int getNumOfTotalAnswers(const std::string& uname) const = 0;
+	virtual int getNumOfPlayerGames(const std::string& uname) const = 0;
+	virtual std::vector<std::string> getBestPlayers() const = 0;
 
 	virtual bool open() = 0;
 	virtual void close() = 0;

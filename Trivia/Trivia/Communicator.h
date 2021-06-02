@@ -14,6 +14,7 @@
 #include "LoginRequestHandler.h"
 #include "SqliteDataBase.h"
 #include "RequestHandlerFactory.h"
+
 class Communicator
 {
 public:
@@ -85,4 +86,3 @@ private:
 
 	LoginManager m_loginManager;
 };
-

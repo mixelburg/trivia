@@ -21,7 +21,8 @@ unsigned int RoomManager::getRoomState(const int id)
 std::vector<RoomData> RoomManager::getRooms()
 {
 	std::vector<RoomData> roomsData;
-	for (const auto& room : m_rooms) {
+	for (const auto& room : m_rooms)
+	{
 		roomsData.push_back(room.second.getData());
 	}
 	return roomsData;
