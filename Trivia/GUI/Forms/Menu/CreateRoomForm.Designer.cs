@@ -228,6 +228,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CreateRoomForm";
             this.Text = "CreateRoomForm";
+            this.Load += new System.EventHandler(this.CreateRoomForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

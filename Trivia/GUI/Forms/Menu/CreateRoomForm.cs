@@ -47,5 +47,10 @@ namespace GUI.Forms.Menu
                 Util.OpenNewForm(new RoomFormAdmin(ref _socket), this);
             }
         }
+
+        private void CreateRoomForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

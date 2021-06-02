@@ -34,5 +34,10 @@ namespace GUI.Forms.Menu
         {
             Util.OpenNewForm(new MenuForm(ref _socket), this);
         }
+
+        private void joinButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
