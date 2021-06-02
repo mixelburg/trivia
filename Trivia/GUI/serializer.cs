@@ -38,6 +38,13 @@ namespace GUI
     {
         public const int LengthSize = 4;
 
+        /// <summary>
+        /// serializes general request 
+        /// </summary>
+        /// <typeparam name="T">struct to serialize</typeparam>
+        /// <param name="req">request that will be serialized</param>
+        /// <param name="code">request code</param>
+        /// <returns>string with serialized request</returns>
         private static string SerializeRequest<T>(ref T req, ref string code)
         {
             var request = code;
@@ -47,32 +54,57 @@ namespace GUI
             return request;
         }
 
-        public static string SerializeLoginRequest(ref LoginRequestData loginReq)
+        /// <summary>
+        /// specifically serializes login request 
+        /// </summary>
+        /// <param name="req">struct with login request params</param>
+        /// <returns>string with serialized request</returns>
+        public static string SerializeLoginRequest(ref LoginRequestData req)
         {
-            return SerializeRequest(ref loginReq, ref codesClass.loginCode);
+            return SerializeRequest(ref req, ref CodesClass.loginCode);
         }
 
-        public static string SerializeSignupRequest(ref SignupRequestData signupReq)
+        /// <summary>
+        /// specifically serializes signup request 
+        /// </summary>
+        /// <param name="req">struct with signup request params</param>
+        /// <returns>string with serialized request</returns>
+        public static string SerializeSignupRequest(ref SignupRequestData req)
         {
-            return SerializeRequest(ref signupReq, ref codesClass.signupCode);
+            return SerializeRequest(ref req, ref CodesClass.signupCode);
         }
 
-        public static string SerializeCreateRoomRequest(ref CreateRoomData createRoomReq)
+        /// <summary>
+        /// specifically serializes create room request 
+        /// </summary>
+        /// <param name="req">struct with create room request params</param>
+        /// <returns>string with serialized request</returns>
+        public static string SerializeCreateRoomRequest(ref CreateRoomData req)
         {
-            return SerializeRequest(ref createRoomReq, ref codesClass.createRoomCode);
+            return SerializeRequest(ref req, ref CodesClass.createRoomCode);
         }
 
-        public static string SerializeJoinRoomRequest(ref JoinRoomData joinRoomData)
+        /// <summary>
+        /// specifically serializes join room request 
+        /// </summary>
+        /// <param name="req">struct with join room request params</param>
+        /// <returns>string with serialized request</returns>
+        public static string SerializeJoinRoomRequest(ref JoinRoomData req)
         {
-            return SerializeRequest(ref joinRoomData, ref codesClass.joinRoomCode);
+            return SerializeRequest(ref req, ref CodesClass.joinRoomCode);
         }
 
-        public static string SerializeGetPlayersRequest(ref GetPlayersData getPlayersData)
+        /// <summary>
+        /// specifically serializes get players request 
+        /// </summary>
+        /// <param name="req">struct with get players request params</param>
+        /// <returns>string with serialized request</returns>
+        public static string SerializeGetPlayersRequest(ref GetPlayersData req)
         {
-            return SerializeRequest(ref getPlayersData, ref codesClass.getPlayersCode);
+            return SerializeRequest(ref req, ref CodesClass.getPlayersCode);
         }
 
-        private struct codesClass
+        private struct CodesClass
         {
             public static string loginCode = "1";
             public static string signupCode = "2";
