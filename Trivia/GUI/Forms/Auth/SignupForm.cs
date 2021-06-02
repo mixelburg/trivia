@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Drawing;
 using System.Net.Sockets;
-using System.Text;
 using System.Windows.Forms;
+
 namespace GUI
 {
     public partial class SignupForm : Form
     {
         private Socket _socket;
+
         public SignupForm(ref Socket socket)
         {
             _socket = socket;
             InitializeComponent();
         }
 
-        private void loginButton_Click(object sender, System.EventArgs e)
+        private void loginButton_Click(object sender, EventArgs e)
         {
             var newForm = new LoginForm(ref _socket)
             {
@@ -26,27 +27,20 @@ namespace GUI
             Hide();
         }
 
-        private void signupButton_Click(object sender, System.EventArgs e)
+        private void signupButton_Click(object sender, EventArgs e)
         {
-            SignupRequestData data = new SignupRequestData
+            var data = new SignupRequestData
             {
                 username = textBoxUname.Text,
                 password = textBoxPass.Text,
                 mail = textBoxMail.Text
             };
             //serialize
-            string request = Serializer.SerializeSignupRequest(ref data);
-            
-            //sending message
-            byte[] messageSent = Encoding.ASCII.GetBytes(request);
-            _socket.Send(messageSent);
-               byte[] messageReceived = new byte[1024];
+            var request = Serializer.SerializeSignupRequest(ref data);
 
-            //receiveing message
-            int byteRecv = _socket.Receive(messageReceived);
-            string msg = Encoding.ASCII.GetString(messageReceived, 0, byteRecv);
+            var msg = Util.SendRequest(_socket, request);
 
-            Deserializer.StatusStruct serverResponse = Deserializer.deserializeStatusMsg(ref msg);
+            var serverResponse = Deserializer.DeserializeStatusMsg(ref msg);
             //act by server's answer
             if (serverResponse.status == "0") // fail
             {
@@ -57,13 +51,6 @@ namespace GUI
             {
                 Util.OpenNewForm(new MenuForm(ref _socket), this);
             }
-
-            Console.WriteLine(@"Message from Server -> {0}",
-                Encoding.ASCII.GetString(messageReceived,
-                    0, byteRecv));
-        }
-
         }
     }
-
-
+}

@@ -19,13 +19,13 @@ public:
 	input: none
 	output: none
 	*/
-	virtual ~LoginRequestHandler() override = default;
+	~LoginRequestHandler() override = default;
 	/*
 	Function checks if the request got from the client is valid and relevant
 	input: struct with the client' request
 	output: boolean answer if the request is relevant
 	*/
-	const virtual bool isRequestRelevant(const RequestInfo& reqInfo) override;
+	const bool isRequestRelevant(const RequestInfo& reqInfo) override;
 	/*
 	Function handles with the client request
 	input: struct with the client' request
@@ -44,6 +44,7 @@ private:
 	input: struct with the login information
 	output: struct with the result of the login
 	*/
+
 	RequestResult login(const RequestInfo& reqInfo);
 	/*
 	Function performs a signup
@@ -53,4 +54,3 @@ private:
 	RequestResult signup(const RequestInfo& reqInfo);
 	LoggedUser m_newUser;
 };
-

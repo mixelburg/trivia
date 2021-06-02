@@ -11,12 +11,12 @@ std::vector<std::string> StatisticsManager::getStatistics()
 	return stats;
 }
 
-auto StatisticsManager::getHighScore() -> std::vector<std::string>
+std::vector<std::string> StatisticsManager::getHighScore()
 {
 	return _dataBase->getBestPlayers();
 }
 
-auto StatisticsManager::getUserStatistics(const std::string& uname) const -> std::vector<std::string>
+std::vector<std::string> StatisticsManager::getUserStatistics(const std::string& uname) const
 {
 	std::vector<std::string> stats;
 	stats.emplace_back("avg answer time: " + std::to_string(_dataBase->getPlayerAverageAnswerTime(uname)));

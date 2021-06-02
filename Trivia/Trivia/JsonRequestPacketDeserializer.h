@@ -4,24 +4,30 @@
 #include "json/json.h"
 #include <vector>
 #include <string>
-struct LoginRequest {
+
+struct LoginRequest
+{
 	std::string username;
 	std::string password;
 };
 
-struct SignupRequest : LoginRequest {
+struct SignupRequest : LoginRequest
+{
 	std::string email;
 };
 
-struct GetPlayersInRoomRequest {
+struct GetPlayersInRoomRequest
+{
 	unsigned int roomId;
 };
 
-struct JoinRoomRequest {
+struct JoinRoomRequest
+{
 	unsigned int roomId;
 };
 
-struct CreateRoomRequest {
+struct CreateRoomRequest
+{
 	std::string roomName;
 	unsigned int maxUsers;
 	unsigned int questionCount;
@@ -69,4 +75,3 @@ private:
 	*/
 	static const Json::Value parseToJson(const std::vector<unsigned char>& buffer);
 };
-

@@ -19,8 +19,6 @@ enum MessageType : byte
 class Helper
 {
 public:
-
-
 	static int getMessageTypeCode(SOCKET sc);
 	static int getIntPartFromSocket(SOCKET sc, int bytesNum);
 	static std::string getStringPartFromSocket(SOCKET sc, int bytesNum);
@@ -30,7 +28,6 @@ public:
 private:
 	static char* getPartFromSocket(SOCKET sc, int bytesNum);
 	static char* getPartFromSocket(SOCKET sc, int bytesNum, int flags);
-
 };
 
 

@@ -3,6 +3,7 @@
 #include "Room.h"
 #include <vector>
 #include <map>
+
 class RoomManager
 {
 public:
@@ -17,13 +18,13 @@ public:
 	input: the id of the room to be deleted
 	output: none
 	*/
-	void deleteRoom(const int id);
+	void deleteRoom(int id);
 	/*
 	Function returns the room state
 	input: the id of the room
 	output: the state
 	*/
-	unsigned int getRoomState(const int id);
+	unsigned int getRoomState(int id);
 	/*
 	Function returns all the rooms
 	input: none
@@ -31,12 +32,10 @@ public:
 	*/
 	std::vector<RoomData> getRooms();
 
-	void addUser(const LoggedUser& user, const int roomId);
+	void addUser(const LoggedUser& user, int roomId);
 
-	const std::vector<std::string> getAllUsers(const int id);
+	const std::vector<std::string> getAllUsers(int id);
 private:
-
 	std::map<unsigned int, Room> m_rooms; // a map with the rooms
 	int m_currRoomId = 0;
 };
-

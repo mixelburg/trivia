@@ -4,17 +4,17 @@ using System.Windows.Forms;
 
 namespace GUI.Forms.Menu
 {
-    public partial class MyStatus : Form
+    public partial class RoomFormUser : Form
     {
         private Socket _socket;
 
-        public MyStatus(ref Socket socket)
+        public RoomFormUser(ref Socket socket)
         {
             _socket = socket;
             InitializeComponent();
         }
 
-        private void backMenuButton_Click(object sender, EventArgs e)
+        private void leaveRoomButton_Click(object sender, EventArgs e)
         {
             Util.OpenNewForm(new MenuForm(ref _socket), this);
         }

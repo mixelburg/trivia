@@ -5,7 +5,7 @@ LoginManager::LoginManager(IDataBase* db) : _db(db)
 {
 }
 
-auto LoginManager::login(const std::string& uname, const std::string& pswd) -> bool
+bool LoginManager::login(const std::string& uname, const std::string& pswd)
 {
 	if (_db->checkPassword(uname, pswd))
 	{
@@ -15,7 +15,7 @@ auto LoginManager::login(const std::string& uname, const std::string& pswd) -> b
 	return false;
 }
 
-auto LoginManager::signup(const std::string& uname, const std::string& pswd, const std::string& email) -> bool
+bool LoginManager::signup(const std::string& uname, const std::string& pswd, const std::string& email)
 {
 	if (!_db->isUser(uname))
 	{
@@ -27,8 +27,10 @@ auto LoginManager::signup(const std::string& uname, const std::string& pswd, con
 
 const LoggedUser& LoginManager::getUserByName(const std::string& uname) const
 {
-	for (const LoggedUser& user : _users) {
-		if (uname == user.getUname()) {
+	for (const LoggedUser& user : _users)
+	{
+		if (uname == user.getUname())
+		{
 			return user;
 		}
 	}
@@ -37,4 +39,3 @@ const LoggedUser& LoginManager::getUserByName(const std::string& uname) const
 	LoggedUser invalidUser("", "");
 	return invalidUser;
 }
-

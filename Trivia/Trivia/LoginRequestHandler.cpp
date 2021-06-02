@@ -3,6 +3,7 @@
 #include "JsonRequestPacketDeserializer.h"
 #define SUCCESS 1
 #define FAIL 0
+
 LoginRequestHandler::LoginRequestHandler(LoginManager& loginManager, RequestHandlerFactory& handlerFactory) :
     m_loginManager(loginManager), m_handlerFactory(handlerFactory), m_newUser("","")
 {
@@ -10,19 +11,21 @@ LoginRequestHandler::LoginRequestHandler(LoginManager& loginManager, RequestHand
 
 const bool LoginRequestHandler::isRequestRelevant(const RequestInfo& reqInfo)
 {
-    return reqInfo.id == LOGIN_CODE || reqInfo.id == SIGNUP_CODE ? true : false;
+	return reqInfo.id == LOGIN_CODE || reqInfo.id == SIGNUP_CODE ? true : false;
 }
 
 RequestResult LoginRequestHandler::handleRequest(const RequestInfo& reqInfo)
 {
-    RequestResult reqResult;
-    if (reqInfo.id == LOGIN_CODE) {
-        reqResult = login(reqInfo);
-    }
+	RequestResult reqResult;
+	if (reqInfo.id == LOGIN_CODE)
+	{
+		reqResult = login(reqInfo);
+	}
 
-    else {
-        reqResult = signup(reqInfo);
-    }
+	else
+	{
+		reqResult = signup(reqInfo);
+	}
 
 
     return reqResult;

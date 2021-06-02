@@ -12,7 +12,8 @@ public:
 	Function creats a RequestHandlerFactory object
 	input + output: none
 	*/
-	RequestHandlerFactory(IDataBase* database, LoginManager* loginManager, RoomManager* roomManager, StatisticsManager* statisticsManager);
+	RequestHandlerFactory(IDataBase* database, LoginManager* loginManager, RoomManager* roomManager,
+	                      StatisticsManager* statisticsManager);
 	/*
 	Function distructs a RequestHandlerFactory object
 	input + output: none
@@ -35,7 +36,9 @@ public:
 	input: none
 	output: the handler that has been created
 	*/
-	MenuRequestHandler* createMenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory, LoginManager& loginManager);
+	MenuRequestHandler* createMenuRequestHandler(const LoggedUser& user, RoomManager& roomManager,
+	                                             StatisticsManager& statisticsManager,
+	                                             RequestHandlerFactory& handlerFactory, LoginManager& loginManager);
 	/*
 	Function returns the statistics manager
 	input: none
@@ -84,4 +87,3 @@ private:
 	StatisticsManager* m_statisticsManagerPtr;
 	//GameManager m_gameManager;
 };
-
