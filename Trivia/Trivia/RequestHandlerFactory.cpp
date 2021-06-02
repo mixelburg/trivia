@@ -1,8 +1,10 @@
 #include "RequestHandlerFactory.h"
 
-RequestHandlerFactory::RequestHandlerFactory(IDataBase* database, LoginManager* loginManager, RoomManager* roomManager,
-                                             StatisticsManager* statisticsManager) : m_database(database),
-	m_loginManagerPtr(loginManager), m_roomManagerPtr(roomManager), m_statisticsManagerPtr(statisticsManager)
+#define LOGIN "login"
+#define MENU "menu"
+
+
+RequestHandlerFactory::RequestHandlerFactory(IDataBase* database, LoginManager* loginManager, RoomManager* roomManager, StatisticsManager* statisticsManager) : m_database(database), m_loginManagerPtr(loginManager), m_roomManagerPtr(roomManager), m_statisticsManagerPtr(statisticsManager)
 {
 }
 

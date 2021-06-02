@@ -5,7 +5,7 @@
 #define FAIL 0
 
 LoginRequestHandler::LoginRequestHandler(LoginManager& loginManager, RequestHandlerFactory& handlerFactory) :
-	m_loginManager(loginManager), m_handlerFactory(handlerFactory)
+    m_loginManager(loginManager), m_handlerFactory(handlerFactory), m_newUser("","")
 {
 }
 
@@ -27,59 +27,54 @@ RequestResult LoginRequestHandler::handleRequest(const RequestInfo& reqInfo)
 		reqResult = signup(reqInfo);
 	}
 
-	return reqResult;
+
+    return reqResult;
+}
+
+const LoggedUser& LoginRequestHandler::getNewUser() const
+{
+    return m_newUser;
 }
 
 RequestResult LoginRequestHandler::login(const RequestInfo& reqInfo)
 {
-	RequestResult reqResult;
-	LoginRequest clientLoginRequest = JsonRequestPacketDeserializer::deserializeLoginRequest(reqInfo.buffer);
-	try
-	{
-		if (m_loginManager.login(clientLoginRequest.username, clientLoginRequest.password))
-		{
-			const LoggedUser& currUser = m_loginManager.getUserByName(clientLoginRequest.username);
-			reqResult.newHandler = m_handlerFactory.createMenuRequestHandler(
-				currUser, m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory,
-				m_loginManager);
-			reqResult.response.push_back(SUCCESS);
-		}
-		else
-		{
-			reqResult.newHandler = this;
-			reqResult.response.push_back(FAIL);
-		}
-	}
-	catch (...)
-	{
-		reqResult.newHandler = nullptr;
-	}
-	return reqResult;
+    RequestResult reqResult;
+    LoginRequest clientLoginRequest = JsonRequestPacketDeserializer::deserializeLoginRequest(reqInfo.buffer);
+    try {
+        if (m_loginManager.login(clientLoginRequest.username, clientLoginRequest.password)) {
+            m_newUser = m_loginManager.getUserByName(clientLoginRequest.username);
+            reqResult.response.push_back(SUCCESS);
+        }
+        else {
+            reqResult.newHandler = this;
+            reqResult.response.push_back(FAIL);
+
+        }
+    }
+    catch (...) {
+        reqResult.newHandler = nullptr;
+    }
+    return reqResult;
 }
 
 RequestResult LoginRequestHandler::signup(const RequestInfo& reqInfo)
 {
-	RequestResult reqResult;
-	SignupRequest clientLoginRequest = JsonRequestPacketDeserializer::deserializeSignupRequest(reqInfo.buffer);
-	try
-	{
-		if (m_loginManager.signup(clientLoginRequest.username, clientLoginRequest.password, clientLoginRequest.email))
-		{
-			const LoggedUser& newUser = m_loginManager.getUserByName(clientLoginRequest.username);
-			reqResult.newHandler = m_handlerFactory.createMenuRequestHandler(
-				newUser, m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory,
-				m_loginManager);
-			reqResult.response.push_back(SUCCESS);
-		}
-		else
-		{
-			reqResult.newHandler = this;
-			reqResult.response.push_back(FAIL);
-		}
-	}
-	catch (...)
-	{
-		reqResult.newHandler = nullptr;
-	}
-	return reqResult;
+    RequestResult reqResult;
+    SignupRequest clientLoginRequest = JsonRequestPacketDeserializer::deserializeSignupRequest(reqInfo.buffer);
+    try {
+        if (m_loginManager.signup(clientLoginRequest.username, clientLoginRequest.password, clientLoginRequest.email)) {
+            m_newUser = m_loginManager.getUserByName(clientLoginRequest.username);
+            reqResult.response.push_back(SUCCESS);
+
+        }
+        else {
+            reqResult.newHandler = this;
+            reqResult.response.push_back(FAIL);
+
+        }
+    }
+    catch (...) {
+        reqResult.newHandler = nullptr;
+    }
+    return reqResult;
 }

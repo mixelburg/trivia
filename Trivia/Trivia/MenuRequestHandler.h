@@ -45,7 +45,6 @@ private:
 	LoginManager& m_loginManager;
 
 	//methods
-	RequestResult signout(const RequestInfo& reqInfo);
 	RequestResult getRooms(const RequestInfo& reqInfo);
 	RequestResult getPlayersInRoom(const RequestInfo& reqInfo);
 	RequestResult getPersonalStats(const RequestInfo& reqInfo);

@@ -11,10 +11,10 @@
 #define HELLO_LEN 5
 #define LEN_SIZE 4
 #define CODE_LEN 1
+#define LOGIN "login"
+#define MENU "menu"
 
-
-Communicator::Communicator(RequestHandlerFactory& handlerFactory, IDataBase& db) : m_handlerFactory(handlerFactory),
-	m_dataBase(db), m_loginManager(&db)
+Communicator::Communicator(RequestHandlerFactory& handlerFactory, IDataBase& db) : m_handlerFactory(handlerFactory), m_dataBase(db), m_loginManager(&db)
 {
 	//setting the socket to communicate with the clients
 	m_serverSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -120,8 +120,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 			{
 				currentStatus = handleSignup(clientSocket, clientRequest);
 			}
-			else
-			{
+			else {
 				currentStatus = currentStatus.newHandler->handleRequest(clientRequest);
 				for (const auto ch : currentStatus.response)
 				{
@@ -155,7 +154,7 @@ RequestInfo Communicator::extractReqInfo(SOCKET clientSocket)
 
 void Communicator::welcome(SOCKET clientSocket)
 {
-	// sending and reciving hello message
+	// sending and receiving hello message
 	Helper::sendData(clientSocket, "Hello");
 	auto retVal = Helper::getStringPartFromSocket(clientSocket, HELLO_LEN);
 	std::cout << retVal << std::endl;
@@ -163,11 +162,12 @@ void Communicator::welcome(SOCKET clientSocket)
 
 RequestResult Communicator::handleLogin(SOCKET clientSocket, RequestInfo& clientRequest)
 {
-	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory)->
-	                                        handleRequest(clientRequest);
-
+	LoginRequestHandler* s = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory);
+	RequestResult reqRes = (*s).handleRequest(clientRequest);
 	LoginResponse resStruct(reqRes.response[0]);
-
+	// TODO: change handler
+	reqRes.newHandler = m_handlerFactory.createMenuRequestHandler(s->getNewUser(),  m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory, m_loginManager);
+	delete s; // deleteing old handler
 	const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
 	std::string resInString;
 
@@ -182,11 +182,13 @@ RequestResult Communicator::handleLogin(SOCKET clientSocket, RequestInfo& client
 
 RequestResult Communicator::handleSignup(SOCKET clientSocket, RequestInfo& clientRequest)
 {
-	RequestResult reqRes = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory)->
-	                                        handleRequest(clientRequest);
-
+	LoginRequestHandler* s = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory);
+	RequestResult reqRes = (*s).handleRequest(clientRequest);
+	reqRes.newHandler = s;
 	SignupResponse resStruct(reqRes.response[0]);
-
+	// TODO: change handler
+	reqRes.newHandler = m_handlerFactory.createMenuRequestHandler(s->getNewUser(),  m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory, m_loginManager);
+	delete s;// deleteing old handler
 	const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
 	std::string resInString;
 

@@ -29,8 +29,6 @@ RequestResult MenuRequestHandler::handleRequest(const RequestInfo& reqInfo)
 {
 	switch (reqInfo.id)
 	{
-	case LOGOUT_CODE:
-		return signout(reqInfo);
 	case GET_ROOMS_CODE:
 		return getRooms(reqInfo);
 	case GET_PLAYERS_CODE:
@@ -46,16 +44,6 @@ RequestResult MenuRequestHandler::handleRequest(const RequestInfo& reqInfo)
 	default:
 		return RequestResult();
 	}
-}
-
-RequestResult MenuRequestHandler::signout(const RequestInfo& reqInfo)
-{
-	RequestResult res;
-	LoginRequestHandler* h = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory);
-
-	res.newHandler = h;
-
-	return res;
 }
 
 RequestResult MenuRequestHandler::getRooms(const RequestInfo& reqInfo)
