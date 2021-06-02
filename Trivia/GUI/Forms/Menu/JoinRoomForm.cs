@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GUI.Forms.Menu
@@ -20,17 +13,14 @@ namespace GUI.Forms.Menu
             _socket = socket;
             InitializeComponent();
 
-            for (int i = 0; i < 2; i++)
+            for (var i = 0; i < 2; i++)
             {
-                Button b = new Button();
+                var b = new Button();
                 b.Width = 300;
                 b.Height = 35;
                 b.Text = "b" + i;
                 b.Click +=
-                    (o, e) =>
-                    {
-                        Console.WriteLine("hello world");
-                    };
+                    (o, e) => { Console.WriteLine("hello world"); };
                 roomsPanel.Controls.Add(b);
             }
         }

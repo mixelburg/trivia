@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GUI
 {
-    class Util
+    internal class Util
     {
         /// <summary>
         /// opens new Form and closes current (hides it)
@@ -32,12 +29,12 @@ namespace GUI
         /// <returns>string with response from server</returns>
         public static string SendRequest(Socket socket, string request)
         {
-            byte[] messageSent = Encoding.ASCII.GetBytes(request);
+            var messageSent = Encoding.ASCII.GetBytes(request);
             socket.Send(messageSent);
-            byte[] messageReceived = new byte[1024];
+            var messageReceived = new byte[1024];
 
             //receiving message
-            int byteRecv = socket.Receive(messageReceived);
+            var byteRecv = socket.Receive(messageReceived);
 
             Console.WriteLine(@"Message from Server -> {0}",
                 Encoding.ASCII.GetString(messageReceived,
