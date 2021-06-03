@@ -28,6 +28,18 @@ class IRequestHandler
 public:
 	IRequestHandler() = default;
 	virtual ~IRequestHandler() = default;
+
+	/**
+	 * @brief checks if request contains one of allowed coed
+	 * @param reqInfo request to check
+	 * @return (true/false)
+	*/
 	const virtual bool isRequestRelevant(const RequestInfo& reqInfo) = 0;
+
+	/**
+	 * @brief handles given request
+	 * @param reqInfo request to handle
+	 * @return request result
+	*/
 	virtual RequestResult handleRequest(const RequestInfo& reqInfo) = 0;
 };

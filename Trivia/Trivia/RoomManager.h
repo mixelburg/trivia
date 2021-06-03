@@ -32,8 +32,18 @@ public:
 	*/
 	std::vector<RoomData> getRooms();
 
+	/**
+	 * @brief adds user to a list of connected users in a room with given id
+	 * @param user LoggedUser object to add
+	 * @param roomId id of room to add user to
+	*/
 	void addUser(const LoggedUser& user, int roomId);
 
+	/**
+	 * @brief returns list of connected users in a room with given id
+	 * @param id - id of room to retrieve data from
+	 * @return std::vector with usernames
+	*/
 	const std::vector<std::string> getAllUsers(int id);
 private:
 	std::map<unsigned int, Room> m_rooms; // a map with the rooms
