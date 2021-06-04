@@ -112,6 +112,8 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		while (true)
 		{
 			RequestInfo clientRequest = extractReqInfo(clientSocket);
+			std::cout << "id: " << clientRequest.id << std::endl;
+			
 			if (clientRequest.id == LOGIN_CODE)
 			{
 				currentStatus = handleLogin(clientSocket, clientRequest);
