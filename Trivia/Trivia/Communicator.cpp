@@ -104,7 +104,6 @@ void Communicator::acceptConnection()
 void Communicator::handleNewClient(SOCKET clientSocket)
 {
 	RequestResult currentStatus;
-	std::string resInString = "";
 	std::cout << "Comms with the client..." << std::endl;
 	try
 	{
@@ -128,6 +127,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 			}
 			else {
 				currentStatus = currentStatus.newHandler->handleRequest(clientRequest);
+				std::string resInString = "";
 				for (const auto ch : currentStatus.response)
 				{
 					resInString += ch;
