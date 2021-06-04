@@ -23,9 +23,14 @@ namespace GUI
             return DeserializeMsg<StatusStruct>(msg);
         }
 
-        public static UserStatsStruct DeserializeUserStatsMsg(string msg)
+        public static StatsStruct DeserializeUserStatsMsg(string msg)
         {
-            return DeserializeMsg<UserStatsStruct>(msg);
+            return DeserializeMsg<StatsStruct>(msg);
+        }
+
+        public static ScoresStruct DeserializeScoresMsg(string msg)
+        {
+            return DeserializeMsg<ScoresStruct>(msg);
         }
 
         public struct StatusStruct
@@ -33,9 +38,14 @@ namespace GUI
             public string status;
         }
 
-        public struct UserStatsStruct
+        public struct StatsStruct
         {
             public string UserStatistics;
+        }
+
+        public struct ScoresStruct
+        {
+            public string HighScores;
         }
     }
 }

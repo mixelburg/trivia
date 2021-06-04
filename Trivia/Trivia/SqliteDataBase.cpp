@@ -190,7 +190,7 @@ std::vector<std::string> SqliteDataBase::getBestPlayers() const
 
 	for (const auto& p : temp)
 	{
-		list.emplace_back(p.second + ": " + getUserName(p.first));
+		list.emplace_back(getUserName(p.first) + ":\t" + p.second);
 	}
 
 	return list;
