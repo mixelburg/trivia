@@ -103,7 +103,6 @@ void Communicator::acceptConnection()
 void Communicator::handleNewClient(SOCKET clientSocket)
 {
 	RequestResult currentStatus;
-	std::string resInString = "";
 	std::cout << "Comms with the client..." << std::endl;
 	try
 	{
@@ -112,6 +111,8 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		while (true)
 		{
 			RequestInfo clientRequest = extractReqInfo(clientSocket);
+			std::cout << "id: " << clientRequest.id << std::endl;
+			
 			if (clientRequest.id == LOGIN_CODE)
 			{
 				currentStatus = handleLogin(clientSocket, clientRequest);
@@ -122,6 +123,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 			}
 			else {
 				currentStatus = currentStatus.newHandler->handleRequest(clientRequest);
+				std::string resInString = "";
 				for (const auto ch : currentStatus.response)
 				{
 					resInString += ch;
