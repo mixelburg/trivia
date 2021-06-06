@@ -9,6 +9,11 @@ bool LoginManager::login(const std::string& uname, const std::string& pswd)
 {
 	if (_db->checkPassword(uname, pswd))
 	{
+		for (const auto& user : _users) {
+			if (user.getUname() == uname) {
+				return false;
+			}
+		}
 		_users.emplace_back(LoggedUser(uname, pswd));
 		return true;
 	}
