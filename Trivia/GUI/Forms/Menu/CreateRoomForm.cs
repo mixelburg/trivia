@@ -44,7 +44,7 @@ namespace GUI.Forms.Menu
             }
             else
             {
-                Util.OpenNewForm(new RoomFormAdmin(ref _socket), this);
+                Util.OpenNewForm(new JoinRoomForm(ref _socket), this);
             }
         }
 
