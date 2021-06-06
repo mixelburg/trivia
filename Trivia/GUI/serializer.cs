@@ -115,6 +115,6 @@ namespace GUI
         public static string getStatsCode = "8";
         public static string getHighScoreCode = "7";
         public static string getRoomsCode = "5";
-
+        public static string signOutCode = "4";
     }
 }

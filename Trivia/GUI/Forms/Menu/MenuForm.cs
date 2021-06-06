@@ -17,9 +17,14 @@ namespace GUI
 
         private void signOutButton_Click(object sender, EventArgs e)
         {
-            // TODO: send logout request to server
+            var status = Deserializer.DeserializeStatusMsg(
+                Util.SendRequest(_socket, CodesClass.signOutCode + "0000")
+                ).status;
 
-            Util.OpenNewForm(new LoginForm(ref _socket), this);
+            if (status == "1")
+            { 
+                Util.OpenNewForm(new LoginForm(ref _socket), this);
+            }
         }
 
         private void joinRoomButton_Click(object sender, EventArgs e)

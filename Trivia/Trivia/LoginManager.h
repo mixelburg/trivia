@@ -35,6 +35,8 @@ public:
 	*/
 	const LoggedUser& getUserByName(const std::string& uname) const;
 
+	void removeUserByName(const std::string& uname);
+
 
 private:
 	std::vector<LoggedUser> _users;

@@ -122,6 +122,13 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 			}
 			else if (clientRequest.id == LOGOUT_CODE)
 			{
+				currentStatus = currentStatus.newHandler->handleRequest(clientRequest);
+				std::string resInString = "";
+				for (const auto ch : currentStatus.response)
+				{
+					resInString += ch;
+				}
+				Helper::sendData(clientSocket, resInString);
 				delete currentStatus.newHandler;
 				currentStatus.newHandler = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory);
 			}
