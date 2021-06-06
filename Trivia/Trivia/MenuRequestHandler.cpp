@@ -120,8 +120,8 @@ RequestResult MenuRequestHandler::createRoom(const RequestInfo& reqInfo)
 	roomData.numOfQuestionsInGame = data.questionCount;
 	roomData.timePerQuestion = data.answerTimeout;
 
-	m_roomManager.createRoom(m_user, roomData);
-	const CreateRoomResponse rr(1);
+	int roomId = m_roomManager.createRoom(m_user, roomData);
+	const CreateRoomResponse rr(1, roomId);
 	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
 
 	return res;

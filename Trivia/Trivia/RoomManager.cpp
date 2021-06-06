@@ -1,11 +1,12 @@
 #include "RoomManager.h"
 
-void RoomManager::createRoom(const LoggedUser& owner, RoomData& roomData)
+int RoomManager::createRoom(const LoggedUser& owner, RoomData& roomData)
 {
 	roomData.id = m_currRoomId++;
 	Room newRoom(roomData);
 	newRoom.addUser(owner);
 	m_rooms.emplace(std::make_pair(roomData.id, newRoom));
+	return roomData.id;
 }
 
 void RoomManager::deleteRoom(const int id)
