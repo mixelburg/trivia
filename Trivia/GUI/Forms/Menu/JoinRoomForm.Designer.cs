@@ -28,12 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.backMenuButton = new System.Windows.Forms.Button();
-            this.refreshButton = new System.Windows.Forms.Button();
             this.roomsPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.statusLabel = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.timer4 = new System.Windows.Forms.Timer(this.components);
+            this.timer5 = new System.Windows.Forms.Timer(this.components);
+            this.timer6 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,20 +69,6 @@
             this.backMenuButton.Text = "back";
             this.backMenuButton.UseVisualStyleBackColor = false;
             this.backMenuButton.Click += new System.EventHandler(this.backMenuButton_Click);
-            // 
-            // refreshButton
-            // 
-            this.refreshButton.AccessibleName = "";
-            this.refreshButton.BackColor = System.Drawing.SystemColors.Control;
-            this.refreshButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.refreshButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.refreshButton.Location = new System.Drawing.Point(213, 390);
-            this.refreshButton.Margin = new System.Windows.Forms.Padding(2);
-            this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(85, 37);
-            this.refreshButton.TabIndex = 27;
-            this.refreshButton.Text = "REFRESH";
-            this.refreshButton.UseVisualStyleBackColor = false;
             // 
             // roomsPanel
             // 
@@ -123,7 +115,6 @@
             this.ClientSize = new System.Drawing.Size(512, 531);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.backMenuButton);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -141,9 +132,14 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button backMenuButton;
-        private System.Windows.Forms.Button refreshButton;
         private System.Windows.Forms.FlowLayoutPanel roomsPanel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.Timer timer4;
+        private System.Windows.Forms.Timer timer5;
+        private System.Windows.Forms.Timer timer6;
     }
 }
