@@ -4,18 +4,22 @@ using System.Windows.Forms;
 using System.Windows;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading;
+using System.Windows.Forms;
 namespace GUI.Forms.Menu
 {
     public partial class JoinRoomForm : Form
     {
         private Socket _socket;
-
+        private const int SleepTimeMs = 2000;
         public JoinRoomForm(ref Socket socket)
         {
             _socket = socket;
             InitializeComponent();
-
-
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer.Interval = (SleepTimeMs); // 2 secs
+            timer.Tick += new EventHandler(JoinRoomForm_Load);
+            timer.Start();
         }
 
         private void PrintNum(object sender, EventArgs r)
@@ -30,6 +34,7 @@ namespace GUI.Forms.Menu
 
         private void JoinRoomForm_Load(object sender, EventArgs e)
         {
+            roomsPanel.Controls.Clear();
             int i = 0;
             Deserializer.RoomsStruct rooms = getRooms();
             var namesList = rooms.roomsNames.Split(',');
@@ -77,10 +82,6 @@ namespace GUI.Forms.Menu
                 Util.OpenNewForm(new RoomFormUser(ref _socket), this);
             }
         }
-
-        private void refreshButton_Click(object sender, EventArgs e)
-        {
-            JoinRoomForm_Load(sender, e);
-        }
+    
     }
 }
