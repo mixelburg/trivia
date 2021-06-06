@@ -36,6 +36,9 @@ namespace GUI.Forms.Menu
             var idsList = rooms.roomsIds.Split(',');
             //creating map 
             SortedDictionary<string, int> roomMap = new SortedDictionary<string, int>();
+            if (namesList[0] == "" || idsList[0] == "") {
+                return;
+            }
             for (i = 0; i < namesList.Length; ++i) {
                 roomMap.Add(namesList[i], Int32.Parse(idsList[i])) ;
             }
@@ -73,6 +76,11 @@ namespace GUI.Forms.Menu
             else {
                 Util.OpenNewForm(new RoomFormUser(ref _socket), this);
             }
+        }
+
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+            JoinRoomForm_Load(sender, e);
         }
     }
 }

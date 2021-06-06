@@ -77,6 +77,7 @@
             this.refreshButton.TabIndex = 27;
             this.refreshButton.Text = "REFRESH";
             this.refreshButton.UseVisualStyleBackColor = false;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
             // roomsPanel
             // 
