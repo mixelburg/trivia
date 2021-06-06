@@ -56,9 +56,9 @@ namespace GUI
             PlayersStruct serverRes = JsonConvert.DeserializeObject<PlayersStruct>(res);
             return serverRes;
         }
-        public static CreateRoomStruct DeserializeCreateRoomMsg(ref string res) {
+        public static RoomIdStruct DeserializeRoomMsg(ref string res) {
             res = res.Substring(startIndex);
-            CreateRoomStruct serverRes = JsonConvert.DeserializeObject<CreateRoomStruct>(res);
+            RoomIdStruct serverRes = JsonConvert.DeserializeObject<RoomIdStruct>(res);
             return serverRes;
         }
         public struct StatsStruct
@@ -83,7 +83,7 @@ namespace GUI
         public struct PlayersStruct {
             public string PlayersInRoom;
         }
-        public struct CreateRoomStruct {
+        public struct RoomIdStruct {
             public string status;
             public int roomId;
         }

@@ -214,3 +214,28 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
 	//returning the complete message
 	return buffer;
 }
+
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const JoinRoomResponse& joinRoomResponse)
+{
+	std::vector<unsigned char> buffer;
+
+	//inserting the message code
+	buffer.push_back(joinRoomResponse.code);
+
+	//create the json object
+	Json::Value root;
+
+	root["status"] = std::to_string(joinRoomResponse.status);
+	root["roomId"] = joinRoomResponse.roomId;
+	std::string out = root.toStyledString();
+
+	//insert the data' size + the data
+	std::string dataSize = Helper::getPaddedNumber(out.length(), LEN_SIZE);
+	for (const auto ch : dataSize + out)
+	{
+		buffer.push_back(ch);
+	}
+
+	//returning the complete message
+	return buffer;
+}

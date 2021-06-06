@@ -35,7 +35,7 @@ namespace GUI.Forms.Menu
 
             var msg = Util.SendRequest(_socket, request);
 
-            var serverResponse = Deserializer.DeserializeCreateRoomMsg(ref msg);
+            var serverResponse = Deserializer.DeserializeRoomMsg(ref msg);
             //act by server's answer
             if (serverResponse.status == "0") // fail
             {
