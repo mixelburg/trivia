@@ -97,9 +97,10 @@ struct JoinRoomResponse : public IStatusResponse
 
 struct CreateRoomResponse : public IStatusResponse
 {
-	CreateRoomResponse(unsigned int status) : IStatusResponse(status, CREATE_ROOM_CODE)
+	CreateRoomResponse(unsigned int status, int id) : IStatusResponse(status, CREATE_ROOM_CODE), roomId(id)
 	{
 	}
+	int roomId;
 };
 
 class JsonResponsePacketSerializer
@@ -141,4 +142,10 @@ public:
 	output: buffer with the  high scores response
 	*/
 	static std::vector<unsigned char> serializeResponse(const GetHighScoreResponse& highScoresResponse);
+	/*
+	Function serialize the create room response to buffer
+	input: struct of the create room response
+	output: buffer with the  create room response
+	*/
+	static std::vector<unsigned char> serializeResponse(const CreateRoomResponse& createRoomResponse);
 };

@@ -189,3 +189,28 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(
 	//returning the complete message
 	return buffer;
 }
+
+std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const CreateRoomResponse& createRoomResponse)
+{
+	std::vector<unsigned char> buffer;
+
+	//inserting the message code
+	buffer.push_back(createRoomResponse.code);
+
+	//create the json object
+	Json::Value root;
+
+	root["status"] = std::to_string(createRoomResponse.status);
+	root["roomId"] = createRoomResponse.roomId;
+	std::string out = root.toStyledString();
+
+	//insert the data' size + the data
+	std::string dataSize = Helper::getPaddedNumber(out.length(), LEN_SIZE);
+	for (const auto ch : dataSize + out)
+	{
+		buffer.push_back(ch);
+	}
+
+	//returning the complete message
+	return buffer;
+}

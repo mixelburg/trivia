@@ -35,7 +35,7 @@ namespace GUI.Forms.Menu
 
             var msg = Util.SendRequest(_socket, request);
 
-            var serverResponse = Deserializer.DeserializeStatusMsg(msg);
+            var serverResponse = Deserializer.DeserializeCreateRoomMsg(ref msg);
             //act by server's answer
             if (serverResponse.status == "0") // fail
             {
@@ -44,7 +44,7 @@ namespace GUI.Forms.Menu
             }
             else
             {
-                Util.OpenNewForm(new RoomFormAdmin(ref _socket), this);
+                Util.OpenNewForm(new RoomFormAdmin(ref _socket, serverResponse.roomId), this);
             }
         }
 
