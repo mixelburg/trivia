@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 ﻿using System.Resources;
 using Newtonsoft.Json;
+using System;
+using System.Net.Sockets;
+using System.Windows.Forms;
+using System.Windows;
+using System.Collections.Generic;
 
 namespace GUI
 {
@@ -41,6 +46,7 @@ namespace GUI
         /// <returns></returns>
         public static RoomsStruct DeserializeRoomsMsg(ref string res) {
             res = res.Substring(startIndex);
+            Console.WriteLine(res);
             RoomsStruct serverRes = JsonConvert.DeserializeObject<RoomsStruct>(res);
 
             return serverRes;
@@ -56,7 +62,8 @@ namespace GUI
         public struct RoomsStruct
         {
             public string status;
-            public List<string> roomsNames;
+            public string roomsNames;
+            public string roomsIds;
         }
 
         public struct ScoresStruct

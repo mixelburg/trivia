@@ -63,18 +63,23 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
 	//inserting the message code
 	buffer.push_back(roomsResponse.code);
 
-	//get the names of the rooms from the rooms vector
+	//get the names of the rooms + their id from the rooms vector
 	std::string roomsNames;
+	std::string roomsIds;
 	for (const auto room : roomsResponse.rooms)
 	{
 		roomsNames += room.name + ", ";
+		roomsIds += std::to_string(room.id) + ", ";
 	}
 	roomsNames = roomsNames.substr(0, roomsNames.size() - CHARS_TO_REMOVE);
+	roomsIds = roomsIds.substr(0, roomsIds.size() - CHARS_TO_REMOVE);
+
 	//create the json object
 	Json::Value root;
 
 	root["status"] = std::to_string(roomsResponse.status);
-	root["rooms"] = roomsNames;
+	root["roomsNames"] = roomsNames;
+	root["roomsIds"] = roomsIds;
 	std::string out = root.toStyledString();
 
 	//insert the data' size + the data
