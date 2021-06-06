@@ -27,7 +27,7 @@ namespace GUI
 
             var msg = Util.SendRequest(_socket, request);
 
-            var serverResponse = Deserializer.DeserializeStatusMsg(ref msg);
+            var serverResponse = Deserializer.DeserializeStatusMsg(msg);
             //act by server's answer
             if (serverResponse.status == "0") // fail
             {

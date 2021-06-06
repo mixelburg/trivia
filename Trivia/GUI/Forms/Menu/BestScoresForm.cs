@@ -18,5 +18,14 @@ namespace GUI.Forms.Menu
         {
             Util.OpenNewForm(new MenuForm(ref _socket), this);
         }
+
+        private void BestScoresForm_Load(object sender, EventArgs e)
+        {
+            var stats = Deserializer.DeserializeScoresMsg(
+                Util.SendRequest(_socket, CodesClass.getHighScoreCode + "0000")
+            ).HighScores.Split(',');
+
+            bestScoresListBox.DataSource = stats;
+        }
     }
 }

@@ -103,14 +103,16 @@ namespace GUI
         {
             return SerializeRequest(ref req, ref CodesClass.getPlayersCode);
         }
+    }
 
-        private struct CodesClass
-        {
-            public static string loginCode = "1";
-            public static string signupCode = "2";
-            public static string createRoomCode = "A";
-            public static string joinRoomCode = "9";
-            public static string getPlayersCode = "6";
-        }
+    public struct CodesClass
+    {
+        public static string loginCode = "1";
+        public static string signupCode = "2";
+        public static string createRoomCode = "A";
+        public static string joinRoomCode = "9";
+        public static string getPlayersCode = "6";
+        public static string getStatsCode = "8";
+        public static string getHighScoreCode = "7";
     }
 }

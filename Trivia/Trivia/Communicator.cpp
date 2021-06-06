@@ -14,7 +14,8 @@
 #define LOGIN "login"
 #define MENU "menu"
 
-Communicator::Communicator(RequestHandlerFactory& handlerFactory, IDataBase& db) : m_handlerFactory(handlerFactory), m_dataBase(db), m_loginManager(&db)
+Communicator::Communicator(RequestHandlerFactory& handlerFactory, IDataBase& db) : m_handlerFactory(handlerFactory),
+	m_dataBase(db), m_loginManager(&db)
 {
 	//setting the socket to communicate with the clients
 	m_serverSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -103,7 +104,6 @@ void Communicator::acceptConnection()
 void Communicator::handleNewClient(SOCKET clientSocket)
 {
 	RequestResult currentStatus;
-	std::string resInString = "";
 	std::cout << "Comms with the client..." << std::endl;
 	try
 	{
@@ -120,8 +120,14 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 			{
 				currentStatus = handleSignup(clientSocket, clientRequest);
 			}
+			else if (clientRequest.id == LOGOUT_CODE)
+			{
+				delete currentStatus.newHandler;
+				currentStatus.newHandler = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory);
+			}
 			else {
 				currentStatus = currentStatus.newHandler->handleRequest(clientRequest);
+				std::string resInString = "";
 				for (const auto ch : currentStatus.response)
 				{
 					resInString += ch;
