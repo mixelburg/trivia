@@ -51,4 +51,5 @@ private:
 	RequestResult getHighScore(const RequestInfo& reqInfo);
 	RequestResult joinRoom(const RequestInfo& reqInfo);
 	RequestResult createRoom(const RequestInfo& reqInfo);
+	RequestResult logout();
 };

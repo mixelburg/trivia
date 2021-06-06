@@ -44,3 +44,19 @@ const LoggedUser& LoginManager::getUserByName(const std::string& uname) const
 	LoggedUser invalidUser("", "");
 	return invalidUser;
 }
+
+void LoginManager::removeUserByName(const std::string& uname)
+{
+	const auto it =
+		std::find_if(_users.begin(), _users.end(),
+			[&uname](const LoggedUser& obj) {return obj.getUname() == uname; });
+
+	if (it != _users.end())
+	{
+		// found element. it is an iterator to the first matching element.
+		// if you really need the index, you can also get it:
+		auto index = std::distance(_users.begin(), it);
+	}
+
+	_users.erase(it);
+}

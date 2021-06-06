@@ -29,6 +29,8 @@ RequestResult MenuRequestHandler::handleRequest(const RequestInfo& reqInfo)
 {
 	switch (reqInfo.id)
 	{
+	case LOGOUT_CODE:
+		return logout();
 	case GET_ROOMS_CODE:
 		return getRooms(reqInfo);
 	case GET_PLAYERS_CODE:
@@ -124,5 +126,16 @@ RequestResult MenuRequestHandler::createRoom(const RequestInfo& reqInfo)
 	const CreateRoomResponse rr(1, roomId);
 	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
 
+	return res;
+}
+
+RequestResult MenuRequestHandler::logout()
+{
+	m_loginManager.removeUserByName(m_user.getUname());
+	RequestResult res;
+	res.newHandler = this;
+
+	res.response = JsonResponsePacketSerializer::serializeResponse(IStatusResponse(1, 4));
+	
 	return res;
 }

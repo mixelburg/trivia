@@ -83,10 +83,10 @@ std::list<Question> SqliteDataBase::getQuestion(const int num) const
 
 float SqliteDataBase::getPlayerAverageAnswerTime(const std::string& uname) const
 {
-	int avgTime = false;
+	float avgTime = 0;
 	auto callback = [](void* data, int argc, char** argv, char** azColName)
 	{
-		*static_cast<int*>(data) = std::stoi(argv[0]);
+		*static_cast<float*>(data) = std::stoi(argv[0]);
 		return 0;
 	};
 
@@ -188,9 +188,10 @@ std::vector<std::string> SqliteDataBase::getBestPlayers() const
 		std::cout << errMessage << std::endl;
 	}
 
+	list.reserve(temp.size());
 	for (const auto& p : temp)
 	{
-		list.emplace_back(getUserName(p.first) + ":\t" + p.second);
+		list.emplace_back(getUserName(p.first) + "\t" + p.second);
 	}
 
 	return list;
