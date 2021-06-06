@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-=======
 ﻿using System.Resources;
 using Newtonsoft.Json;
->>>>>>> 06777027518b7fb0ac77a6f112944ad1a371c694
 
 namespace GUI
 {
@@ -25,10 +22,6 @@ namespace GUI
         /// <returns></returns>
         public static StatusStruct DeserializeStatusMsg(string msg)
         {
-<<<<<<< HEAD
-            res = res.Substring(startIndex);
-            StatusStruct serverRes = JsonConvert.DeserializeObject<StatusStruct>(res);
-=======
             return DeserializeMsg<StatusStruct>(msg);
         }
 
@@ -36,7 +29,6 @@ namespace GUI
         {
             return DeserializeMsg<StatsStruct>(msg);
         }
->>>>>>> 06777027518b7fb0ac77a6f112944ad1a371c694
 
         public static ScoresStruct DeserializeScoresMsg(string msg)
         {
@@ -53,25 +45,23 @@ namespace GUI
 
             return serverRes;
         }
+        public struct StatsStruct
+        {
+            public string UserStatistics;
+        }
         public struct StatusStruct
         {
             public string status;
         }
-<<<<<<< HEAD
-        public struct RoomsStruct {
-            public string status; 
-            public List<string> roomsNames;
-=======
-
-        public struct StatsStruct
+        public struct RoomsStruct
         {
-            public string UserStatistics;
+            public string status;
+            public List<string> roomsNames;
         }
 
         public struct ScoresStruct
         {
             public string HighScores;
->>>>>>> 06777027518b7fb0ac77a6f112944ad1a371c694
         }
     }
 }
