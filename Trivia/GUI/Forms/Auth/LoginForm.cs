@@ -44,5 +44,10 @@ namespace GUI
         {
             Util.OpenNewForm(new SignupForm(ref _socket), this);
         }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

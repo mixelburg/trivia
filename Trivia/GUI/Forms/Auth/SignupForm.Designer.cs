@@ -53,7 +53,7 @@
             this.SignupLabes.Name = "SignupLabes";
             this.SignupLabes.Size = new System.Drawing.Size(380, 79);
             this.SignupLabes.TabIndex = 6;
-            this.SignupLabes.Text = "Sing up";
+            this.SignupLabes.Text = "Sign up";
             this.SignupLabes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.SignupLabes.UseMnemonic = false;
             // 
@@ -61,7 +61,7 @@
             // 
             this.pictureBoxPass.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPass.Image")));
             this.pictureBoxPass.Location = new System.Drawing.Point(49, 171);
-            this.pictureBoxPass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBoxPass.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBoxPass.Name = "pictureBoxPass";
             this.pictureBoxPass.Size = new System.Drawing.Size(48, 52);
             this.pictureBoxPass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -72,7 +72,7 @@
             // 
             this.pictureBoxUname.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxUname.Image")));
             this.pictureBoxUname.Location = new System.Drawing.Point(49, 109);
-            this.pictureBoxUname.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBoxUname.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBoxUname.Name = "pictureBoxUname";
             this.pictureBoxUname.Size = new System.Drawing.Size(48, 52);
             this.pictureBoxUname.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -85,7 +85,7 @@
             this.textBoxPass.Location = new System.Drawing.Point(101, 171);
             this.textBoxPass.Margin = new System.Windows.Forms.Padding(2, 8, 2, 2);
             this.textBoxPass.Name = "textBoxPass";
-            this.textBoxPass.Size = new System.Drawing.Size(224, 53);
+            this.textBoxPass.Size = new System.Drawing.Size(227, 53);
             this.textBoxPass.TabIndex = 8;
             this.textBoxPass.UseSystemPasswordChar = true;
             // 
@@ -93,9 +93,9 @@
             // 
             this.textBoxUname.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxUname.Location = new System.Drawing.Point(101, 109);
-            this.textBoxUname.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxUname.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxUname.Name = "textBoxUname";
-            this.textBoxUname.Size = new System.Drawing.Size(224, 53);
+            this.textBoxUname.Size = new System.Drawing.Size(227, 53);
             this.textBoxUname.TabIndex = 7;
             // 
             // pictureBox1
@@ -114,8 +114,8 @@
             this.textBoxMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxMail.Location = new System.Drawing.Point(101, 234);
             this.textBoxMail.Margin = new System.Windows.Forms.Padding(2, 8, 2, 2);
-            this.textBoxMail.Name = "textBox1";
-            this.textBoxMail.Size = new System.Drawing.Size(224, 53);
+            this.textBoxMail.Name = "textBoxMail";
+            this.textBoxMail.Size = new System.Drawing.Size(227, 53);
             this.textBoxMail.TabIndex = 11;
             this.textBoxMail.UseSystemPasswordChar = true;
             // 
@@ -125,7 +125,7 @@
             this.signupButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.signupButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.signupButton.Location = new System.Drawing.Point(140, 323);
-            this.signupButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.signupButton.Margin = new System.Windows.Forms.Padding(2);
             this.signupButton.Name = "signupButton";
             this.signupButton.Size = new System.Drawing.Size(106, 41);
             this.signupButton.TabIndex = 13;
@@ -139,9 +139,9 @@
             this.loginButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.loginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.loginButton.Location = new System.Drawing.Point(286, 0);
-            this.loginButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.loginButton.Margin = new System.Windows.Forms.Padding(2);
             this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(93, 37);
+            this.loginButton.Size = new System.Drawing.Size(96, 37);
             this.loginButton.TabIndex = 25;
             this.loginButton.Text = "login";
             this.loginButton.UseVisualStyleBackColor = true;
@@ -149,12 +149,13 @@
             // 
             // statusLabel
             // 
-            this.statusLabel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.statusLabel.BackColor = System.Drawing.Color.DarkCyan;
             this.statusLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.statusLabel.Location = new System.Drawing.Point(0, 380);
             this.statusLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.statusLabel.Name = "statusLabel";
+            this.statusLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.statusLabel.Size = new System.Drawing.Size(380, 115);
             this.statusLabel.TabIndex = 26;
             this.statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -163,7 +164,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackColor = System.Drawing.Color.Teal;
             this.ClientSize = new System.Drawing.Size(380, 495);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.loginButton);
@@ -175,7 +176,7 @@
             this.Controls.Add(this.textBoxPass);
             this.Controls.Add(this.textBoxUname);
             this.Controls.Add(this.SignupLabes);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SignupForm";
             this.Text = "SignupForm";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPass)).EndInit();
