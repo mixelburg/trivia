@@ -93,6 +93,7 @@ struct JoinRoomResponse : public IStatusResponse
 	JoinRoomResponse(unsigned int status) : IStatusResponse(status, JOIN_ROOM_CODE)
 	{
 	}
+	int roomId;
 };
 
 struct CreateRoomResponse : public IStatusResponse
@@ -148,4 +149,10 @@ public:
 	output: buffer with the  create room response
 	*/
 	static std::vector<unsigned char> serializeResponse(const CreateRoomResponse& createRoomResponse);
+	/*
+	Function serialize the join room response to buffer
+	input: struct of the join room response
+	output: buffer with the  join room response
+	*/
+	static std::vector<unsigned char> serializeResponse(const JoinRoomResponse& joinRoomResponse);
 };

@@ -71,7 +71,7 @@ namespace GUI.Forms.Menu
             };
             string reqToServer = Serializer.SerializeJoinRoomRequest(ref joinRoomData);
             string serverResbeforDesi = Util.SendRequest(_socket, reqToServer);
-            Deserializer.StatusStruct serverRes = Deserializer.DeserializeStatusMsg(serverResbeforDesi);
+            Deserializer.RoomIdStruct serverRes = Deserializer.DeserializeRoomMsg(ref serverResbeforDesi);
             // open roomMember form by id 
             if (serverRes.status == "0")
             {
@@ -79,7 +79,7 @@ namespace GUI.Forms.Menu
                 statusLabel.ForeColor = Color.Red;
             }
             else {
-                Util.OpenNewForm(new RoomFormUser(ref _socket), this);
+                Util.OpenNewForm(new RoomFormUser(ref _socket, serverRes.roomId), this);
             }
         }
     
