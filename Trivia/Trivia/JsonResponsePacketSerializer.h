@@ -155,4 +155,11 @@ public:
 	output: buffer with the  join room response
 	*/
 	static std::vector<unsigned char> serializeResponse(const JoinRoomResponse& joinRoomResponse);
+private:
+	/*
+	Function inserts into buffer the chars from a given string
+	input: reference to the buffer, reference to the soruce string
+	output: none
+	*/
+	static void insertToBuffer(std::vector<unsigned char>& buff, std::string& src);
 };
