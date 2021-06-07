@@ -114,6 +114,12 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 	}
 	catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
+		if (currentStatus.newHandler != nullptr)
+		{
+			RequestInfo info;
+			info.id = '4';
+			currentStatus.newHandler->handleRequest(info);
+		}
 	}
 
 }
