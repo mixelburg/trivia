@@ -21,12 +21,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
 	root["message"] = errResponse.message;
 	std::string out = root.toStyledString();
 
-	//insert the data' size + the data
-	std::string dataSize = Helper::getPaddedNumber(out.length(), LEN_SIZE);
-	for (const auto ch : dataSize + out)
-	{
-		buffer.push_back(ch);
-	}
+	insertToBuffer(buffer, out);
 
 	//returning the complete message
 	return buffer;
@@ -45,12 +40,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
 	root["status"] = std::to_string(statusResponse.status);
 	std::string out = root.toStyledString();
 
-	//insert the data' size + the data
-	std::string dataSize = Helper::getPaddedNumber(out.length(), LEN_SIZE);
-	for (const auto ch : dataSize + out)
-	{
-		buffer.push_back(ch);
-	}
+	insertToBuffer(buffer, out);
 
 	//returning the complete message
 	return buffer;
@@ -82,12 +72,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
 	root["roomsIds"] = roomsIds;
 	std::string out = root.toStyledString();
 
-	//insert the data' size + the data
-	std::string dataSize = Helper::getPaddedNumber(out.length(), LEN_SIZE);
-	for (const auto ch : dataSize + out)
-	{
-		buffer.push_back(ch);
-	}
+	insertToBuffer(buffer, out);
 
 	//returning the complete message
 	return buffer;
@@ -114,12 +99,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(
 	root["PlayersInRoom"] = playersNames;
 	std::string out = root.toStyledString();
 
-	//insert the data' size + the data
-	std::string dataSize = Helper::getPaddedNumber(out.length(), LEN_SIZE);
-	for (const auto ch : dataSize + out)
-	{
-		buffer.push_back(ch);
-	}
+	insertToBuffer(buffer, out);
 
 	//returning the complete message
 	return buffer;
@@ -147,12 +127,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(
 	root["UserStatistics"] = statsInString;
 	std::string out = root.toStyledString();
 
-	//insert the data' size + the data
-	std::string dataSize = Helper::getPaddedNumber(out.length(), LEN_SIZE);
-	for (const auto ch : dataSize + out)
-	{
-		buffer.push_back(ch);
-	}
+	insertToBuffer(buffer, out);
 
 	//returning the complete message
 	return buffer;
@@ -179,12 +154,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(
 	root["HighScores"] = scoreInString;
 	std::string out = root.toStyledString();
 
-	//insert the data' size + the data
-	std::string dataSize = Helper::getPaddedNumber(out.length(), LEN_SIZE);
-	for (const auto ch : dataSize + out)
-	{
-		buffer.push_back(ch);
-	}
+	insertToBuffer(buffer, out);
 
 	//returning the complete message
 	return buffer;
@@ -204,12 +174,7 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
 	root["roomId"] = createRoomResponse.roomId;
 	std::string out = root.toStyledString();
 
-	//insert the data' size + the data
-	std::string dataSize = Helper::getPaddedNumber(out.length(), LEN_SIZE);
-	for (const auto ch : dataSize + out)
-	{
-		buffer.push_back(ch);
-	}
+	insertToBuffer(buffer, out);
 
 	//returning the complete message
 	return buffer;
@@ -228,14 +193,19 @@ std::vector<unsigned char> JsonResponsePacketSerializer::serializeResponse(const
 	root["status"] = std::to_string(joinRoomResponse.status);
 	root["roomId"] = joinRoomResponse.roomId;
 	std::string out = root.toStyledString();
-
-	//insert the data' size + the data
-	std::string dataSize = Helper::getPaddedNumber(out.length(), LEN_SIZE);
-	for (const auto ch : dataSize + out)
-	{
-		buffer.push_back(ch);
-	}
+	
+	insertToBuffer(buffer, out);
 
 	//returning the complete message
 	return buffer;
+}
+
+void JsonResponsePacketSerializer::insertToBuffer(std::vector<unsigned char>& buff, std::string& src)
+{
+	//insert the data' size + the data
+	std::string dataSize = Helper::getPaddedNumber(src.length(), LEN_SIZE);
+	for (const auto ch : dataSize + src)
+	{
+		buff.push_back(ch);
+	}
 }
