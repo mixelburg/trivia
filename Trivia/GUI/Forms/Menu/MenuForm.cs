@@ -46,5 +46,10 @@ namespace GUI
         {
             Util.OpenNewForm(new BestScoresForm(ref _socket), this);
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

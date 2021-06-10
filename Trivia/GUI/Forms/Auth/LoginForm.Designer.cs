@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SignupForm));
             this.loginButton = new System.Windows.Forms.Button();
             this.pictureBoxPass = new System.Windows.Forms.PictureBox();
             this.pictureBoxUname = new System.Windows.Forms.PictureBox();
@@ -49,7 +49,7 @@
             this.loginButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.loginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.loginButton.Location = new System.Drawing.Point(142, 271);
-            this.loginButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.loginButton.Margin = new System.Windows.Forms.Padding(2);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(106, 41);
             this.loginButton.TabIndex = 21;
@@ -59,46 +59,19 @@
             // 
             // pictureBoxPass
             // 
-            this.pictureBoxPass.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPass.Image")));
-            this.pictureBoxPass.Location = new System.Drawing.Point(49, 173);
-            this.pictureBoxPass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBoxPass.Name = "pictureBoxPass";
-            this.pictureBoxPass.Size = new System.Drawing.Size(48, 52);
-            this.pictureBoxPass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxPass.TabIndex = 18;
-            this.pictureBoxPass.TabStop = false;
+            Initializer.initialPassPic(ref this.pictureBoxPass, ref resources);
             // 
             // pictureBoxUname
             // 
-            this.pictureBoxUname.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxUname.Image")));
-            this.pictureBoxUname.Location = new System.Drawing.Point(49, 110);
-            this.pictureBoxUname.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBoxUname.Name = "pictureBoxUname";
-            this.pictureBoxUname.Size = new System.Drawing.Size(48, 52);
-            this.pictureBoxUname.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxUname.TabIndex = 17;
-            this.pictureBoxUname.TabStop = false;
+            Initializer.initialUnamePic(ref this.pictureBoxUname, ref resources);
             // 
             // textBoxPass
             // 
-            this.textBoxPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxPass.Location = new System.Drawing.Point(101, 173);
-            this.textBoxPass.Margin = new System.Windows.Forms.Padding(2, 8, 2, 2);
-            this.textBoxPass.Name = "textBoxPass";
-            this.textBoxPass.Size = new System.Drawing.Size(224, 53);
-            this.textBoxPass.TabIndex = 16;
-            this.textBoxPass.Text = "1111";
-            this.textBoxPass.UseSystemPasswordChar = true;
+            Initializer.initialPassTextBox(ref this.textBoxPass);
             // 
             // textBoxUname
             // 
-            this.textBoxUname.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxUname.Location = new System.Drawing.Point(101, 110);
-            this.textBoxUname.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxUname.Name = "textBoxUname";
-            this.textBoxUname.Size = new System.Drawing.Size(224, 53);
-            this.textBoxUname.TabIndex = 15;
-            this.textBoxUname.Text = "Ivan";
+            Initializer.initialUnameTextBox(ref this.textBoxUname);
             // 
             // SignupLabes
             // 
@@ -112,6 +85,7 @@
             this.SignupLabes.Text = "Login";
             this.SignupLabes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.SignupLabes.UseMnemonic = false;
+            this.SignupLabes.Click += new System.EventHandler(this.SignupLabes_Click);
             // 
             // statusLabel
             // 
@@ -131,7 +105,7 @@
             this.panel1.Controls.Add(this.statusLabel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 380);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(380, 115);
             this.panel1.TabIndex = 23;
@@ -143,7 +117,7 @@
             this.signupButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.signupButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.signupButton.Location = new System.Drawing.Point(286, 0);
-            this.signupButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.signupButton.Margin = new System.Windows.Forms.Padding(2);
             this.signupButton.Name = "signupButton";
             this.signupButton.Size = new System.Drawing.Size(93, 37);
             this.signupButton.TabIndex = 24;
@@ -165,7 +139,7 @@
             this.Controls.Add(this.textBoxPass);
             this.Controls.Add(this.textBoxUname);
             this.Controls.Add(this.SignupLabes);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LoginForm";
             this.Text = "NewLoginForm";
             this.Load += new System.EventHandler(this.LoginForm_Load);

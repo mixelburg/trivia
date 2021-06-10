@@ -49,5 +49,15 @@ namespace GUI
         {
 
         }
+
+        private void textBoxUname_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SignupLabes_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

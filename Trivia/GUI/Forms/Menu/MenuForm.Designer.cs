@@ -102,17 +102,8 @@
             this.bestScoresButton.Click += new System.EventHandler(this.bestScoresButton_Click);
             // 
             // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Font = new System.Drawing.Font("Mongolian Baiti", 29.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(512, 54);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "The Trivia";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            //             
+            Initializer.initialTriviaLabel(ref label1);
             // 
             // MenuForm
             // 
@@ -126,7 +117,7 @@
             this.Controls.Add(this.createRoomButton);
             this.Controls.Add(this.joinRoomButton);
             this.Controls.Add(this.signOutButton);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MenuForm";
             this.Text = "Form1";
             this.ResumeLayout(false);
