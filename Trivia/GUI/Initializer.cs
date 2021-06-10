@@ -75,6 +75,13 @@ namespace GUI
             label.Text = "The Trivia";
             label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         }
+        public static void initialMenuButton(ref Button button) {
+            button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            button.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            button.Margin = new System.Windows.Forms.Padding(2, 8, 2, 2);
+            button.Size = new System.Drawing.Size(246, 46);
+            button.UseVisualStyleBackColor = false;
+        }
         
     }
 }

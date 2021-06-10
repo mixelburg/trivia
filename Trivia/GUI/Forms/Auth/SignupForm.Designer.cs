@@ -59,44 +59,19 @@
             // 
             // pictureBoxPass
             // 
-            this.pictureBoxPass.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPass.Image")));
-            this.pictureBoxPass.Location = new System.Drawing.Point(49, 171);
-            this.pictureBoxPass.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBoxPass.Name = "pictureBoxPass";
-            this.pictureBoxPass.Size = new System.Drawing.Size(48, 52);
-            this.pictureBoxPass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxPass.TabIndex = 10;
-            this.pictureBoxPass.TabStop = false;
+            Initializer.initialPassPic(ref this.pictureBoxPass, ref resources);
             // 
             // pictureBoxUname
             // 
-            this.pictureBoxUname.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxUname.Image")));
-            this.pictureBoxUname.Location = new System.Drawing.Point(49, 109);
-            this.pictureBoxUname.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBoxUname.Name = "pictureBoxUname";
-            this.pictureBoxUname.Size = new System.Drawing.Size(48, 52);
-            this.pictureBoxUname.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxUname.TabIndex = 9;
-            this.pictureBoxUname.TabStop = false;
+            Initializer.initialUnamePic(ref this.pictureBoxUname, ref resources);
             // 
             // textBoxPass
             // 
-            this.textBoxPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxPass.Location = new System.Drawing.Point(101, 171);
-            this.textBoxPass.Margin = new System.Windows.Forms.Padding(2, 8, 2, 2);
-            this.textBoxPass.Name = "textBoxPass";
-            this.textBoxPass.Size = new System.Drawing.Size(227, 53);
-            this.textBoxPass.TabIndex = 8;
-            this.textBoxPass.UseSystemPasswordChar = true;
+            Initializer.initialPassTextBox(ref this.textBoxPass);
             // 
             // textBoxUname
             // 
-            this.textBoxUname.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxUname.Location = new System.Drawing.Point(101, 109);
-            this.textBoxUname.Margin = new System.Windows.Forms.Padding(2);
-            this.textBoxUname.Name = "textBoxUname";
-            this.textBoxUname.Size = new System.Drawing.Size(227, 53);
-            this.textBoxUname.TabIndex = 7;
+            Initializer.initialUnameTextBox(ref this.textBoxUname);
             // 
             // pictureBox1
             // 
