@@ -15,7 +15,7 @@
 #define MENU "menu"
 
 Communicator::Communicator(RequestHandlerFactory& handlerFactory, IDataBase& db) : m_handlerFactory(handlerFactory),
-	m_dataBase(db), m_loginManager(&db)
+m_dataBase(db), m_loginManager(&db)
 {
 	//setting the socket to communicate with the clients
 	m_serverSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -53,7 +53,7 @@ void Communicator::startHandleRequests(IDataBase& db)
 
 void Communicator::bindAndListen()
 {
-	struct sockaddr_in sa = {0};
+	struct sockaddr_in sa = { 0 };
 
 	sa.sin_port = htons(LISTEN_PORT); // port that server will listen for
 	sa.sin_family = AF_INET; // must be AF_INET
@@ -149,15 +149,21 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 	}
 }
 
-		// splitting the request of the client
-		RequestInfo clientRequest;
-		clientRequest.id = Helper::getStringPartFromSocket(clientSocket, CODE_LEN)[0];
-		clientRequest.receivalTime = time(NULL);
-		auto reqDataLen = Helper::getIntPartFromSocket(clientSocket, LEN_SIZE);
-		auto jsonData = Helper::getStringPartFromSocket(clientSocket, reqDataLen);
-		for (const auto ch : jsonData) {
-			clientRequest.buffer.push_back(ch);
-		}
+RequestInfo Communicator::extractReqInfo(SOCKET clientSocket)
+{
+	RequestInfo clientRequest;
+	// splitting the request of the client
+
+	clientRequest.id = Helper::getStringPartFromSocket(clientSocket, CODE_LEN)[0];
+	clientRequest.receivalTime = time(nullptr);
+	auto reqDataLen = Helper::getIntPartFromSocket(clientSocket, LEN_SIZE);
+	auto jsonData = Helper::getStringPartFromSocket(clientSocket, reqDataLen);
+	for (const auto ch : jsonData)
+	{
+		clientRequest.buffer.push_back(ch);
+	}
+	return clientRequest;
+}
 
 void Communicator::welcome(SOCKET clientSocket)
 {
@@ -173,7 +179,7 @@ RequestResult Communicator::handleLogin(SOCKET clientSocket, RequestInfo& client
 	RequestResult reqRes = (*s).handleRequest(clientRequest);
 	LoginResponse resStruct(reqRes.response[0]);
 	// TODO: change handler
-	reqRes.newHandler = m_handlerFactory.createMenuRequestHandler(s->getNewUser(),  m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory, m_loginManager);
+	reqRes.newHandler = m_handlerFactory.createMenuRequestHandler(s->getNewUser(), m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory, m_loginManager);
 	delete s; // deleteing old handler
 	const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
 	std::string resInString;
@@ -194,7 +200,7 @@ RequestResult Communicator::handleSignup(SOCKET clientSocket, RequestInfo& clien
 	reqRes.newHandler = s;
 	SignupResponse resStruct(reqRes.response[0]);
 	// TODO: change handler
-	reqRes.newHandler = m_handlerFactory.createMenuRequestHandler(s->getNewUser(),  m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory, m_loginManager);
+	reqRes.newHandler = m_handlerFactory.createMenuRequestHandler(s->getNewUser(), m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory, m_loginManager);
 	delete s;// deleteing old handler
 	const auto res = JsonResponsePacketSerializer::serializeResponse(resStruct);
 	std::string resInString;

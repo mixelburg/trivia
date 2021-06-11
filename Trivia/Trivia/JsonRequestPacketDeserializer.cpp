@@ -49,9 +49,9 @@ JoinRoomRequest JsonRequestPacketDeserializer::deserializeJoinRoomRequest(const 
 	return joinRoomReq;
 }
 
-const Json::Value JsonRequestPacketDeserializer::parseToJson(const std::vector<unsigned char>& buffer)
+CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(const std::vector<unsigned char>& buffer)
 {
-
+	CreateRoomRequest createRoomReq;
 	const Json::Value json = parseToJson(buffer);
 
 	createRoomReq.roomName = json.get("name", NULL).asString();
