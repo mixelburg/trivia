@@ -17,7 +17,7 @@ public:
 	std::vector<std::string> getAnswers() const;
 	void setAnswers(std::vector<std::string> answers);
 	int getAnswer() const;
-	void setAnswer(const int answer);
+	void setAnswer(int answer);
 private:
 	std::string _question;
 	std::vector<std::string> _answers;

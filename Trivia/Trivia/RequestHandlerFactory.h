@@ -12,18 +12,19 @@ public:
 	Function creats a RequestHandlerFactory object
 	input + output: none
 	*/
-	RequestHandlerFactory(IDataBase* database, LoginManager* loginManager, RoomManager* roomManager, StatisticsManager* statisticsManager);
+	RequestHandlerFactory(IDataBase* database, LoginManager* loginManager, RoomManager* roomManager,
+	                      StatisticsManager* statisticsManager);
 	/*
 	Function distructs a RequestHandlerFactory object
 	input + output: none
 	*/
 	~RequestHandlerFactory();
 	/*
-	Function creates a login request handler 
+	Function creates a login request handler
 	input: none
 	output: the handler that has been created
 	*/
-	LoginRequestHandler createLoginRequestHandler(LoginManager& loginManager, RequestHandlerFactory& handlerFactory);
+	LoginRequestHandler* createLoginRequestHandler(LoginManager& loginManager, RequestHandlerFactory& handlerFactory);
 	/*
 	Function returns the login manager
 	input: none
@@ -35,7 +36,9 @@ public:
 	input: none
 	output: the handler that has been created
 	*/
-	MenuRequestHandler createMenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory, LoginManager& loginManager);
+	MenuRequestHandler* createMenuRequestHandler(const LoggedUser& user, RoomManager& roomManager,
+	                                             StatisticsManager& statisticsManager,
+	                                             RequestHandlerFactory& handlerFactory, LoginManager& loginManager);
 	/*
 	Function returns the statistics manager
 	input: none
@@ -72,6 +75,11 @@ public:
 	output: the game manager
 	*/
 	//GameManager& getGameManager();
+	/*
+	Function updates the handlers to track the client status 
+	input: ref to an object with the request result of the user, the name of the new handler, pointer to the logged user (if needed)
+	output: none
+	*/
 private:
 	IDataBase* m_database;
 	LoginManager* m_loginManagerPtr;
@@ -79,4 +87,3 @@ private:
 	StatisticsManager* m_statisticsManagerPtr;
 	//GameManager m_gameManager;
 };
-

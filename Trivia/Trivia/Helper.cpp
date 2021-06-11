@@ -18,7 +18,7 @@ int Helper::getMessageTypeCode(SOCKET sc)
 
 	int res = std::atoi(s);
 	delete s;
-	return  res;
+	return res;
 }
 
 // recieve data from socket according byteSize
@@ -44,7 +44,6 @@ string Helper::getPaddedNumber(int num, int digits)
 	std::ostringstream ostr;
 	ostr << std::setw(digits) << std::setfill('0') << num;
 	return ostr.str();
-
 }
 
 // recieve data from socket according byteSize
@@ -61,7 +60,7 @@ char* Helper::getPartFromSocket(SOCKET sc, int bytesNum, int flags)
 		return (char*)"";
 	}
 
-	char* data = new char[bytesNum + 1];
+	auto data = new char[bytesNum + 1];
 	int res = recv(sc, data, bytesNum, flags);
 
 	if (res == INVALID_SOCKET)

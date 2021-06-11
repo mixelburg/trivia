@@ -21,6 +21,7 @@ RequestResult LoginRequestHandler::handleRequest(const RequestInfo& reqInfo)
 	{
 		reqResult = login(reqInfo);
 	}
+
 	else
 	{
 		reqResult = signup(reqInfo);

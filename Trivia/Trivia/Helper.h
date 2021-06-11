@@ -19,18 +19,51 @@ enum MessageType : byte
 class Helper
 {
 public:
-
-
+	/**
+	 * @brief retrieves message code from a given socket
+	 * @param sc SOCKET to retrieve data from
+	 * @return int with message code
+	*/
 	static int getMessageTypeCode(SOCKET sc);
+
+	/**
+	 * @brief returns given number of bytes from socket
+	 * and converts them into int
+	 * @param sc SOCKET to retrieve data from
+	 * @param bytesNum num of bytes to retrieve
+	 * @return int with data
+	*/
 	static int getIntPartFromSocket(SOCKET sc, int bytesNum);
+
+	/**
+	 * @brief returns given number of bytes from socket
+	 * and converts them into string
+	 * @param sc SOCKET to retrieve data from
+	 * @param bytesNum num of bytes to retrieve
+	 * @return string with data
+	*/
 	static std::string getStringPartFromSocket(SOCKET sc, int bytesNum);
+
+	/**
+	 * @brief sends given string using given socket
+	 * @param sc SOCKET to send data form
+	 * @param message string with message to send
+	*/
 	static void sendData(SOCKET sc, std::string message);
+
+	/**
+	 * @brief returns string with padded number
+	 * for example if num=44, digits=5
+	 * function will return "00044"
+	 * @param num given number to add padding to
+	 * @param digits size of padding
+	 * @return string with padded number
+	*/
 	static std::string getPaddedNumber(int num, int digits);
 
 private:
 	static char* getPartFromSocket(SOCKET sc, int bytesNum);
 	static char* getPartFromSocket(SOCKET sc, int bytesNum, int flags);
-
 };
 
 

@@ -4,20 +4,25 @@
 #include "JsonRequestPacketDeserializer.h"
 #include "LoginRequestHandler.h"
 
-MenuRequestHandler::MenuRequestHandler(const LoggedUser& user, RoomManager& roomManager, StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory, LoginManager& loginManager) 
-	: m_user(user), m_roomManager(roomManager), m_statisticsManager(statisticsManager), m_handlerFactory(handlerFactory), m_loginManager(loginManager)
+MenuRequestHandler::MenuRequestHandler(const LoggedUser& user, RoomManager& roomManager,
+                                       StatisticsManager& statisticsManager, RequestHandlerFactory& handlerFactory,
+                                       LoginManager& loginManager)
+	: m_user(user), m_roomManager(roomManager), m_statisticsManager(statisticsManager),
+	  m_handlerFactory(handlerFactory), m_loginManager(loginManager)
 {
 }
 
 const bool MenuRequestHandler::isRequestRelevant(const RequestInfo& reqInfo)
 {
 	return reqInfo.id == LOGOUT_CODE ||
-		reqInfo.id == GET_ROOMS_CODE ||
-		reqInfo.id == GET_PLAYERS_CODE ||
-		reqInfo.id == GET_HIGH_SCORE_CODE ||
-		reqInfo.id == GET_STATS_CODE ||
-		reqInfo.id == JOIN_ROOM_CODE ||
-		reqInfo.id == CREATE_ROOM_CODE ? true : false;
+	       reqInfo.id == GET_ROOMS_CODE ||
+	       reqInfo.id == GET_PLAYERS_CODE ||
+	       reqInfo.id == GET_HIGH_SCORE_CODE ||
+	       reqInfo.id == GET_STATS_CODE ||
+	       reqInfo.id == JOIN_ROOM_CODE ||
+	       reqInfo.id == CREATE_ROOM_CODE
+		       ? true
+		       : false;
 }
 
 RequestResult MenuRequestHandler::handleRequest(const RequestInfo& reqInfo)
@@ -25,7 +30,7 @@ RequestResult MenuRequestHandler::handleRequest(const RequestInfo& reqInfo)
 	switch (reqInfo.id)
 	{
 	case LOGOUT_CODE:
-		return signout(reqInfo);
+		return logout();
 	case GET_ROOMS_CODE:
 		return getRooms(reqInfo);
 	case GET_PLAYERS_CODE:
@@ -43,16 +48,6 @@ RequestResult MenuRequestHandler::handleRequest(const RequestInfo& reqInfo)
 	}
 }
 
-RequestResult MenuRequestHandler::signout(const RequestInfo& reqInfo)
-{
-	RequestResult res;
-	LoginRequestHandler h = m_handlerFactory.createLoginRequestHandler(m_loginManager, m_handlerFactory);
-
-	res.newHandler = &h;
-	
-	return res;
-}
-
 RequestResult MenuRequestHandler::getRooms(const RequestInfo& reqInfo)
 {
 	RequestResult res;
@@ -60,7 +55,7 @@ RequestResult MenuRequestHandler::getRooms(const RequestInfo& reqInfo)
 
 	const GetRoomsResponse rr(1, m_roomManager.getRooms());
 	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
-	
+
 	return res;
 }
 
@@ -73,7 +68,7 @@ RequestResult MenuRequestHandler::getPlayersInRoom(const RequestInfo& reqInfo)
 	const GetPlayersInRoomResponse rr(m_roomManager.getAllUsers(id));
 
 	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
-	
+
 	return res;
 }
 
@@ -101,13 +96,12 @@ RequestResult MenuRequestHandler::getHighScore(const RequestInfo& reqInfo)
 
 RequestResult MenuRequestHandler::joinRoom(const RequestInfo& reqInfo)
 {
-
 	RequestResult res;
 	res.newHandler = this;
 
 	const int id = JsonRequestPacketDeserializer::deserializeJoinRoomRequest(reqInfo.buffer).roomId;
 	m_roomManager.addUser(m_user, id);
-	
+
 	const JoinRoomResponse rr(1);
 	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
 
@@ -127,10 +121,21 @@ RequestResult MenuRequestHandler::createRoom(const RequestInfo& reqInfo)
 	roomData.name = data.roomName;
 	roomData.numOfQuestionsInGame = data.questionCount;
 	roomData.timePerQuestion = data.answerTimeout;
-	
-	m_roomManager.createRoom(m_user, roomData);
-	const CreateRoomResponse rr(1);
+
+	int roomId = m_roomManager.createRoom(m_user, roomData);
+	const CreateRoomResponse rr(1, roomId);
 	res.response = JsonResponsePacketSerializer::serializeResponse(rr);
 
+	return res;
+}
+
+RequestResult MenuRequestHandler::logout()
+{
+	m_loginManager.removeUserByName(m_user.getUname());
+	RequestResult res;
+	res.newHandler = this;
+
+	res.response = JsonResponsePacketSerializer::serializeResponse(IStatusResponse(1, 4));
+	
 	return res;
 }
