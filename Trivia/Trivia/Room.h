@@ -4,7 +4,8 @@
 #include <vector>
 #include "LoggedUser.h"
 
-struct RoomData {
+struct RoomData
+{
 	unsigned int id;
 	std::string name;
 	unsigned int maxPlayers;
@@ -20,7 +21,6 @@ private:
 	std::vector<LoggedUser> m_users;
 
 public:
-
 	Room(const RoomData& metaData);
 	/*
 	Function adds a user to the room
@@ -46,4 +46,3 @@ public:
 	//getter for the room data
 	const RoomData getData() const;
 };
-

@@ -3,6 +3,7 @@
 #include "Room.h"
 #include <vector>
 #include <map>
+
 class RoomManager
 {
 public:
@@ -11,19 +12,19 @@ public:
 	input: a logged user who creats the room, the room data
 	output: none
 	*/
-	void createRoom(const LoggedUser& owner, RoomData& roomData);
+	int createRoom(const LoggedUser& owner, RoomData& roomData);
 	/*
 	Function deletes a room
 	input: the id of the room to be deleted
 	output: none
 	*/
-	void deleteRoom(const int id);
+	void deleteRoom(int id);
 	/*
 	Function returns the room state
 	input: the id of the room
 	output: the state
 	*/
-	unsigned int getRoomState(const int id);
+	unsigned int getRoomState(int id);
 	/*
 	Function returns all the rooms
 	input: none
@@ -31,12 +32,20 @@ public:
 	*/
 	std::vector<RoomData> getRooms();
 
-	void addUser(const LoggedUser& user, const int roomId);
+	/**
+	 * @brief adds user to a list of connected users in a room with given id
+	 * @param user LoggedUser object to add
+	 * @param roomId id of room to add user to
+	*/
+	void addUser(const LoggedUser& user, int roomId);
 
-	const std::vector<std::string> getAllUsers(const int id);
+	/**
+	 * @brief returns list of connected users in a room with given id
+	 * @param id - id of room to retrieve data from
+	 * @return std::vector with usernames
+	*/
+	const std::vector<std::string> getAllUsers(int id);
 private:
-
 	std::map<unsigned int, Room> m_rooms; // a map with the rooms
-	int m_currRoomId = 0; 
+	int m_currRoomId = 0;
 };
-

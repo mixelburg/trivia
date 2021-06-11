@@ -3,28 +3,37 @@
 #include "JsonRequestPacketDeserializer.h"
 #define SUCCESS 1
 #define FAIL 0
-LoginRequestHandler::LoginRequestHandler(LoginManager& loginManager, RequestHandlerFactory& handlerFactory):
-    m_loginManager(loginManager), m_handlerFactory(handlerFactory)
+
+LoginRequestHandler::LoginRequestHandler(LoginManager& loginManager, RequestHandlerFactory& handlerFactory) :
+    m_loginManager(loginManager), m_handlerFactory(handlerFactory), m_newUser("","")
 {
 }
 
 const bool LoginRequestHandler::isRequestRelevant(const RequestInfo& reqInfo)
 {
-    return reqInfo.id == LOGIN_CODE || reqInfo.id == SIGNUP_CODE ? true : false;
+	return reqInfo.id == LOGIN_CODE || reqInfo.id == SIGNUP_CODE ? true : false;
 }
 
 RequestResult LoginRequestHandler::handleRequest(const RequestInfo& reqInfo)
 {
-    RequestResult reqResult;
-    if (reqInfo.id == LOGIN_CODE) {
-        reqResult = login(reqInfo);
-    }
-    
-    else {
-        reqResult = signup(reqInfo);
-    }
-    
+	RequestResult reqResult;
+	if (reqInfo.id == LOGIN_CODE)
+	{
+		reqResult = login(reqInfo);
+	}
+
+	else
+	{
+		reqResult = signup(reqInfo);
+	}
+
+
     return reqResult;
+}
+
+const LoggedUser& LoginRequestHandler::getNewUser() const
+{
+    return m_newUser;
 }
 
 RequestResult LoginRequestHandler::login(const RequestInfo& reqInfo)
@@ -33,8 +42,7 @@ RequestResult LoginRequestHandler::login(const RequestInfo& reqInfo)
     LoginRequest clientLoginRequest = JsonRequestPacketDeserializer::deserializeLoginRequest(reqInfo.buffer);
     try {
         if (m_loginManager.login(clientLoginRequest.username, clientLoginRequest.password)) {
-            const LoggedUser& currUser = m_loginManager.getUserByName(clientLoginRequest.username);
-            *reqResult.newHandler = m_handlerFactory.createMenuRequestHandler(currUser, m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory, m_loginManager);
+            m_newUser = m_loginManager.getUserByName(clientLoginRequest.username);
             reqResult.response.push_back(SUCCESS);
         }
         else {
@@ -43,7 +51,7 @@ RequestResult LoginRequestHandler::login(const RequestInfo& reqInfo)
 
         }
     }
-    catch(...){
+    catch (...) {
         reqResult.newHandler = nullptr;
     }
     return reqResult;
@@ -55,8 +63,7 @@ RequestResult LoginRequestHandler::signup(const RequestInfo& reqInfo)
     SignupRequest clientLoginRequest = JsonRequestPacketDeserializer::deserializeSignupRequest(reqInfo.buffer);
     try {
         if (m_loginManager.signup(clientLoginRequest.username, clientLoginRequest.password, clientLoginRequest.email)) {
-            const LoggedUser& newUser = m_loginManager.getUserByName(clientLoginRequest.username);
-            *reqResult.newHandler = m_handlerFactory.createMenuRequestHandler(newUser, m_handlerFactory.getRoomManager(), m_handlerFactory.getStatisticsManager(), m_handlerFactory, m_loginManager);
+            m_newUser = m_loginManager.getUserByName(clientLoginRequest.username);
             reqResult.response.push_back(SUCCESS);
 
         }

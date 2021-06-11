@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-auto SqliteDataBase::isUser(const std::string& uname) const -> bool
+bool SqliteDataBase::isUser(const std::string& uname) const
 {
 	bool flag = false;
 	auto callback = [](void* data, int argc, char** argv, char** azColName)
@@ -24,7 +24,7 @@ auto SqliteDataBase::isUser(const std::string& uname) const -> bool
 	return flag;
 }
 
-auto SqliteDataBase::checkPassword(const std::string& uname, const std::string& pswd) const -> bool
+bool SqliteDataBase::checkPassword(const std::string& uname, const std::string& pswd) const
 {
 	bool flag = false;
 	auto callback = [](void* data, int argc, char** argv, char** azColName)
@@ -44,9 +44,10 @@ auto SqliteDataBase::checkPassword(const std::string& uname, const std::string& 
 	return flag;
 }
 
-auto SqliteDataBase::addUser(const std::string& uname, const std::string& pswd, const std::string& email) const -> void
+void SqliteDataBase::addUser(const std::string& uname, const std::string& pswd, const std::string& email) const
 {
-	const std::string sqlCommand = "INSERT INTO USERS (NAME, PASSWORD, EMAIL) VALUES('" + uname + "', '" + pswd + "', '" + email + "');";
+	const std::string sqlCommand = "INSERT INTO USERS (NAME, PASSWORD, EMAIL) VALUES('" + uname + "', '" + pswd + "', '"
+		+ email + "');";
 	char* errMessage = nullptr;
 	const auto res = sqlite3_exec(_db, sqlCommand.c_str(), nullptr, nullptr, &errMessage);
 	if (res != SQLITE_OK)
@@ -55,7 +56,7 @@ auto SqliteDataBase::addUser(const std::string& uname, const std::string& pswd, 
 	}
 }
 
-auto SqliteDataBase::getQuestion(const int num) const -> std::list<Question>
+std::list<Question> SqliteDataBase::getQuestion(const int num) const
 {
 	std::list<Question> questions;
 	auto callback = [](void* data, int argc, char** argv, char** azColName)
@@ -80,16 +81,17 @@ auto SqliteDataBase::getQuestion(const int num) const -> std::list<Question>
 	return questions;
 }
 
-auto SqliteDataBase::getPlayerAverageAnswerTime(const std::string& uname) const -> float
+float SqliteDataBase::getPlayerAverageAnswerTime(const std::string& uname) const
 {
-	int avgTime = false;
+	float avgTime = 0;
 	auto callback = [](void* data, int argc, char** argv, char** azColName)
 	{
-		*static_cast<int*>(data) = std::stoi(argv[0]);
+		*static_cast<float*>(data) = std::stoi(argv[0]);
 		return 0;
 	};
 
-	const std::string sqlCommand = "SELECT AVG_ANSWER_TIME FROM STATISTICS WHERE USER_ID is " + std::to_string(getUserId(uname)) + ";";
+	const std::string sqlCommand = "SELECT AVG_ANSWER_TIME FROM STATISTICS WHERE USER_ID is " +
+		std::to_string(getUserId(uname)) + ";";
 	char* errMessage = nullptr;
 	const auto res = sqlite3_exec(_db, sqlCommand.c_str(), callback, &avgTime, &errMessage);
 	if (res != SQLITE_OK)
@@ -100,7 +102,7 @@ auto SqliteDataBase::getPlayerAverageAnswerTime(const std::string& uname) const 
 	return avgTime;
 }
 
-auto SqliteDataBase::getNumOfCorrectAnswers(const std::string& uname) const -> int
+int SqliteDataBase::getNumOfCorrectAnswers(const std::string& uname) const
 {
 	int numCorrectAnswers = false;
 	auto callback = [](void* data, int argc, char** argv, char** azColName)
@@ -109,7 +111,8 @@ auto SqliteDataBase::getNumOfCorrectAnswers(const std::string& uname) const -> i
 		return 0;
 	};
 
-	const std::string sqlCommand = "SELECT NUM_ANSWERS_CORRECT FROM STATISTICS WHERE USER_ID is " + std::to_string(getUserId(uname)) + ";";
+	const std::string sqlCommand = "SELECT NUM_ANSWERS_CORRECT FROM STATISTICS WHERE USER_ID is " +
+		std::to_string(getUserId(uname)) + ";";
 	char* errMessage = nullptr;
 	const auto res = sqlite3_exec(_db, sqlCommand.c_str(), callback, &numCorrectAnswers, &errMessage);
 	if (res != SQLITE_OK)
@@ -120,7 +123,7 @@ auto SqliteDataBase::getNumOfCorrectAnswers(const std::string& uname) const -> i
 	return numCorrectAnswers;
 }
 
-auto SqliteDataBase::getNumOfTotalAnswers(const std::string& uname) const -> int
+int SqliteDataBase::getNumOfTotalAnswers(const std::string& uname) const
 {
 	int numAnswers = false;
 	auto callback = [](void* data, int argc, char** argv, char** azColName)
@@ -128,9 +131,10 @@ auto SqliteDataBase::getNumOfTotalAnswers(const std::string& uname) const -> int
 		*static_cast<int*>(data) = std::stoi(argv[0]);
 		return 0;
 	};
-	
 
-	const std::string sqlCommand = "SELECT NUM_ANSWERS FROM STATISTICS WHERE USER_ID is " + std::to_string(getUserId(uname)) + ";";
+
+	const std::string sqlCommand = "SELECT NUM_ANSWERS FROM STATISTICS WHERE USER_ID is " +
+		std::to_string(getUserId(uname)) + ";";
 	char* errMessage = nullptr;
 	const auto res = sqlite3_exec(_db, sqlCommand.c_str(), callback, &numAnswers, &errMessage);
 	if (res != SQLITE_OK)
@@ -141,7 +145,7 @@ auto SqliteDataBase::getNumOfTotalAnswers(const std::string& uname) const -> int
 	return numAnswers;
 }
 
-auto SqliteDataBase::getNumOfPlayerGames(const std::string& uname) const -> int
+int SqliteDataBase::getNumOfPlayerGames(const std::string& uname) const
 {
 	int numGames = false;
 	auto callback = [](void* data, int argc, char** argv, char** azColName)
@@ -151,7 +155,8 @@ auto SqliteDataBase::getNumOfPlayerGames(const std::string& uname) const -> int
 	};
 
 
-	const std::string sqlCommand = "SELECT NUM_GAMES FROM STATISTICS WHERE USER_ID is " + std::to_string(getUserId(uname)) + ";";
+	const std::string sqlCommand = "SELECT NUM_GAMES FROM STATISTICS WHERE USER_ID is " + std::to_string(
+		getUserId(uname)) + ";";
 	char* errMessage = nullptr;
 	const auto res = sqlite3_exec(_db, sqlCommand.c_str(), callback, &numGames, &errMessage);
 	if (res != SQLITE_OK)
@@ -162,7 +167,7 @@ auto SqliteDataBase::getNumOfPlayerGames(const std::string& uname) const -> int
 	return numGames;
 }
 
-auto SqliteDataBase::getBestPlayers() const -> std::vector<std::string>
+std::vector<std::string> SqliteDataBase::getBestPlayers() const
 {
 	std::vector<std::string> list;
 
@@ -174,7 +179,8 @@ auto SqliteDataBase::getBestPlayers() const -> std::vector<std::string>
 		return 0;
 	};
 
-	const std::string sqlCommand = "SELECT USER_ID, NUM_ANSWERS_CORRECT FROM STATISTICS ORDER BY NUM_ANSWERS_CORRECT DESC LIMIT 5;";
+	const std::string sqlCommand =
+		"SELECT USER_ID, NUM_ANSWERS_CORRECT FROM STATISTICS ORDER BY NUM_ANSWERS_CORRECT DESC LIMIT 5;";
 	char* errMessage = nullptr;
 	const auto res = sqlite3_exec(_db, sqlCommand.c_str(), callback, &temp, &errMessage);
 	if (res != SQLITE_OK)
@@ -182,15 +188,16 @@ auto SqliteDataBase::getBestPlayers() const -> std::vector<std::string>
 		std::cout << errMessage << std::endl;
 	}
 
+	list.reserve(temp.size());
 	for (const auto& p : temp)
 	{
-		list.emplace_back(p.second + ": " + getUserName(p.first));
+		list.emplace_back(getUserName(p.first) + "\t" + p.second);
 	}
 
 	return list;
 }
 
-auto SqliteDataBase::open() -> bool
+bool SqliteDataBase::open()
 {
 	const auto res = sqlite3_open(_dbFilename.c_str(), &_db);
 	if (res == SQLITE_OK)
@@ -206,7 +213,7 @@ void SqliteDataBase::close()
 	_db = nullptr;
 }
 
-auto SqliteDataBase::getUserId(const std::string& uname) const -> int
+int SqliteDataBase::getUserId(const std::string& uname) const
 {
 	int userId = -1;
 	auto callback = [](void* data, int argc, char** argv, char** azColName)
@@ -226,7 +233,7 @@ auto SqliteDataBase::getUserId(const std::string& uname) const -> int
 	return userId;
 }
 
-auto SqliteDataBase::getUserName(const int id) const -> std::string
+std::string SqliteDataBase::getUserName(const int id) const
 {
 	std::string uname;
 	auto callback = [](void* data, int argc, char** argv, char** azColName)
@@ -245,4 +252,3 @@ auto SqliteDataBase::getUserName(const int id) const -> std::string
 
 	return uname;
 }
-

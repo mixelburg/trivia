@@ -11,8 +11,10 @@ void Room::addUser(const LoggedUser& loggedUser)
 
 void Room::removeUser(LoggedUser& loggedUser)
 {
-	for (auto it = m_users.begin(); it != m_users.end(); ++it) {
-		if (loggedUser == *it) {
+	for (auto it = m_users.begin(); it != m_users.end(); ++it)
+	{
+		if (loggedUser == *it)
+		{
 			m_users.erase(it);
 		}
 	}
@@ -21,7 +23,8 @@ void Room::removeUser(LoggedUser& loggedUser)
 std::vector<std::string> Room::getAllUsers() const
 {
 	std::vector<std::string> usersNames;
-	for (const auto user : m_users) {
+	for (const auto user : m_users)
+	{
 		usersNames.push_back(user.getUname());
 	}
 	return usersNames;
