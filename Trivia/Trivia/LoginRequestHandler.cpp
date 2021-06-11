@@ -16,18 +16,15 @@ const bool LoginRequestHandler::isRequestRelevant(const RequestInfo& reqInfo)
 
 RequestResult LoginRequestHandler::handleRequest(const RequestInfo& reqInfo)
 {
-	RequestResult reqResult;
-	if (reqInfo.id == LOGIN_CODE)
-	{
-		reqResult = login(reqInfo);
-	}
-
-	else
-	{
-		reqResult = signup(reqInfo);
-	}
-
-
+    RequestResult reqResult;
+    if (reqInfo.id == LOGIN_CODE) {
+        reqResult = login(reqInfo);
+    }
+    
+    else {
+        reqResult = signup(reqInfo);
+    }
+    
     return reqResult;
 }
 
